@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<title>{{ if .IsHome }}{{ .Site.Title }} &#8211; {{ .Site.Params.description }}{{ else }}{{ .Title }} &#8211; {{ .Site.Title }}{{ end }}</title>
+<link rel='stylesheet' href='/wp-content/themes/hemingway/assets/css/fonts.css' media='all' />
+<link rel='stylesheet' href='/wp-content/themes/hemingway/style.css' media='all' />
+<link rel='stylesheet' href='/wp-content/plugins/drop-shadow-boxes/css/dropshadowboxes.css' media='all' />
+<style>
+body.custom-background { background-color: #d1d1d1; }
+.post-title, .entry-title {
+	display: none;
+}
+.address { background-color:transparent; }
+/* Center the navigation menu under the site title */
+.blog-menu {
+	justify-content: center;
+	margin-left: 0;
+}
+</style>
+<script src="https://app.rybbit.io/api/script.js" data-site-id="{{ .Site.Params.rybbitSiteId }}" defer></script>
+</head>
+<body class="{{ if .IsHome }}home {{ end }}page-template page-template-template-nosidebar page custom-background wp-theme-hemingway template-nosidebar">
+<div class="big-wrapper">
+
+	<div class="header-cover section bg-dark-light no-padding">
+		<div class="header section" id="site-header">
+			<script>
+			/* Rotating header: same 10 farm photos WordPress rotated through */
+			(function(){
+				var imgs=[1,2,3,4,5,6,7,8,9,10];
+				var n=imgs[Math.floor(Math.random()*imgs.length)];
+				document.getElementById('site-header').style.backgroundImage=
+					"url( /wp-content/uploads/2017/09/cropped-Header"+n+".jpg )";
+			})();
+			</script>
+			<div class="header-inner section-inner">
+				<div class="blog-info">
+					<div class="blog-title">
+						<a href="/" rel="home">{{ .Site.Title }}</a>
+					</div>
+					<p class="blog-description">{{ .Site.Params.description }}</p>
+				</div><!-- .blog-info -->
+			</div><!-- .header-inner -->
+		</div><!-- .header -->
+	</div><!-- .header-cover -->
+
+	<div class="navigation section no-padding bg-dark">
+		<div class="navigation-inner section-inner group">
+
+			<div class="toggle-container section-inner hidden">
+				<button type="button" class="nav-toggle toggle">
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<span class="screen-reader-text">Toggle mobile menu</span>
+				</button>
+			</div><!-- .toggle-container -->
+
+			<ul class="blog-menu">
+				{{ range .Site.Menus.main }}<li class="menu-item{{ if or ($.IsMenuCurrent "main" .) (eq $.RelPermalink .URL) }} current-menu-item current_page_item{{ end }}"><a href="{{ .URL }}">{{ .Name }}</a></li>
+				{{ end }}
+			</ul><!-- .blog-menu -->
+
+			<ul class="mobile-menu">
+				{{ range .Site.Menus.main }}<li class="menu-item{{ if or ($.IsMenuCurrent "main" .) (eq $.RelPermalink .URL) }} current-menu-item current_page_item{{ end }}"><a href="{{ .URL }}">{{ .Name }}</a></li>
+				{{ end }}
+			</ul><!-- .mobile-menu -->
+
+		</div><!-- .navigation-inner -->
+	</div><!-- .navigation -->
+
+<main class="wrapper section-inner group" id="site-content">
+{{ block "main" . }}{{ end }}
+</main><!-- .wrapper -->
+
+	<div class="footer section large-padding bg-dark">
+		<div class="footer-inner section-inner group">
+		</div><!-- .footer-inner -->
+	</div><!-- .footer -->
+
+	<div class="credits section bg-dark no-padding">
+		<div class="credits-inner section-inner group">
+			<p class="credits-left">
+				&copy; {{ now.Year }} <a href="/">{{ .Site.Title }}</a>
+			</p>
+			<p class="credits-right">
+				<span>Theme by <a href="https://andersnoren.se">Anders Noren</a></span> &mdash; <a title="To the top" class="tothetop">Up &uarr;</a>
+			</p>
+		</div><!-- .credits-inner -->
+	</div><!-- .credits -->
+
+</div><!-- .big-wrapper -->
+
+<script src="/wp-includes/js/jquery/jquery.min.js"></script>
+<script src="/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+<script src="/wp-content/themes/hemingway/assets/js/global.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+baseURL = 'https://wirtanenfarm.org/'
+languageCode = 'en-US'
+title = 'Friends of the Wirtanen Farm'
+disableKinds = ['taxonomy', 'term', 'section', 'rss']
+
+[params]
+  description = 'Experience Old World Serenity'
+  rybbitSiteId = '3eff1c5d1561'
+
+[[menus.main]]
+name = 'Home'
+url = '/'
+weight = 10
+[[menus.main]]
+name = 'Eli Wirtanen'
+url = '/eli-wirtanen/'
+weight = 20
+[[menus.main]]
+name = 'Savusauna Restoration'
+url = '/savusauna/'
+weight = 30
+[[menus.main]]
+name = 'Location'
+url = '/location/'
+weight = 40
+[[menus.main]]
+name = 'Facebook'
+url = 'https://www.facebook.com/WirtanenFarm'
+weight = 50
+[[menus.main]]
+name = 'Contact'
+url = '/contact-us/'
+weight = 60
+[[menus.main]]
+name = 'About'
+url = '/about-us/'
+weight = 70
