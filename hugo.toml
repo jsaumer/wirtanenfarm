@@ -1,5 +1,5 @@
 baseURL = 'https://wirtanenfarm.org/'
-languageCode = 'en-US'
+locale = 'en-US'
 title = 'Friends of the Wirtanen Farm'
 disableKinds = ['taxonomy', 'term', 'section', 'rss']
 
@@ -35,3 +35,6 @@ weight = 60
 name = 'About'
 url = '/about-us/'
 weight = 70
+
+[security]
+  allowContent = ['^text/html$']
