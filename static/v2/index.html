@@ -659,7 +659,7 @@ footer a{color:#DDE3D8}
   // ---------- list + chips ----------
   var list=document.getElementById('stops'),chips=document.getElementById('chips');
   list.innerHTML=S.map(function(s,i){
-    var ph='<figure class="phwrap">'+(s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy"'+(s.pos?' style="object-position:'+s.pos+'"':'')+'>':'<div class="ph none">Photo coming</div>')++'</figure>';
+    var ph='<figure class="phwrap">'+(s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy"'+(s.pos?' style="object-position:'+s.pos+'"':'')+'>':'<div class="ph none">Photo coming</div>')+'</figure>';
     return '<article class="stop" id="stop-'+s.k+'" data-k="'+s.k+'"><span class="n">'+(i+1)+'</span><div><h3>'+s.name+'</h3><p>'+s.p+'</p></div>'+ph+'</article>';
   }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="#savusauna">Read the restoration story</a>. It will join the map soon.</p>';
   chips.innerHTML=S.map(function(s,i){return '<button type="button" id="chip-'+s.k+'" data-k="'+s.k+'">'+(i+1)+' · '+s.name+'</button>';}).join('');
