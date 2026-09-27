@@ -176,6 +176,9 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .fdate .fy{font-size:16px;font-weight:700}
 .featured h2{font-size:clamp(30px,3.6vw,44px);color:var(--fink)}
 .fmeta{font-size:17px;font-weight:700;color:var(--fsub)}
+.fplace{font-size:15px;color:var(--fsub);margin-top:-6px}
+.evplace{font-size:14px}
+.evplace a{color:var(--muted)}
 .facts2{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .featured .btn{background:var(--fbtn);color:var(--fbtn-ink)}
 .featured .btn.ghost{background:transparent;color:var(--fink);box-shadow:inset 0 0 0 1.5px var(--fink)}
@@ -229,6 +232,12 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .newsgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:44px;align-items:start}
 .newslist{display:grid}
 .news{padding:20px 0;border-top:1px solid var(--line);display:grid;gap:6px}
+.nbody{display:grid;gap:6px}
+.news.has-poster{grid-template-columns:minmax(0,1fr) 104px;column-gap:24px;align-items:start}
+.nposter{display:block;padding-top:4px}
+.nposter img{width:100%;border-radius:3px;box-shadow:0 10px 22px -12px rgba(0,0,0,.55);transform:rotate(2deg);transition:transform .2s}
+.nposter:hover img,.nposter:focus-visible img{transform:rotate(0)}
+@media (max-width:520px){.news.has-poster{grid-template-columns:minmax(0,1fr) 72px;column-gap:14px}}
 .news:first-child{border-top:0;padding-top:0}
 .nmeta{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted)}
 .kind{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#E6EADB;color:var(--pine)}
@@ -561,8 +570,6 @@ footer a{color:#DDE3D8}
       p:'The farm’s hand pump, out on the lawn south of the Tool Shop.'},
     {k:'well',name:'Well House',x:395,y:394,t:'well',img:null,
       p:'A small board building over the farm’s well, standing on its own in the open lawn.'},
-    {k:'horse',name:'Horse Barn',x:472,y:322,t:'horse',img:null,
-      p:'Board siding over log lower walls, at the northeast edge of the clearing among the pines.'},
     {k:'equip',name:'Farm Equipment Shed',x:349,y:586,t:'open',img:'img/mnhs-farm-equipment.jpg',credit:'https://commons.wikimedia.org/wiki/File:Eli_Wirtanen_Pioneer_Farm,_farm_equipment.jpg',
       p:'An open-sided shed on the south edge of the clearing, full of horse-era implements: iron wheels, a seed drill and more.'},
     {k:'pen',name:'Baby Animal Pen',x:305,y:428,t:'pen',img:'/wp-content/uploads/2017/09/cropped-Header6.jpg',
@@ -635,7 +642,6 @@ footer a{color:#DDE3D8}
       case 'house':R('-34,-30 0,-50 34,-30',SH);B(-30,-30,60,30,LOG);B(-22,-22,9,9,WIN);B(12,-22,9,9,WIN);B(-4,-16,9,16,DARK);B(12,-46,5,10,'#8A4A3A');return 52;
       case 'cabin':R('-18,-20 0,-32 18,-20',SH);B(-15,-20,30,20,LOG);B(-4,-13,8,13,DARK);return 34;
       case 'barn':R('-30,-26 -22,-44 0,-54 22,-44 30,-26',GREEN);B(-26,-26,52,26,'#5E4E3C');B(-5,-44,10,10,DARK);B(-7,-16,14,16,DARK);return 56;
-      case 'horse':R('-24,-22 -2,-38 4,-34 24,-22',SH);B(-21,-22,42,22,'#7A6A55');B(-21,-8,42,8,'#5E4E3C');B(-6,-15,11,15,DARK);return 40;
       case 'shed':R('-18,-18 0,-30 18,-18',SH);B(-15,-18,30,18,LOG);B(-11,-12,7,12,DARK);B(5,-11,6,6,WIN);return 32;
       case 'bath':R('-13,-18 0,-28 13,-18','#7D7A70');B(-11,-18,22,18,'#EEF0EC');el('rect',{x:-11,y:-18,width:22,height:18,fill:'none',stroke:'#9FA69A','stroke-width':1},g);B(-3,-12,6,6,'#5E6A62');return 30;
       case 'woodshed':R('-14,-16 0,-27 14,-16',SH);B(-12,-16,24,16,LOG);B(-7,-12,14,12,'#2A241D');return 29;
@@ -705,7 +711,8 @@ footer a{color:#DDE3D8}
 <script>
 /* ============================================================
    EVENTS: the only part that needs editing each year.
-   - date: 'YYYY-MM-DD' (leave '' until the date is set)
+   - date: 'YYYY-MM-DD' (leave '' until the date is set); endDate for events of more than one day
+   - place/address: for events away from the farm (directions and calendar use the address)
    - start/end: 24-hour local times, e.g. '10:00' and '16:00'
    - promoFrom: the day the event starts being featured under the headline
      (leave '' to start 30 days before the event)
@@ -726,42 +733,52 @@ var EVENTS=[
     ],
     after:'Thank you to everyone who came out for this year’s festival. Next year’s date will be posted here.' },
   { id:'bakesale', name:'Fall Bake Sale', season:'Every fall',
-    date:'', start:'', end:'', promoFrom:'',
-    admission:'Details to be announced',
+    date:'2026-11-06', endDate:'2026-11-07', start:'08:00', end:'17:00', promoFrom:'',
+    place:'Colvin Town Hall', address:'Colvin Town Hall, 2579 Vermilion Trail, Makinen, MN 55763',
+    admission:'At the Colvin Town Hall',
     poster:'', lineup:[],
-    blurb:'The Friends’ annual fall bake sale. Every purchase helps keep the farm standing.',
+    blurb:'The Friends’ annual fall bake sale: two days at the Colvin Town Hall, 2579 Vermilion Trail. Every purchase helps keep the farm standing.',
     after:'Thank you for supporting this year’s bake sale. Next year’s date will be posted here.' }
 ];
 </script>
 <script>
 (function(){
   var MON=['JAN','FEB','MAR','APR','MAY','JUNE','JULY','AUG','SEPT','OCT','NOV','DEC'];
+  var MONL=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
   var DAY=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var FARM='Wirtanen Pioneer Farm, 5312 Markham Rd, Makinen, MN 55763';
   function parse(d){if(!d)return null;var p=d.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
   function fmtTime(t){if(!t)return '';var h=+t.split(':')[0],m=t.split(':')[1];var ap=h>=12?'PM':'AM';h=h%12||12;return h+(m!=='00'?':'+m:'')+' '+ap;}
   function ymd(d){return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
+  function first(e){return parse(e.date);}
+  function last(e){return parse(e.endDate)||parse(e.date);}
+  function nDays(e){return Math.round((last(e)-first(e))/864e5)+1;}
+  function dayNums(e){var a=first(e),b=last(e);return nDays(e)>1?a.getDate()+'–'+b.getDate():''+a.getDate();}
+  function dayNames(e){var a=first(e),b=last(e);return nDays(e)>1?(nDays(e)===2?DAYS[a.getDay()]+' & '+DAYS[b.getDay()]:DAYS[a.getDay()]+'–'+DAYS[b.getDay()]):DAY[a.getDay()];}
+  function hours(e){return fmtTime(e.start)+'–'+fmtTime(e.end)+(nDays(e)>1?' both days':'');}
+  function dir(e){return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(e.address||FARM);}
   function gcal(e){var d=e.date.replace(/-/g,'');function z(t){return d+'T'+t.replace(':','')+'00';}
-    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.name)+'&dates='+z(e.start)+'/'+z(e.end)+'&ctz=America/Chicago&location='+encodeURIComponent('Wirtanen Pioneer Farm, 5312 Markham Rd, Makinen, MN 55763')+'&details='+encodeURIComponent('wirtanenfarm.org');}
-  var DIR='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent('Wirtanen Pioneer Farm, 5312 Markham Rd, Makinen, MN 55763');
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.name)+'&dates='+z(e.start)+'/'+z(e.end)+(nDays(e)>1?'&recur='+encodeURIComponent('RRULE:FREQ=DAILY;COUNT='+nDays(e)):'')+'&ctz=America/Chicago&location='+encodeURIComponent(e.address||FARM)+'&details='+encodeURIComponent('wirtanenfarm.org');}
 
   function today(){var q=(location.search.match(/[?&]today=(\d{4}-\d{2}-\d{2})/)||[])[1];return q?parse(q):new Date();}
   window.renderEvents=function(now){
     now=now||today();var t=ymd(now);
-    // featured: the next event inside its promotion window
+    // featured: the next event inside its promotion window (through its last day)
     var feat=null;
-    EVENTS.forEach(function(e){var d=parse(e.date),p=parse(e.promoFrom)||(d&&new Date(d.getFullYear(),d.getMonth(),d.getDate()-30));if(!d||!p)return;if(t>=ymd(p)&&t<=ymd(d)){if(!feat||ymd(d)<ymd(parse(feat.date)))feat=e;}});
+    EVENTS.forEach(function(e){var d=first(e);if(!d)return;var p=parse(e.promoFrom)||new Date(d.getFullYear(),d.getMonth(),d.getDate()-30);if(t>=ymd(p)&&t<=ymd(last(e))){if(!feat||ymd(d)<ymd(first(feat)))feat=e;}});
     var box=document.getElementById('featured');
     if(feat){
-      var d=parse(feat.date),days=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
-      var when=days===0?'Today!':days===1?'Tomorrow':days<=14?'In '+days+' days':'Coming up';
+      var d=first(feat),days=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
+      var when=days<=0?'Today!':days===1?'Tomorrow':days<=14?'In '+days+' days':'Coming up';
       var lineup=feat.lineup.length?'<ul class="lineup">'+feat.lineup.map(function(l){return '<li><b>'+l[0]+'</b><span>'+l[1]+'</span></li>';}).join('')+'</ul>':'<p class="fblurb">'+(feat.blurb||'')+'</p>';
       box.innerHTML='<div class="wrap fgrid'+(feat.poster?'':' noposter')+'">'+
         '<div class="fmain"><div class="fwhen">'+when+'</div>'+
-        '<div class="fdate"><span class="fm">'+MON[d.getMonth()]+'</span><span class="fd">'+d.getDate()+'</span><span class="fy">'+DAY[d.getDay()]+'</span></div>'+
+        '<div class="fdate"><span class="fm">'+MON[d.getMonth()]+'</span><span class="fd">'+dayNums(feat)+'</span><span class="fy">'+dayNames(feat)+'</span></div>'+
         '<h2>'+feat.name+'</h2>'+
-        '<p class="fmeta">'+fmtTime(feat.start)+'–'+fmtTime(feat.end)+' · '+feat.admission+'</p>'+
-        (feat.sample?'<p class="sample">Sample date and times: waiting on the real ones</p>':'')+
-        '<div class="facts2"><a class="btn" href="'+DIR+'" target="_blank" rel="noopener">Get directions</a><a class="btn ghost" href="'+gcal(feat)+'" target="_blank" rel="noopener">Add to calendar</a></div></div>'+
+        '<p class="fmeta">'+hours(feat)+' · '+feat.admission+'</p>'+
+        (feat.address?'<p class="fplace">'+feat.address+'</p>':'')+
+        '<div class="facts2"><a class="btn" href="'+dir(feat)+'" target="_blank" rel="noopener">Get directions</a><a class="btn ghost" href="'+gcal(feat)+'" target="_blank" rel="noopener">Add to calendar</a></div></div>'+
         '<div class="flist">'+lineup+'</div>'+
         (feat.poster?'<a class="fposter" href="'+feat.poster+'" target="_blank" rel="noopener"><img src="'+feat.poster+'" alt="'+feat.name+' poster" loading="lazy"><span>See the full poster</span></a>':'')+
         '</div>';
@@ -771,12 +788,13 @@ var EVENTS=[
     // the yearly cards
     var cards=document.getElementById('evcards');
     cards.innerHTML=EVENTS.map(function(e){
-      var d=parse(e.date),state='tba';
-      if(d){state=t>ymd(d)?'past':'upcoming';}
-      var dateHtml=d?'<div class="date"><div class="m">'+MON[d.getMonth()]+'</div><div class="d">'+d.getDate()+'</div><div class="y">'+d.getFullYear()+'</div></div>':'<div class="date"><div class="m">DATE</div><div class="d">?</div><div class="y">to come</div></div>';
+      var d=first(e),state='tba';
+      if(d){state=t>ymd(last(e))?'past':'upcoming';}
+      var dateHtml=d?'<div class="date"><div class="m">'+MON[d.getMonth()]+'</div><div class="d">'+dayNums(e)+'</div><div class="y">'+d.getFullYear()+'</div></div>':'<div class="date"><div class="m">DATE</div><div class="d">?</div><div class="y">to come</div></div>';
       var lastYear=d&&now.getFullYear()>d.getFullYear();
       if(state==='past'&&lastYear)e=Object.assign({},e,{after:'Thanks to everyone who came in '+d.getFullYear()+'. The '+now.getFullYear()+' date will be posted here.'});
-      var body=state==='upcoming'?'<p><b>'+DAY[d.getDay()]+', '+fmtTime(e.start)+'–'+fmtTime(e.end)+'.</b> '+e.admission+'.</p>'+(e.sample?'<p class="sample">Sample date and times</p>':''):state==='past'?'<p>'+e.after+'</p>':'<p>Date to be announced.</p>';
+      var when=d?(nDays(e)>1?dayNames(e)+', '+MONL[d.getMonth()]+' '+dayNums(e):DAY[d.getDay()])+', '+hours(e):'';
+      var body=state==='upcoming'?'<p><b>'+when+'.</b> '+e.admission+'.</p>'+(e.address?'<p class="evplace"><a href="'+dir(e)+'" target="_blank" rel="noopener">'+e.address+'</a></p>':''):state==='past'?'<p>'+e.after+'</p>':'<p>Date to be announced.</p>';
       var tag=state==='upcoming'?'<span class="tag up">Coming up</span>':state==='past'?'<span class="tag">'+(lastYear?'Date to come':'This year’s is done')+'</span>':'<span class="tag">To be announced</span>';
       return '<article class="evcard '+state+'">'+dateHtml+'<div><div class="evtop">'+tag+'<span class="season">'+e.season+'</span></div><h3>'+e.name+'</h3>'+body+(e.poster&&state==='past'?'<p><a href="'+e.poster+'" target="_blank" rel="noopener">See the '+d.getFullYear()+' poster</a></p>':'')+'</div></article>';
     }).join('');
@@ -789,14 +807,16 @@ var EVENTS=[
 /* ============================================================
    NEWS: newest first. The homepage shows the latest four; older ones sit behind a button.
    kind: 'Kiitos' (thank-you), 'Press', or 'Event'
+   poster: optional festival poster shown small beside the post
+   draft: a private reminder; it is never shown on the page
    ============================================================ */
 var NEWS=[
-  { date:'2026-09-12', kind:'Event', title:'The 25th Fall Festival',
+  { date:'2026-09-12', kind:'Event', title:'The 25th Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
     text:'Thank you to everyone who came out to celebrate 25 years of the Fall Festival, and to the artisans, musicians, volunteers and the Colvin Fire Department who made the day.' },
   { date:'2026-08-13', kind:'Kiitos', title:'Natural Harvest Food Co-op customers raise $1,961.61',
     text:'Through the co-op’s Change Within Reach program, customers raised $1,961.61 for the Friends in July. The funds go to restoring and preserving the pioneer farmstead.',
     link:'https://www.facebook.com/WirtanenFarm', linkText:'See the post on Facebook' },
-  { date:'2026-08-29', kind:'Press', title:'Celebrating 25 years of the Wirtanen Farm Fall Festival',
+  { date:'2026-08-29', kind:'Press', title:'Celebrating 25 years of the Wirtanen Farm Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
     text:'The Friends announced the 25th annual Fall Festival, set for Saturday, September 12, with artisans, wagon rides, live music and a book signing.',
     draft:'Press release: confirm the date and fill in the quote before posting' },
   { date:'2026-06-08', kind:'Press', title:'Discover the Range features the farm',
@@ -823,10 +843,10 @@ var NEWS=[
   function fmt(d){var p=d.split('-');return M[+p[1]-1]+' '+(+p[2])+', '+p[0];}
   var el=document.getElementById('newslist');if(!el)return;
   el.innerHTML=NEWS.map(function(n,i){
-    return '<article class="news"'+(i>=4?' hidden':'')+'><div class="nmeta"><span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
+    return '<article class="news'+(n.poster?' has-poster':'')+'"'+(i>=4?' hidden':'')+'><div class="nbody"><div class="nmeta"><span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
       '<h3>'+n.title+'</h3><p>'+n.text+'</p>'+
-      (n.link?'<p class="nlink"><a href="'+n.link+'" target="_blank" rel="noopener">'+n.linkText+'</a></p>':'')+
-      (n.draft?'<p class="sample">'+n.draft+'</p>':'')+'</article>';
+      (n.link?'<p class="nlink"><a href="'+n.link+'" target="_blank" rel="noopener">'+n.linkText+'</a></p>':'')+'</div>'+
+      (n.poster?'<a class="nposter" href="'+n.poster+'" target="_blank" rel="noopener" aria-label="See the full Fall Festival poster"><img src="'+n.poster+'" alt="Fall Festival poster" loading="lazy"></a>':'')+'</article>';
   }).join('')+(NEWS.length>4?'<button type="button" class="older" id="older-news">Show older news ('+(NEWS.length-4)+')</button>':'');
   var b=document.getElementById('older-news');
   if(b)b.addEventListener('click',function(){el.querySelectorAll('.news[hidden]').forEach(function(a){a.hidden=false});b.remove();});
