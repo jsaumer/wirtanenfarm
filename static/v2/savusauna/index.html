@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Savusauna Restoration Notes · Wirtanen Pioneer Farm</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Norm Jarva and Harold Johnson’s notes on rebuilding Eli Wirtanen’s smoke sauna, 2008–2009.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Lato:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Pihapiiri: Norway pine, barn-roof green, lichen, birch */
+:root{--pine:#1E3A2F;--roof:#3F7D5C;--lichen:#C9D3B0;--birch:#F1F2EE;--bark:#24231F;--log:#6B5A45;--muted:#5B5A52;--line:#DCDFD5;--card:#FFFFFF;--meadow:#DDE4CC;
+  --serif:"Sorts Mill Goudy",Georgia,"Times New Roman",serif;--sans:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--birch);color:var(--bark);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;color:var(--pine);margin:0;line-height:1.08;text-wrap:balance}
+p{margin:0}
+a{color:var(--roof)}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--roof);outline-offset:3px}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:28px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--roof);font-weight:700}
+.btn{display:inline-block;background:var(--pine);color:var(--birch);padding:10px 20px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--pine);box-shadow:inset 0 0 0 1.5px var(--pine)}
+
+/* preview banner */
+.preview{background:var(--pine);color:#DDE3D8;font-size:14px;text-align:center;padding:8px 16px;padding-top:calc(8px + env(safe-area-inset-top,0px))}
+.preview a{color:var(--lichen);font-weight:700}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:14px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--pine);text-decoration:none;font-weight:700;font-size:16px;line-height:1.2}
+.brand small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.links{display:flex;gap:22px;flex-wrap:wrap;align-items:center;font-size:15px;font-weight:500}
+.links a{color:var(--bark);text-decoration:none}
+.links a:hover{color:var(--roof)}
+.links .btn{color:var(--birch)}
+.menu-btn{display:none;align-items:center;gap:8px;font:700 15px var(--sans);color:var(--pine);background:transparent;border:1.5px solid var(--pine);border-radius:999px;padding:8px 14px;cursor:pointer}
+.menu-btn .bars,.menu-btn .bars::before,.menu-btn .bars::after{display:block;width:16px;height:2px;background:var(--pine);border-radius:1px;position:relative;content:""}
+.menu-btn .bars::before{position:absolute;top:-5px}.menu-btn .bars::after{position:absolute;top:5px}
+.menu-btn[aria-expanded="true"] .bars{background:transparent}
+.menu-btn[aria-expanded="true"] .bars::before{top:0;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{top:0;transform:rotate(-45deg)}
+
+/* hero */
+.hero{position:relative;display:grid;align-items:end;min-height:440px;background:url(/wp-content/uploads/2017/09/cropped-Header2.jpg) center 45%/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,32,26,.88) 0%,rgba(20,32,26,.55) 48%,rgba(20,32,26,0) 85%)}
+.hero .wrap{position:relative;width:100%;padding-block:48px}
+.hero .in{display:grid;gap:16px;max-width:620px;color:#F1F2EE}
+.hero .eyebrow{color:var(--lichen)}
+.hero h1{font-size:clamp(42px,6.4vw,78px);line-height:.98;color:#F4F5F1}
+.hero p{font-size:19px;color:#DDE3D8}
+.facts{display:flex;gap:8px;flex-wrap:wrap}
+.facts span{font-size:14px;font-weight:700;background:rgba(241,242,238,.14);border:1px solid rgba(241,242,238,.3);padding:6px 12px;border-radius:999px}
+
+/* farmstead guide */
+.guide-head{padding-block:64px 8px;display:grid;gap:10px}
+.guide-head h2{font-size:clamp(32px,4vw,46px)}
+.guide-head p{color:var(--muted);max-width:62ch}
+.guide{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:44px;padding-block:28px 64px;align-items:start}
+.side{position:sticky;top:32px;display:grid;gap:10px;z-index:3}
+.mapcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;display:grid;gap:8px}
+.mapcard svg{width:100%;height:auto;display:block;border-radius:10px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--muted);padding:0 6px 2px}
+.legend i{display:inline-block;vertical-align:middle;margin-right:6px}
+.chips{display:none;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chips button{font:600 13px var(--sans);padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--bark);white-space:nowrap;cursor:pointer}
+.chips button.on{background:var(--pine);border-color:var(--pine);color:var(--birch)}
+.stops{display:grid}
+.stop{display:grid;grid-template-columns:44px minmax(0,1fr) 200px;gap:18px;padding:24px 0;border-top:1px solid var(--line);scroll-margin-top:24px}
+.stop:first-child{border-top:0;padding-top:0}
+.stop .n{width:38px;height:38px;border-radius:50%;background:var(--pine);color:var(--birch);display:grid;place-items:center;font:700 15px/1 var(--sans);font-variant-numeric:lining-nums tabular-nums}
+.stop.on .n{background:var(--roof)}
+.stop h3{font-size:27px;margin:0 0 8px}
+.stop p{font-size:16px;color:#3D3C36;max-width:56ch}
+.stop .ph{aspect-ratio:4/3;width:100%;border-radius:8px;object-fit:cover;background:var(--meadow)}
+.phwrap{margin:0;display:grid;gap:4px;align-content:start}
+.phwrap figcaption{font-size:11.5px;line-height:1.35;color:var(--muted)}
+.phwrap figcaption a{color:var(--muted)}
+.stop .ph.none{display:grid;place-items:center;color:var(--muted);font-size:13px}
+.also{margin-top:8px;background:#E6EADB;border-radius:12px;padding:18px 20px;font-size:16px}
+.also b{color:var(--pine)}
+
+/* Eli */
+.eli{background:var(--pine);color:#E2E7DE}
+.eli .wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:48px;align-items:start;padding-block:72px 0}
+.eli-photo{margin:0;position:sticky;top:32px;display:grid;gap:8px}
+.eli img{border-radius:4px;filter:sepia(.2) contrast(1.05)}
+.eli-photo figcaption{font-size:13px;color:#AEB8AA;font-style:italic}
+.eli h2{color:#F4F5F1;font-size:clamp(32px,4vw,46px)}
+.eli .eyebrow{color:var(--lichen)}
+.eli p{max-width:64ch}
+.eli .lead{font:400 clamp(21px,2.2vw,25px)/1.4 var(--serif);color:#F4F5F1}
+.eli .copy{display:grid;gap:16px}
+.forest{margin:10px 0;padding:22px 24px;border-radius:14px;background:rgba(201,211,176,.1);display:grid;gap:12px}
+.forest h3{font-size:24px;color:#F4F5F1}
+.forest blockquote{margin:4px 0 0;font:400 clamp(24px,2.6vw,30px)/1.25 var(--serif);color:var(--lichen)}
+.forest cite{display:block;margin-top:6px;font:italic 400 14px var(--sans);color:#AEB8AA}
+.eli-close{grid-template-columns:1fr!important;justify-items:center;text-align:center;padding-block:48px 72px!important;gap:10px!important}
+.monument{font:400 clamp(24px,3vw,36px)/1.25 var(--serif);color:#F4F5F1;max-width:28ch;text-wrap:balance}
+.tranquil{font-size:16px;color:#C7CFC2}
+.tranquil em{color:var(--lichen)}
+.line{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:10px;border-top:2px solid rgba(201,211,176,.35)}
+.line div{padding:14px 12px 0 0;font-size:13.5px;line-height:1.4;color:#C7CFC2;position:relative}
+.line div::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--lichen)}
+.line b{display:block;font:400 22px var(--serif);color:#F4F5F1}
+
+/* mission, visit, events, support */
+.band{padding-block:64px;display:grid;gap:24px}
+.band h2{font-size:clamp(30px,3.6vw,42px)}
+.mission{max-width:760px;font:400 clamp(22px,2.4vw,28px)/1.35 var(--serif);color:var(--pine)}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cols>div{display:grid;gap:6px;align-content:start;padding-top:14px;border-top:3px solid var(--roof)}
+.cols b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roof)}
+.cols .big{font:400 40px/1 var(--serif);color:var(--pine)}
+.signrow{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:center}
+/* hero tagline + meadow band */
+.hero h1 em{font-style:italic;color:var(--lichen)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.btn.light{background:var(--lichen);color:var(--pine)}
+.btn.ghost-light{background:transparent;color:#F1F2EE;box-shadow:inset 0 0 0 1.5px rgba(241,242,238,.7)}
+/* savusauna */
+.sauna{background:var(--bark);color:#DDE3D8}
+.sauna .wrap{padding-block:72px;display:grid;gap:40px}
+.sauna .eyebrow{color:var(--lichen)}
+.shead{display:grid;gap:14px;max-width:760px}
+.shead h2{color:#F4F5F1;font-size:clamp(32px,4.2vw,50px)}
+.shead p{font-size:18px;color:#CFD4C8;max-width:62ch}
+.sstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid #3A3934}
+.sstats div{padding:20px 20px 18px;display:grid;gap:4px;border-left:1px solid #3A3934}
+.sstats div:first-child{border-left:0;padding-left:0}
+.sstats b{font:400 clamp(30px,3.4vw,40px)/1 var(--serif);color:#F4F5F1;font-variant-numeric:tabular-nums}
+.sstats span{font-size:14px;color:#AEB4A8}
+.stwo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start}
+.slog{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid #4A4943;display:grid;gap:22px}
+.slog li{position:relative;display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px}
+.slog li::before{content:"";position:absolute;left:-28px;top:7px;width:11px;height:11px;background:var(--lichen);transform:rotate(45deg)}
+.slog time{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--lichen);padding-top:3px}
+.slog p{color:#CFD4C8;font-size:16px}
+.slog b{color:#F4F5F1}
+.sside{display:grid;gap:28px}
+.fit{display:grid;gap:10px}
+.fit p{font:400 clamp(20px,2.2vw,24px)/1.4 var(--serif);color:#E6EADF}
+.found{background:#2E2D28;border-radius:12px;padding:20px 22px;display:grid;gap:12px}
+.found ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.found li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed #4A4943;padding-bottom:10px;font-size:16px;color:#F1F2EE}
+.found li span:last-child{color:#AEB4A8;font-size:14px;text-align:right}
+.hands{display:grid;gap:14px;justify-items:start;padding-top:8px;border-top:1px solid #3A3934}
+.hands .names{font:400 clamp(20px,2.3vw,26px)/1.5 var(--serif);color:#E6EADF;max-width:none}
+@media (max-width:900px){
+  .sstats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sstats div:nth-child(3){border-left:0;padding-left:0}
+  .sstats div:nth-child(n+3){border-top:1px solid #3A3934}
+  .stwo{grid-template-columns:1fr}
+  .slog li{grid-template-columns:1fr;gap:2px}
+}
+/* featured event (under the hero); colors come from the tone variables */
+:root{--fbg:#EBDDB4;--fink:#1E3A2F;--fsub:#4A3C18;--fline:rgba(36,35,31,.16);--fpill:#24231F;--fpill-ink:#F1E4BE;--faccent:#C9A24E;--fbtn:#1E3A2F;--fbtn-ink:#F1F2EE}
+body[data-tone="lichen"]{--fbg:#DCE3C8;--fsub:#3F4A35;--fpill:#1E3A2F;--fpill-ink:#DCE3C8;--faccent:#3F7D5C}
+body[data-tone="pine"]{--fbg:#1E3A2F;--fink:#F4F5F1;--fsub:#C7CFC2;--fline:rgba(201,211,176,.22);--fpill:#C9D3B0;--fpill-ink:#1E3A2F;--faccent:#C9D3B0;--fbtn:#C9D3B0;--fbtn-ink:#1E3A2F}
+body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink:#FFF3EA;--faccent:#A5482A}
+.featured{background:var(--fbg);color:var(--fink);border-bottom:1px solid var(--fline)}
+.fgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 220px;gap:36px;padding-block:44px;align-items:start}
+.fgrid.noposter{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.fmain{display:grid;gap:12px;justify-items:start}
+.fwhen{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;background:var(--fpill);color:var(--fpill-ink);padding:4px 10px;border-radius:4px}
+.fdate{display:flex;align-items:baseline;gap:10px;color:var(--fink)}
+.fdate .fm{font-weight:700;letter-spacing:.14em;font-size:15px}
+.fdate .fd{font:400 72px/0.9 var(--serif)}
+.fdate .fy{font-size:16px;font-weight:700}
+.featured h2{font-size:clamp(30px,3.6vw,44px);color:var(--fink)}
+.fmeta{font-size:17px;font-weight:700;color:var(--fsub)}
+.facts2{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.featured .btn{background:var(--fbtn);color:var(--fbtn-ink)}
+.featured .btn.ghost{background:transparent;color:var(--fink);box-shadow:inset 0 0 0 1.5px var(--fink)}
+.lineup{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lineup li{display:grid;padding-bottom:10px;border-bottom:1px solid var(--fline)}
+.lineup b{font:400 20px/1.2 var(--serif);color:var(--fink)}
+.lineup span{font-size:15px;color:var(--fsub)}
+.fblurb{font:400 24px/1.35 var(--serif);color:var(--fink);max-width:30ch}
+.fposter{display:grid;gap:8px;text-decoration:none;color:var(--fink);font-weight:700;font-size:14px}
+.fposter img{width:100%;border-radius:4px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55);transform:rotate(1.5deg);transition:transform .2s}
+.fposter:hover img{transform:rotate(0)}
+.sample{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A4F0E;background:#F3E9CF;padding:2px 8px;border-radius:3px}
+/* yearly event cards */
+.evcards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.evcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:start}
+.evcard.upcoming{border-color:var(--faccent);box-shadow:0 0 0 2px var(--faccent)}
+.evtop{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+.tag.up{background:var(--fpill);border-color:var(--fpill);color:var(--fpill-ink)}
+.season{font-size:13px;color:var(--muted)}
+.evcard h3{font-size:26px;margin-bottom:6px}
+.evcard p{color:#3D3C36;font-size:16px}
+.evcard p+p{margin-top:6px}
+@media (max-width:900px){
+  .fgrid,.fgrid.noposter{grid-template-columns:1fr;gap:24px}
+  .fposter{max-width:220px}
+  .evcards{grid-template-columns:1fr}
+}
+@media (max-width:520px){.evcard{grid-template-columns:1fr}}
+/* mission (compact, above the events band) */
+.mission-band{background:var(--birch);padding-block:36px}
+.mframe{position:relative;max-width:980px;margin-inline:auto;background:var(--birch);border:2px solid var(--pine);padding:38px clamp(20px,5vw,56px) 24px;text-align:center;display:grid;gap:6px;justify-items:center}
+.mframe::before{content:"";position:absolute;inset:7px;border:1px solid var(--roof);pointer-events:none}
+.mframe .c{position:absolute;width:12px;height:12px;background:var(--pine);transform:rotate(45deg)}
+.mframe .tl{top:2px;left:2px}.mframe .tr{top:2px;right:2px}.mframe .bl{bottom:2px;left:2px}.mframe .br{bottom:2px;right:2px}
+.mmark{position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:var(--birch);padding:0 8px;box-sizing:content-box;width:40px;height:40px}
+.mframe h2.eyebrow{font-family:var(--sans);font-size:12px;margin-bottom:4px}
+.mline{font:400 clamp(17px,1.8vw,21px)/1.35 var(--serif);color:var(--pine);width:min(100%,820px);text-wrap:balance}
+.msig{margin-top:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+/* before-you-go tips */
+.tips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tips>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:4px;align-content:start}
+.tips svg{width:32px;height:32px;margin-bottom:4px}
+.tips b{font:400 19px/1.2 var(--serif);color:var(--pine)}
+.tips span{font-size:15px;color:#3D3C36}
+@media (max-width:900px){.tips{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.tips{grid-template-columns:1fr}}
+#events{scroll-margin-top:16px}
+#events-low #events{border-top:1px solid var(--line)}
+/* news + kiitos */
+.newsgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:44px;align-items:start}
+.newslist{display:grid}
+.news{padding:20px 0;border-top:1px solid var(--line);display:grid;gap:6px}
+.news:first-child{border-top:0;padding-top:0}
+.nmeta{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted)}
+.kind{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#E6EADB;color:var(--pine)}
+.k-kiitos{background:var(--pine);color:var(--birch)}
+.k-press{background:#DCE3C8;color:var(--pine)}
+.k-on-screen{background:var(--bark);color:var(--birch)}
+.news h3{font-size:24px}
+.news p{color:#3D3C36;max-width:62ch}
+.nlink a{font-weight:700}
+.kiitos{background:var(--pine);color:#DDE3D8;border-radius:16px;padding:24px 24px 18px;display:grid;gap:10px}
+.kt{font:italic 400 38px/1 var(--serif);color:var(--lichen)}
+.ksub{font-size:15px;color:#C7CFC2}
+.kiitos ul{list-style:none;margin:6px 0 0;padding:0;display:grid}
+.kiitos li{display:grid;gap:1px;padding:10px 0;border-top:1px solid rgba(201,211,176,.22)}
+.kiitos b{font:400 18px/1.25 var(--serif);color:#F4F5F1;font-weight:400}
+.kiitos li span{font-size:14px;color:#C7CFC2}
+.older{justify-self:start;margin-top:12px;font:700 14px var(--sans);color:var(--pine);background:transparent;border:1.5px solid var(--pine);border-radius:999px;padding:8px 16px;cursor:pointer}
+.news[hidden]{display:none}
+.more{margin-top:4px}
+.more a{font-weight:700}
+@media (max-width:900px){.newsgrid{grid-template-columns:1fr}}
+/* news sidebar: three random square photos */
+.side-pics{display:grid;gap:14px}
+.side-pics img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;background:var(--meadow)}
+@media (max-width:900px){.side-pics{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}}
+/* news side card options */
+.side-card{border-radius:16px;padding:24px;display:grid;gap:10px;background:var(--card);border:1px solid var(--line);margin:0}
+.side-card.pine{background:var(--pine);border-color:var(--pine);color:#DDE3D8}
+.side-card.pine h3{color:#F4F5F1}
+.side-card.pine a:not(.btn){color:var(--lichen)}
+.side-card.lichen{background:#DCE3C8;border-color:#DCE3C8}
+.side-card h3{font-size:26px;line-height:1.15}
+.sc-eb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--roof)}
+.side-card.pine .sc-eb{color:var(--lichen)}
+.side-card .btn{justify-self:start}
+.side-card ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.sc-q{margin-top:6px;font-weight:700;color:#F4F5F1}
+.sc-c{font-size:15px}
+.sc-poster img{width:100%;border-radius:4px;box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
+.side-card.photo{padding:0;overflow:hidden}
+.side-card.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.side-card.photo figcaption{padding:12px 16px 14px;display:grid;gap:2px}
+.side-card.photo figcaption b{font:400 18px var(--serif);color:var(--pine);font-weight:400}
+.side-card.photo figcaption span{font-size:12px;color:var(--muted)}
+.side-card.photo figcaption a{color:var(--muted)}
+/* visit */
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:36px;align-items:start}
+.vtext{display:grid;gap:16px;align-content:start}
+.vtext p{color:#3D3C36;max-width:56ch}
+.vtext .btn{justify-self:start}
+.vcols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.vcols>div{display:grid;gap:4px;align-content:start;padding-top:12px;border-top:3px solid var(--roof)}
+.vcols b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roof)}
+.gmap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--meadow)}
+.gmap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gmap-go{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:16px;text-decoration:none}
+.gmap-go span{background:var(--pine);color:var(--birch);font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);transition:transform .15s}
+.gmap-go:hover span,.gmap-go:focus-visible span{transform:translateY(-2px)}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.strip figure{margin:0;display:grid;gap:6px}
+.strip img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
+.strip figcaption{font-size:14px;color:var(--muted)}
+.event{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.date{width:120px;border-radius:10px;overflow:hidden;text-align:center;border:1px solid var(--line)}
+.date .m{background:var(--roof);color:#FFF;font-weight:700;letter-spacing:.12em;font-size:13px;padding:5px}
+.date .d{font:400 52px/1 var(--serif);color:var(--pine);padding:10px 0 2px}
+.date .y{font-size:13px;color:var(--muted);padding-bottom:8px}
+.event h3{font-size:28px;margin-bottom:6px}
+.event p{color:#3D3C36}
+footer{background:var(--bark);color:#B9BDB2;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:26px calc(26px + env(safe-area-inset-bottom,0px))}
+footer a{color:#DDE3D8}
+
+@media (max-width:900px){
+  .guide{grid-template-columns:1fr;gap:16px;padding-top:12px}
+  .side{top:0;background:var(--birch);margin-inline:-28px;padding:10px 16px;border-bottom:1px solid var(--line);box-shadow:0 8px 16px -14px rgba(0,0,0,.5)}
+  .mapcard{padding:6px}
+  .mapcard svg{height:190px}
+  .legend{display:none}
+  .chips{display:flex}
+  .stop{grid-template-columns:40px minmax(0,1fr);gap:14px}
+  .stop .phwrap{grid-column:2;max-width:420px}
+  .eli .wrap{grid-template-columns:1fr}
+  .eli img{max-width:220px}
+  .eli-photo{position:static}
+  .line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
+  .cols{grid-template-columns:1fr}
+  .signrow{grid-template-columns:1fr}
+  .visit{grid-template-columns:1fr}
+  .strip{grid-template-columns:1fr 1fr}
+  .menu-btn{display:inline-flex}
+  .links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:0;padding-top:6px;border-top:1px solid var(--line)}
+  .links.open{display:flex}
+  .links a{padding:12px 2px;border-bottom:1px solid var(--line);font-size:17px}
+  .links .btn{margin-top:12px;text-align:center;border-bottom:0}
+}
+@media (max-width:520px){
+  .wrap{padding-inline:18px}
+  .side{margin-inline:-18px}
+  .event{grid-template-columns:1fr}
+  .vcols{grid-template-columns:1fr}
+  .hero{min-height:380px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<style>
+/* notes page */
+.nhero{background:var(--bark);color:#DDE3D8}
+.nhero .wrap{padding-block:56px 48px;display:grid;gap:12px}
+.nhero .eyebrow{color:var(--lichen)}
+.nhero h1{color:#F4F5F1;font-size:clamp(34px,5vw,58px);max-width:18ch}
+.nhero .by{font-size:18px;color:#CFD4C8}
+.nhero .back{color:var(--lichen);font-weight:700;font-size:15px;text-decoration:none}
+.notes{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;padding-block:48px 72px;align-items:start}
+.toc{position:sticky;top:32px;display:grid;gap:6px;font-size:15px}
+.toc b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--roof);margin-bottom:4px}
+.toc a{color:var(--bark);text-decoration:none;padding:3px 0;border-left:2px solid var(--line);padding-left:10px}
+.toc a:hover{color:var(--roof);border-left-color:var(--roof)}
+.ntext{max-width:68ch;display:grid;gap:18px}
+.ntext .intro{font:400 clamp(21px,2.3vw,26px)/1.4 var(--serif);color:var(--pine);font-style:italic}
+.ntext h2{font-size:clamp(26px,3vw,34px);margin-top:22px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:24px}
+.ntext p{font-size:18px;line-height:1.7;color:#2E2D28}
+.progress{margin:0;padding:18px 22px 18px 40px;background:#E6EADB;border-radius:12px;display:grid;gap:8px;font-size:17px}
+.byline-in{font:italic 400 21px var(--serif);color:var(--pine)}
+.sig{font:italic 400 22px var(--serif);color:var(--pine);margin-top:8px}
+.edited{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+@media (max-width:900px){.notes{grid-template-columns:1fr;gap:24px}.toc{position:static;grid-template-columns:1fr 1fr;gap:4px 16px}.toc b{grid-column:1/-1}}
+</style></head>
+<body>
+<div class="preview">You’re looking at a preview of the new website. <a href="/">Go to the current site</a></div>
+<div class="wrap nav">
+  <a class="brand" href="/v2/"><svg width="44" height="44" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg><span>Wirtanen Pioneer Farm<small>Est. 1904 · Markham, Minnesota</small></span></a>
+  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mainnav"><span class="bars" aria-hidden="true"></span>Menu</button>
+  <nav class="links" id="mainnav" aria-label="Main"><a href="/v2/#farmstead">The Farmstead</a><a href="/v2/#eli">Eli’s Story</a><a href="/v2/#savusauna">Savusauna</a><a href="/v2/#events">Events</a><a href="/v2/#news">News</a><a href="/v2/#support">Support</a><a class="btn" href="/v2/#visit">Plan a visit</a></nav>
+</div>
+<header class="nhero"><div class="wrap">
+  <a class="back" href="/v2/#savusauna">← Back to the savusauna on the homepage</a>
+  <div class="eyebrow">Savusauna · the smoke sauna</div>
+  <h1>Two summers to save Eli’s smoke sauna</h1>
+  <p class="by">Restoration notes by Norm Jarva and Harold Johnson, 2008–2009</p>
+</div></header>
+<main class="wrap notes">
+  <nav class="toc" aria-label="Sections of the notes"><b>In these notes</b><a href="#stock">Taking stock, spring 2008</a><a href="#pines">Seven Norway pines</a><a href="#corners">Learning Eli’s corners</a><a href="#raising">Raising the walls</a><a href="#rebuilding">Rebuilding from the ground up</a><a href="#last">The last timber, 2009</a><a href="#stove">Harold’s stove</a><a href="#thanks">Thank you</a></nav>
+  <article class="ntext">
+    <p class="intro">Notes by Norm Jarva and Harold Johnson regarding the summers of 2008 and 2009 to repair the Savu Sauna at the Wirtanen Pioneer Farm.</p>
+    <h2 id="stock">Taking stock, spring 2008</h2>
+    <p>At the April 2008 Annual Meeting of the Friends of the Wirtanen Pioneer Farm, Harold Johnson and Norm Jarva volunteered to be involved with the repair project. It was understood that there is funding available to purchase materials and hardware as needed.</p>
+    <p>Harold and Norm made several visits for preliminary inspection of the existing building to determine a process of priority in tasks to commence on the project. Numerous lower course timbers on all four walls were found to be rotted due to ground contact, moisture, lack of ventilation, and damage by carpenter ants and other insects. Photos were taken before, during, and after to create a record of the entire project.</p>
+    <p>It appeared that some attempts had been made at some time to maintain the place covering some of the partial damage. This probably added to problems as the boards would hold in any moisture from rain or ground absorption by blocking air circulation. Other sections of the exterior held tar paper nailed over the original timbers; that serves for little protection also.</p>
+    <p>We made measurements of the short and long walls to calculate a count of timber that need to be replaced. Full length timbers on the three sides and shorter timbers making up the door and window walls were needed. We decided 18 timbers at 6 inch by 8 inch by 14 feet was a minimum number necessary. But to allow for error and unforeseen we determines 21 or 22 timbers would be best.</p>
+    <p>From the interior the dressing room bench and the steam room benches were removed intact with the intention to re-install them and keep the integrity of Eli’s original structure. The benches have a blackened patina of soot from years of usage of the smoke sauna that cannot be easily duplicated.</p>
+    <p>The wooden floor sections in the steam room were found to not be original. However, this ‘newer’ floor had been there long enough to be damaged over time from ground water and steam and sauna water; the floor was removed to be replaced in the future using better materials and safer construction methods with ventilation.</p>
+    <p>The sauna “stove” was a three foot diameter section of steel road culvert. It was rusted, corroded through, and not re-usable. Numerous odd pieces of scrap steel were mixed in with the stove heating rocks. All were discarded. Many, many buckets of ash, clay soil, pieces of metal, and stones were added atop the ‘kiwas’ had pushed the original stones down into the clay and dirt floor that was around the heating area of the room.</p>
+    <h2 id="pines">Seven Norway pines</h2>
+    <p>For the replacement timbers no easy access to trees on the Pioneer Farm was available. In July of 2008, Norm Jarva donated seven large mature red Norway pine trees from his Lakeland property to be made into timbers. Harold Johnson, Jack Huhta, Bill Marolt, Gene Saumer, Jim Nesselroad, Kraig Johnson, and Norm Jarva cut and limned the trees. Mike Tynjala donated the use of his log hauler truck with a “cherry-picker” and his skills to load the 18, 14-foot lengths onto a goose-neck trailer and truck donated for use by Keith Nelson and driven by Keith’s son, Aaron.</p>
+    <p>Aaron delivered the load to John Latola’s sawmill outside of Aurora. John did the sawing to turn the 18 lengths into the 6x8x14 timbers for use to replace the rotten timbers in the wall sections of the savu sauna.</p>
+    <p>The timbers were delivered to the sauna site by Keith Nelson for the construction to move forward. (Keith made numerous trips over the two summers to deliver timbers then the rough-sawn boards used in the reconstruction.)</p>
+    <p>Latola ably sawed additional one inch boards from those sections of logs. These boards later were used to frame the doors and windows of the sauna. (And some of them were used for the soffits and eaves when the roof was replaced on the main house.)</p>
+    <h2 id="corners">Learning Eli’s corners</h2>
+    <p>In July 2008 Martin Mattson, a local craftsman experiences in construction of log buildings in the Finnish style, conducted a hands-on workshop at the sauna site. Using sections of spare timbers, Martin showed Harold and Norm and the others in attendance how he measures, marks, and basically whittles the compound mitered corners for the ends of the timbers to fit. The angle of the flat cut is about 17 degrees leaving the highest point of the cut on what will be the outside corner. The lowest point of the cut is toward the body of the timber. The two remaining corners are one slightly higher than the lower with the other slightly lower than the higher – each at an opposing corner of the highest and lowest.</p>
+    <p>The opposing end of the timber has a mirror image of the compound angle cuts and the bottom end of the timber has a similar compound miter to allow each course of timber to fit tightly while directing water runoff on the exterior of the building down and toward the center of the exterior wall.</p>
+    <h2 id="raising">Raising the walls</h2>
+    <p>Once the interior was gutted, Harold and Norm, with help on occasion from others, lifted the upper half of the walls of the sauna by bolting 6 inch by 6 inch by 4 foot timber pieces to the interior walls. Using hydraulic 6 hand jacks the solid portions of the upper walls were raised taking the weight of the building off the lower walls. Those timbers to remain in place were freed from the lower rotten pieces allowing for removal. All during the process of removal of the original rotted timbers it was discovered (to our dismay) that Wirtanen certainly used numerous, and VERY large, nail to spike his dovetail joints together. In addition, Wirtanen “pegged” his timbers together with one inch diameter pieces 12-14 inches long in two center areas of each and every horizontal timber he put in place.</p>
+    <p>Dis-assembly of the lower courses made for findings of the “creative” use by Wirtanen of various cast off items to chink the spaces between his original sauna timbers. Harold and Norm removed many yards of strips of oakum, gunny sacks, and even old “long-handles” that Eli had inserted between the timbers in his efforts to maintain heat in his sauna and possibly keep out cold drafts.</p>
+    <h2 id="rebuilding">Rebuilding from the ground up</h2>
+    <p>Once the building was raised in July of 2008, work was begun to remove the lower timber on the rear of the sauna. This became our starting point as it was probably Eli’s first laid timber for his building since the first course of side timbers laid atop this timber as well as the one in the front. The lowest bad timbers on the front and two sides were taken out. These all broke apart into pieces and sawdust and scrap due to their condition. Insect nests were frequently found.</p>
+    <p>Trenches were dug in the soil under the walls of the building into which gravel was dumped in order to prevent ground moisture from shortening the life of the replacement timbers. Green treated timbers were set on the gravel to serve as a long-lasting foundation before the wall timber work began. The four upper ends of the front and rear green treat timbers were cut down to mitered dovetails at ‘approximate’ matching angles of those above so that the last courses of full replacement timbers would tie in correctly in the direction of Eli’s timbers which we were leaving in place.</p>
+    <p>In creating the compound angled dovetail joints on the timbers our measurements of Eli’s carved timber ends showed that Eli had quite the “good eye” in maintaining a close standardization for his jointing construction. But as we found none of them were truly the same, our attempts to closely duplicate his dovetails involved the repetitious tasks of marking approximate lines, using a broad-axe to do more detailed wood chipping, and utilizing an old-time draw knife to shape the dovetail slopes so they would match that dovetail above and below. Most timbers were cut, put in place to check the fit of the joints, then removed one, two times, or more on occasion, before we met an acceptable product that came close to Eli’s. It proved to be a long, slow process over the summers of 2008 and 2009.</p>
+    <p>Exterior work on the sauna was fully dependent on the weather at this time and the summer of 2008 moved into fall. We ceased work for 2008 in October.</p>
+    <p>The progress over the summer of 2008 included:</p>
+    <ul class="progress"><li>Gutting the interior steam room and dressing room (saving what was original that had potential for re-installation)</li><li>Tearing off the various materials that had been added onto the original building in attempts to slow deterioration.</li><li>Bolting on temporary jacking timbers inside the sauna to raise the building.</li><li>Removal of bad timbers on three sides of the building.</li><li>Installation of drain tile underground in a trench around the perimeter of the building to divert groundwater away.</li><li>Replacement of a few timbers (with our hands-on learning of the art of angled and mitered ends.)</li></ul>
+    <h2 id="last">The last timber, 2009</h2>
+    <p>At the end of August 2009, the final replacement timber was installed. It forms the sill of the dressing room window in front. This was a milestone moment in the project! However, we still lacked an interior and numerous details remained to be done. Our stated goal was to have the savu sauna completed for Fall Festival Day, September 12, 2009.</p>
+    <p>Green treated 4×4’s make up the interior joists under the steam room floor. These were attached to the treated timbers that make up the “foundation” of the building. The planks that form the floors of the two rooms were those sawed by John Latola from the original Norway pines. Green-treated 2×4’s were used to support those boards installed for the dressing room floor.</p>
+    <p>The seating benches and the bucket shelves in the steam room are Eli’s originals. As the lower supports for these were quite water damaged, new pieces were installed.</p>
+    <p>The bench in the dressing room is original as is the small shelf by the door.</p>
+    <p>The exterior of the building was treated with a water-based mix using Borax soap to prevent insect damage. After final exterior work a commercial wood treatment was sprayed on the sides in the hope of preserving the solid wood timbers of Wirtanen and delaying weather damage of the replacement timbers.</p>
+    <p>We expect the replacement timbers to gray naturally in a year or two blending with the original construction of Eli Wirtanen.</p>
+    <h2 id="stove">Harold’s stove</h2>
+    <p>Harold fabricated the replacement sauna stove in his garage at home.</p>
+    <p class="byline-in">Harold’s notes:</p>
+    <p>I welded the sauna stove from 3/16 th inch and 1/4 inch plate steel. The stove weighs about 100 pounds; it is 28 inches square and 19 inches tall. I cut 35, 1 inch 3/4″ holes on the sides and top to allow the heat and smoke to heat the rocks which were piled atop and around the stove. The stove has a welded shelf on the one side to allow for radiant heating of a tub of water.</p>
+    <h2 id="thanks">Thank you</h2>
+    <p>We did not keep accurate records of the volunteer man-hours for the summer of 2008. However for the summer of 2009 I recorded 211 hours donated by volunteers.</p>
+    <p>The volunteers who were able to give varied amounts of their time included: Bob Kochendorfer of Hoyt Lakes, Kraig Johnson of Aurora, Jack Huhta of Hutter, and Don Maki of Fayal Township/Eveleth. Their assistance proved to be very valuable with this project and we thank them.</p>
+    <p>As the goal was completion of the building by the 2009 Festival Day, we were assisted by Mickey Nissila who gave hours and hours of work time and offered many suggestions when the floors and benches were replaced. Mickey lent his skills in the window framing and replacement of the doors over several days. He delivered the rocks that form the “kiwas” and aided in placing those – bucket by bucket.</p>
+    <p>We wish to acknowledge the donations of Bradach Lumber of Aurora.</p>
+    <p class="sig">Norm Jarva and Harold Johnson</p>
+    <p class="edited">Two small typos corrected. The text is otherwise exactly as Norm and Harold wrote it.</p>
+  </article>
+</main>
+<footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit · Some photos: <a href="https://commons.wikimedia.org/wiki/Category:Eli_Wirtanen_Pioneer_Farm">Minnesota Historical Society</a>, CC BY 4.0</span><span><a href="/contact-us/">Contact</a> · <a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
+<script>
+/* Phone menu: open and close the top menu */
+(function(){
+  var btn=document.getElementById('menu-btn'),nav=document.getElementById('mainnav');if(!btn||!nav)return;
+  function set(open){nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);}
+  btn.addEventListener('click',function(){set(btn.getAttribute('aria-expanded')!=='true');});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+})();
+</script>
+</body>
+</html>
