@@ -647,14 +647,13 @@ footer a{color:#DDE3D8}
     el('line',{x1:s.x+4,y1:s.y-s.h+4,x2:px,y2:py,stroke:'#1E3A2F','stroke-width':1.2,opacity:.6},g);
     var c=el('circle',{cx:px,cy:py,r:11,fill:'#1E3A2F',stroke:'#F1F2EE','stroke-width':2},g);
     var tx=el('text',{x:px,y:py+4.5,'text-anchor':'middle','font-family':'Gloock,serif','font-size':12,fill:'#F1F2EE'},g);tx.textContent=i+1;
-    var lw=s.name.length*6.4+18,lx=Math.min(px+14,600-lw);
     var tag=el('g',{opacity:0},g);
-    el('rect',{x:lx,y:py-10,width:lw,height:20,rx:10,fill:'#1E3A2F'},tag);
-    var tt=el('text',{x:lx+9,y:py+4,'font-family':'Karla,sans-serif','font-size':12,'font-weight':700,fill:'#F1F2EE'},tag);tt.textContent=s.name;
+    var tr=el('rect',{x:px+14,y:py-10,width:60,height:20,rx:10,fill:'#1E3A2F'},tag);
+    var tt=el('text',{x:px+44,y:py+4,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':12,'font-weight':700,fill:'#F1F2EE'},tag);tt.textContent=s.name;
     var ti=el('title',{},g);ti.textContent=(i+1)+'. '+s.name;
     // hit area covers the building too
     el('rect',{x:s.x-24,y:s.y-s.h-18,width:52,height:s.h+22,fill:'transparent'},g);
-    marks[s.k]={c:c,tag:tag,g:g};
+    marks[s.k]={c:c,tag:tag,g:g,tr:tr,tt:tt,px:px};
     g.addEventListener('click',function(){go(s.k)});
     g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(s.k)}});
   });
@@ -669,6 +668,10 @@ footer a{color:#DDE3D8}
   chips.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.k)})});
 
   var cur=null,lock=0;
+  function fitTag(m){var w=m.tt.getComputedTextLength();if(!w)return;var lw=Math.ceil(w)+22,lx=Math.min(m.px+14,606-lw);
+    m.tr.setAttribute('x',lx);m.tr.setAttribute('width',lw);m.tt.setAttribute('x',lx+lw/2);}
+  function fitAll(){Object.keys(marks).forEach(function(k){fitTag(marks[k]);});}
+  fitAll();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
   function set(k){if(k===cur)return;cur=k;
     Object.keys(marks).forEach(function(j){var on=j===k;marks[j].c.setAttribute('fill',on?'#3F7D5C':'#1E3A2F');marks[j].c.setAttribute('r',on?13:11);marks[j].tag.setAttribute('opacity',on?1:0);marks[j].g.setAttribute('aria-pressed',on);});
     if(marks[k])pinLayer.appendChild(marks[k].g);
