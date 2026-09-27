@@ -98,6 +98,91 @@ img{max-width:100%;display:block}
 .cols b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roof)}
 .cols .big{font:400 40px/1 var(--serif);color:var(--pine)}
 .signrow{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:center}
+/* hero tagline + meadow band */
+.hero h1 em{font-style:italic;color:var(--lichen)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.btn.light{background:var(--lichen);color:var(--pine)}
+.btn.ghost-light{background:transparent;color:#F1F2EE;box-shadow:inset 0 0 0 1.5px rgba(241,242,238,.7)}
+/* savusauna */
+.sauna{background:var(--bark);color:#DDE3D8}
+.sauna .wrap{padding-block:72px;display:grid;gap:40px}
+.sauna .eyebrow{color:var(--lichen)}
+.shead{display:grid;gap:14px;max-width:760px}
+.shead h2{color:#F4F5F1;font-size:clamp(32px,4.2vw,50px)}
+.shead p{font-size:18px;color:#CFD4C8;max-width:62ch}
+.sstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid #3A3934}
+.sstats div{padding:20px 20px 18px;display:grid;gap:4px;border-left:1px solid #3A3934}
+.sstats div:first-child{border-left:0;padding-left:0}
+.sstats b{font:400 clamp(30px,3.4vw,40px)/1 var(--serif);color:#F4F5F1;font-variant-numeric:tabular-nums}
+.sstats span{font-size:14px;color:#AEB4A8}
+.stwo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start}
+.slog{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid #4A4943;display:grid;gap:22px}
+.slog li{position:relative;display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px}
+.slog li::before{content:"";position:absolute;left:-28px;top:7px;width:11px;height:11px;background:var(--lichen);transform:rotate(45deg)}
+.slog time{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--lichen);padding-top:3px}
+.slog p{color:#CFD4C8;font-size:16px}
+.slog b{color:#F4F5F1}
+.sside{display:grid;gap:28px}
+.fit{display:grid;gap:10px}
+.fit p{font:400 clamp(20px,2.2vw,24px)/1.4 var(--serif);color:#E6EADF}
+.found{background:#2E2D28;border-radius:12px;padding:20px 22px;display:grid;gap:12px}
+.found ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.found li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed #4A4943;padding-bottom:10px;font-size:16px;color:#F1F2EE}
+.found li span:last-child{color:#AEB4A8;font-size:14px;text-align:right}
+.hands{display:grid;gap:14px;justify-items:start;padding-top:8px;border-top:1px solid #3A3934}
+.hands .names{font:400 clamp(20px,2.3vw,26px)/1.5 var(--serif);color:#E6EADF;max-width:none}
+@media (max-width:900px){
+  .sstats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sstats div:nth-child(3){border-left:0;padding-left:0}
+  .sstats div:nth-child(n+3){border-top:1px solid #3A3934}
+  .stwo{grid-template-columns:1fr}
+  .slog li{grid-template-columns:1fr;gap:2px}
+}
+/* featured event (under the hero); colors come from the tone variables */
+:root{--fbg:#EBDDB4;--fink:#1E3A2F;--fsub:#4A3C18;--fline:rgba(36,35,31,.16);--fpill:#24231F;--fpill-ink:#F1E4BE;--faccent:#C9A24E;--fbtn:#1E3A2F;--fbtn-ink:#F1F2EE}
+body[data-tone="lichen"]{--fbg:#DCE3C8;--fsub:#3F4A35;--fpill:#1E3A2F;--fpill-ink:#DCE3C8;--faccent:#3F7D5C}
+body[data-tone="pine"]{--fbg:#1E3A2F;--fink:#F4F5F1;--fsub:#C7CFC2;--fline:rgba(201,211,176,.22);--fpill:#C9D3B0;--fpill-ink:#1E3A2F;--faccent:#C9D3B0;--fbtn:#C9D3B0;--fbtn-ink:#1E3A2F}
+body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink:#FFF3EA;--faccent:#A5482A}
+.featured{background:var(--fbg);color:var(--fink);border-bottom:1px solid var(--fline)}
+.fgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 220px;gap:36px;padding-block:44px;align-items:start}
+.fgrid.noposter{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.fmain{display:grid;gap:12px;justify-items:start}
+.fwhen{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;background:var(--fpill);color:var(--fpill-ink);padding:4px 10px;border-radius:4px}
+.fdate{display:flex;align-items:baseline;gap:10px;color:var(--fink)}
+.fdate .fm{font-weight:700;letter-spacing:.14em;font-size:15px}
+.fdate .fd{font:400 72px/0.9 var(--serif)}
+.fdate .fy{font-size:16px;font-weight:700}
+.featured h2{font-size:clamp(30px,3.6vw,44px);color:var(--fink)}
+.fmeta{font-size:17px;font-weight:700;color:var(--fsub)}
+.facts2{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.featured .btn{background:var(--fbtn);color:var(--fbtn-ink)}
+.featured .btn.ghost{background:transparent;color:var(--fink);box-shadow:inset 0 0 0 1.5px var(--fink)}
+.lineup{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lineup li{display:grid;padding-bottom:10px;border-bottom:1px solid var(--fline)}
+.lineup b{font:400 20px/1.2 var(--serif);color:var(--fink)}
+.lineup span{font-size:15px;color:var(--fsub)}
+.fblurb{font:400 24px/1.35 var(--serif);color:var(--fink);max-width:30ch}
+.fposter{display:grid;gap:8px;text-decoration:none;color:var(--fink);font-weight:700;font-size:14px}
+.fposter img{width:100%;border-radius:4px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55);transform:rotate(1.5deg);transition:transform .2s}
+.fposter:hover img{transform:rotate(0)}
+.sample{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A4F0E;background:#F3E9CF;padding:2px 8px;border-radius:3px}
+/* yearly event cards */
+.evcards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.evcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:start}
+.evcard.upcoming{border-color:var(--faccent);box-shadow:0 0 0 2px var(--faccent)}
+.evtop{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+.tag.up{background:var(--fpill);border-color:var(--fpill);color:var(--fpill-ink)}
+.season{font-size:13px;color:var(--muted)}
+.evcard h3{font-size:26px;margin-bottom:6px}
+.evcard p{color:#3D3C36;font-size:16px}
+.evcard p+p{margin-top:6px}
+@media (max-width:900px){
+  .fgrid,.fgrid.noposter{grid-template-columns:1fr;gap:24px}
+  .fposter{max-width:220px}
+  .evcards{grid-template-columns:1fr}
+}
+@media (max-width:520px){.evcard{grid-template-columns:1fr}}
 /* mission */
 .mission-band{background:#E6EADB;padding-block:72px}
 .mframe{position:relative;max-width:860px;margin-inline:auto;background:var(--birch);border:2px solid var(--pine);padding:64px clamp(22px,6vw,72px) 44px;text-align:center;display:grid;gap:14px;justify-items:center}
@@ -165,28 +250,29 @@ footer a{color:#DDE3D8}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
-<body>
+<body data-tone="lichen">
 
 <div class="preview">You’re looking at a preview of the new website. <a href="/">Go to the current site</a></div>
 
 <div class="wrap nav">
   <a class="brand" href="/v2/"><svg width="44" height="44" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg><span>Wirtanen Pioneer Farm<small>Est. 1904 · Markham, Minnesota</small></span></a>
-  <nav class="links" aria-label="Main"><a href="#farmyard">The Farmyard</a><a href="#eli">Eli’s Story</a><a href="/savusauna/">Savusauna</a><a href="#events">Events</a><a href="#support">Support</a><a class="btn" href="#visit">Plan a visit</a></nav>
+  <nav class="links" aria-label="Main"><a href="#farmyard">The Farmyard</a><a href="#eli">Eli’s Story</a><a href="#savusauna">Savusauna</a><a href="#events">Events</a><a href="#support">Support</a><a class="btn" href="#visit">Plan a visit</a></nav>
 </div>
 
 <header class="hero">
   <div class="wrap"><div class="in">
-    <div class="eyebrow">Open-air museum · Finnish homestead</div>
-    <h1>Step into Eli’s farmyard.</h1>
-    <p>A 1904 Finnish immigrant homestead on the Old Vermilion Trail, kept by the Friends of the Wirtanen Pioneer Farm since 2001. Experience Old World serenity.</p>
-    <div class="facts"><span>40 acres</span><span>Homesteaded 1904</span><span>5312 Markham Rd, Makinen</span></div>
+    <div class="eyebrow">Wirtanen Pioneer Farm · Est. 1904</div>
+    <h1>Experience <em>Old World</em> Serenity.</h1>
+    <p>A 1904 Finnish immigrant homestead on the Old Vermilion Trail, kept by the Friends of the Wirtanen Pioneer Farm since 2001.</p>
+    <div class="acts"><a class="btn light" href="#farmyard">Walk the farmyard</a><a class="btn ghost-light" href="#visit">Plan a visit</a></div>
   </div></div>
 </header>
 
 <main>
+<section id="featured" class="featured" hidden></section>
 <section class="wrap guide-head" id="farmyard">
   <div class="eyebrow">Pihapiiri · the farmyard</div>
-  <h2>Walk the farmyard</h2>
+  <h2>Step into Eli’s farmyard</h2>
   <p>Choose a building on the map to jump to it, or scroll the list and the map will follow along.</p>
 </section>
 
@@ -218,6 +304,54 @@ footer a{color:#DDE3D8}
         <div><b>2001</b>The Friends take the deed</div>
         <div><b>2026</b>25 years of the Friends</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="sauna" id="savusauna">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">Savusauna · the smoke sauna</div>
+      <h2>Two summers to save Eli’s smoke sauna</h2>
+      <p>A savusauna has no chimney: the fire heats a pile of stones and the smoke fills the room before the bathing starts. By 2008, the lower timbers of Eli’s were rotted from ground moisture and carpenter ants. At the Friends’ annual meeting that April, Norm Jarva and Harold Johnson volunteered to rebuild it, one timber at a time.</p>
+    </div>
+
+    <div class="sstats">
+      <div><b>7</b><span>Norway pines donated for new timbers</span></div>
+      <div><b>6×8×14</b><span>inches, inches, feet: each replacement timber</span></div>
+      <div><b>18</b><span>timbers sawn at John Latola’s mill near Aurora</span></div>
+      <div><b>211</b><span>volunteer hours logged in the summer of 2009</span></div>
+    </div>
+
+    <div class="stwo">
+      <ol class="slog">
+        <li><time>Apr 2008</time><p><b>Volunteers step up.</b> Norm and Harold take on the project at the annual meeting.</p></li>
+        <li><time>Jul 2008</time><p><b>Seven pines.</b> Norm donates red Norway pines from his Lakeland property. Volunteers fell and limb them, and John Latola’s sawmill near Aurora cuts the timbers.</p></li>
+        <li><time>Jul 2008</time><p><b>A lesson in corners.</b> Log builder Martin Mattson shows the crew how to mark and whittle Eli’s compound-mitered corners.</p></li>
+        <li><time>Summer 2008</time><p><b>Up on jacks.</b> The upper walls are raised so the rotten lower timbers can come out. Drain tile and gravel go in underneath.</p></li>
+        <li><time>Oct 2008</time><p><b>Work stops for winter.</b></p></li>
+        <li><time>Aug 2009</time><p><b>The last timber.</b> It becomes the sill of the dressing-room window. Eli’s original soot-blackened benches go back inside.</p></li>
+        <li><time>Sep 12, 2009</time><p><b>The goal: ready for Fall Festival.</b> A new 100-pound steel stove, welded by Harold in his garage, sits under the kiuas stones.</p></li>
+      </ol>
+
+      <div class="sside">
+        <div class="fit"><div class="eyebrow">Matching Eli’s corners</div><p>No two of Eli’s corners were the same. Every new timber was marked, chipped with a broad-axe, shaped with a draw knife and test-fitted, often two or three times, until it matched his.</p></div>
+
+        <div class="found">
+          <div class="eyebrow">Found in Eli’s walls</div>
+          <ul>
+            <li><span>Oakum, gunny sacks and old “long-handles”</span><span>stuffed in as chinking</span></li>
+            <li><span>1-inch wooden pegs, 12–14 inches long</span><span>two in every timber</span></li>
+            <li><span>Very large nails</span><span>spiking every dovetail</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hands">
+      <div class="eyebrow">The hands that rebuilt it</div>
+      <p class="names">Harold Johnson · Norm Jarva · Jack Huhta · Bill Marolt · Gene Saumer · Jim Nesselroad · Kraig Johnson · Mike Tynjala · Keith Nelson · Aaron Nelson · John Latola · Martin Mattson · Bob Kochendorfer · Don Maki · Mickey Nissila · Bradach Lumber of Aurora</p>
+      <a class="btn light" href="/savusauna/">Read Norm and Harold’s full notes</a>
     </div>
   </div>
 </section>
@@ -263,10 +397,8 @@ footer a{color:#DDE3D8}
 
 <section class="wrap band" id="events" style="border-top:1px solid var(--line)">
   <div class="eyebrow">Events</div>
-  <div class="event">
-    <div class="date"><div class="m">SEPT</div><div class="d">12</div><div class="y">2026</div></div>
-    <div><h3>Thank you for coming to the Fall Festival</h3><p>This year’s festival celebrated 25 years, with artisans and crafters, horse-drawn wagon rides, baby animals, fresh baking, live music and the Colvin Fire Department. Next year’s date will be posted here. <a href="/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg">See the 2026 poster</a>.</p></div>
-  </div>
+  <h2>Every year at the farm</h2>
+  <div class="evcards" id="evcards"></div>
 </section>
 
 <section class="wrap band" id="support" style="border-top:1px solid var(--line)">
@@ -332,8 +464,8 @@ footer a{color:#DDE3D8}
   var rl=el('text',{transform:'translate(64 440) rotate(-90)','text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':2,fill:'#6E6450'},svg);rl.textContent='MARKHAM RD';
   var lk=el('text',{transform:'translate(44 250) rotate(-90)','text-anchor':'middle','font-family':'Gloock,serif','font-size':12,'font-style':'italic',fill:'#4E6272'},svg);lk.textContent='← Little Markham Lake';
   // parking + lane with rope-fence posts + carved sign
-  el('rect',{x:96,y:178,width:84,height:72,rx:12,fill:'#D2CAB6'},svg);
-  var pt=el('text',{x:138,y:219,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':1.5,fill:'#7A7058'},svg);pt.textContent='PARKING';
+  el('rect',{x:68,y:178,width:88,height:72,rx:10,fill:'#D2CAB6'},svg);
+  var pt=el('text',{x:112,y:219,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':1.5,fill:'#7A7058'},svg);pt.textContent='PARKING';
   var lane='M70 256 C 110 258, 170 266, 228 278 S 262 292, 272 312';
   el('path',{d:lane,fill:'none',stroke:'#E6DFC8','stroke-width':14,'stroke-linecap':'round'},svg);
   [[92,247],[112,249],[132,252],[92,266],[112,268],[132,271]].forEach(function(p){el('circle',{cx:p[0],cy:p[1],r:2.2,fill:'#6B5A45'},svg);});
@@ -345,7 +477,7 @@ footer a{color:#DDE3D8}
   function clearOf(x,y){for(var i=0;i<S.length;i++){if(Math.hypot(x-S[i].x,y-S[i].y+10)<32)return false;}return true;}
   while(n<330&&t<12000){t++;var x=72+r()*560,y=90+r()*540,s=7+r()*8;
     if(inside(x,y)||inside(x+s,y)||inside(x-s,y))continue;
-    if(x>90&&x<186&&y>168&&y<258)continue;
+    if(x>62&&x<164&&y>168&&y<258)continue;
     if(x>64&&x<200&&y>228&&y<300)continue;
     if(!clearOf(x,y))continue;
     n++;trees.push([x,y,s,r()]);}
@@ -408,7 +540,7 @@ footer a{color:#DDE3D8}
   list.innerHTML=S.map(function(s,i){
     var ph=s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy">':'<div class="ph none">Photo coming</div>';
     return '<article class="stop" id="stop-'+s.k+'" data-k="'+s.k+'"><span class="n">'+(i+1)+'</span><div><h3>'+s.name+'</h3><p>'+s.p+'</p></div>'+ph+'</article>';
-  }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="/savusauna/">Read the restoration story</a>. It will join the map soon.</p>';
+  }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="#savusauna">Read the restoration story</a>. It will join the map soon.</p>';
   chips.innerHTML=S.map(function(s,i){return '<button type="button" id="chip-'+s.k+'" data-k="'+s.k+'">'+(i+1)+' · '+s.name+'</button>';}).join('');
   chips.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.k)})});
 
@@ -429,6 +561,87 @@ footer a{color:#DDE3D8}
     if(best)set(best);}
   addEventListener('scroll',spy,{passive:true});
   set(S[0].k);
+})();
+</script>
+
+<script>
+/* ============================================================
+   EVENTS: the only part that needs editing each year.
+   - date: 'YYYY-MM-DD' (leave '' until the date is set)
+   - start/end: 24-hour local times, e.g. '10:00' and '16:00'
+   - promoFrom: the day the event starts being featured under the headline
+   ============================================================ */
+var EVENTS=[
+  { id:'festival', name:'Wirtanen Farm Fall Festival', season:'Every September',
+    date:'2026-09-12', start:'10:00', end:'16:00', promoFrom:'2026-08-01',
+    admission:'Free admission · donations accepted',
+    poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
+    lineup:[
+      ['Artisans & crafters','Homemade items for sale'],
+      ['“Strawberry Fields” wagon rides','Horse-drawn, all day'],
+      ['Scott’s Baby Animals','For the kids'],
+      ['Fresh bakery & food','Available all day'],
+      ['Live music','Jon Niemi & Sheila Coughlin'],
+      ['Book signing','“Where’s Grandma?” by Karen Lobb Cleghorn'],
+      ['Colvin Fire Department','Goodies, treats & trinkets']
+    ],
+    after:'Thank you to everyone who came out for this year’s festival. Next year’s date will be posted here.' },
+  { id:'bakesale', name:'Fall Bake Sale', season:'Every fall',
+    date:'', start:'', end:'', promoFrom:'',
+    admission:'Details to be announced',
+    poster:'', lineup:[],
+    blurb:'The Friends’ annual fall bake sale. Every purchase helps keep the farm standing.',
+    after:'Thank you for supporting this year’s bake sale. Next year’s date will be posted here.' }
+];
+</script>
+<script>
+(function(){
+  var MON=['JAN','FEB','MAR','APR','MAY','JUNE','JULY','AUG','SEPT','OCT','NOV','DEC'];
+  var DAY=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function parse(d){if(!d)return null;var p=d.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
+  function fmtTime(t){if(!t)return '';var h=+t.split(':')[0],m=t.split(':')[1];var ap=h>=12?'PM':'AM';h=h%12||12;return h+(m!=='00'?':'+m:'')+' '+ap;}
+  function ymd(d){return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
+  function gcal(e){var d=e.date.replace(/-/g,'');function z(t){return d+'T'+t.replace(':','')+'00';}
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.name)+'&dates='+z(e.start)+'/'+z(e.end)+'&ctz=America/Chicago&location='+encodeURIComponent('Wirtanen Pioneer Farm, 5312 Markham Rd, Makinen, MN 55763')+'&details='+encodeURIComponent('wirtanenfarm.org');}
+  var DIR='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent('Wirtanen Pioneer Farm, 5312 Markham Rd, Makinen, MN 55763');
+
+  function today(){var q=(location.search.match(/[?&]today=(\d{4}-\d{2}-\d{2})/)||[])[1];return q?parse(q):new Date();}
+  window.renderEvents=function(now){
+    now=now||today();var t=ymd(now);
+    // featured: the next event inside its promotion window
+    var feat=null;
+    EVENTS.forEach(function(e){var d=parse(e.date),p=parse(e.promoFrom);if(!d||!p)return;if(t>=ymd(p)&&t<=ymd(d)){if(!feat||ymd(d)<ymd(parse(feat.date)))feat=e;}});
+    var box=document.getElementById('featured');
+    if(feat){
+      var d=parse(feat.date),days=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
+      var when=days===0?'Today!':days===1?'Tomorrow':days<=14?'In '+days+' days':'Coming up';
+      var lineup=feat.lineup.length?'<ul class="lineup">'+feat.lineup.map(function(l){return '<li><b>'+l[0]+'</b><span>'+l[1]+'</span></li>';}).join('')+'</ul>':'<p class="fblurb">'+(feat.blurb||'')+'</p>';
+      box.innerHTML='<div class="wrap fgrid'+(feat.poster?'':' noposter')+'">'+
+        '<div class="fmain"><div class="fwhen">'+when+'</div>'+
+        '<div class="fdate"><span class="fm">'+MON[d.getMonth()]+'</span><span class="fd">'+d.getDate()+'</span><span class="fy">'+DAY[d.getDay()]+'</span></div>'+
+        '<h2>'+feat.name+'</h2>'+
+        '<p class="fmeta">'+fmtTime(feat.start)+'–'+fmtTime(feat.end)+' · '+feat.admission+'</p>'+
+        (feat.sample?'<p class="sample">Sample date and times: waiting on the real ones</p>':'')+
+        '<div class="facts2"><a class="btn" href="'+DIR+'" target="_blank" rel="noopener">Get directions</a><a class="btn ghost" href="'+gcal(feat)+'" target="_blank" rel="noopener">Add to calendar</a></div></div>'+
+        '<div class="flist">'+lineup+'</div>'+
+        (feat.poster?'<a class="fposter" href="'+feat.poster+'" target="_blank" rel="noopener"><img src="'+feat.poster+'" alt="'+feat.name+' poster" loading="lazy"><span>See the full poster</span></a>':'')+
+        '</div>';
+      box.hidden=false;
+    } else {box.hidden=true;box.innerHTML='';}
+    // the yearly cards
+    var cards=document.getElementById('evcards');
+    cards.innerHTML=EVENTS.map(function(e){
+      var d=parse(e.date),state='tba';
+      if(d){state=t>ymd(d)?'past':'upcoming';}
+      var dateHtml=d?'<div class="date"><div class="m">'+MON[d.getMonth()]+'</div><div class="d">'+d.getDate()+'</div><div class="y">'+d.getFullYear()+'</div></div>':'<div class="date"><div class="m">DATE</div><div class="d">?</div><div class="y">to come</div></div>';
+      var lastYear=d&&now.getFullYear()>d.getFullYear();
+      if(state==='past'&&lastYear)e=Object.assign({},e,{after:'Thanks to everyone who came in '+d.getFullYear()+'. The '+now.getFullYear()+' date will be posted here.'});
+      var body=state==='upcoming'?'<p><b>'+DAY[d.getDay()]+', '+fmtTime(e.start)+'–'+fmtTime(e.end)+'.</b> '+e.admission+'.</p>'+(e.sample?'<p class="sample">Sample date and times</p>':''):state==='past'?'<p>'+e.after+'</p>':'<p>Date to be announced.</p>';
+      var tag=state==='upcoming'?'<span class="tag up">Coming up</span>':state==='past'?'<span class="tag">'+(lastYear?'Date to come':'This year’s is done')+'</span>':'<span class="tag">To be announced</span>';
+      return '<article class="evcard '+state+'">'+dateHtml+'<div><div class="evtop">'+tag+'<span class="season">'+e.season+'</span></div><h3>'+e.name+'</h3>'+body+(e.poster&&state==='past'?'<p><a href="'+e.poster+'" target="_blank" rel="noopener">See the '+d.getFullYear()+' poster</a></p>':'')+'</div></article>';
+    }).join('');
+  };
+  renderEvents();
 })();
 </script>
 </body>
