@@ -98,6 +98,30 @@ img{max-width:100%;display:block}
 .cols b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roof)}
 .cols .big{font:400 40px/1 var(--serif);color:var(--pine)}
 .signrow{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:center}
+/* mission */
+.mission-band{background:#E6EADB;padding-block:72px}
+.mframe{position:relative;max-width:860px;margin-inline:auto;background:var(--birch);border:2px solid var(--pine);padding:64px clamp(22px,6vw,72px) 44px;text-align:center;display:grid;gap:14px;justify-items:center}
+.mframe::before{content:"";position:absolute;inset:9px;border:1px solid var(--roof);pointer-events:none}
+.mframe .c{position:absolute;width:14px;height:14px;background:var(--pine);transform:rotate(45deg)}
+.mframe .tl{top:2px;left:2px}.mframe .tr{top:2px;right:2px}.mframe .bl{bottom:2px;left:2px}.mframe .br{bottom:2px;right:2px}
+.mmark{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--birch);padding:0 10px;box-sizing:content-box}
+.mframe h2.eyebrow{font-family:var(--sans);font-size:13px;margin-bottom:6px}
+.mline{font:400 clamp(21px,2.5vw,29px)/1.32 var(--serif);color:var(--pine);width:min(100%,640px);text-wrap:balance}
+.mline+.mline{padding-top:12px;border-top:1px solid var(--line)}
+.msig{margin-top:14px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+/* visit */
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:36px;align-items:start}
+.vtext{display:grid;gap:16px;align-content:start}
+.vtext p{color:#3D3C36;max-width:56ch}
+.vtext .btn{justify-self:start}
+.vcols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.vcols>div{display:grid;gap:4px;align-content:start;padding-top:12px;border-top:3px solid var(--roof)}
+.vcols b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roof)}
+.gmap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--meadow)}
+.gmap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gmap-go{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:16px;text-decoration:none}
+.gmap-go span{background:var(--pine);color:var(--birch);font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);transition:transform .15s}
+.gmap-go:hover span,.gmap-go:focus-visible span{transform:translateY(-2px)}
 .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .strip figure{margin:0;display:grid;gap:6px}
 .strip img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
@@ -127,6 +151,7 @@ footer a{color:#DDE3D8}
   .line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
   .cols{grid-template-columns:1fr}
   .signrow{grid-template-columns:1fr}
+  .visit{grid-template-columns:1fr}
   .strip{grid-template-columns:1fr 1fr}
   .links a:not(.btn){display:none}
 }
@@ -134,6 +159,7 @@ footer a{color:#DDE3D8}
   .wrap{padding-inline:18px}
   .side{margin-inline:-18px}
   .event{grid-template-columns:1fr}
+  .vcols{grid-template-columns:1fr}
   .hero{min-height:380px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -161,14 +187,14 @@ footer a{color:#DDE3D8}
 <section class="wrap guide-head" id="farmyard">
   <div class="eyebrow">Pihapiiri · the farmyard</div>
   <h2>Walk the farmyard</h2>
-  <p>From the parking lot, follow the numbers around the clearing. Choose a building on the map to jump to it, or scroll the list and the map will follow along.</p>
+  <p>Choose a building on the map to jump to it, or scroll the list and the map will follow along.</p>
 </section>
 
 <div class="wrap guide">
   <aside class="side">
     <div class="mapcard">
       <svg id="map" viewBox="40 96 570 530" role="group" aria-label="Illustrated map of the Wirtanen farmyard"></svg>
-      <div class="legend"><span><i style="width:18px;border-top:2.5px dashed #1E3A2F"></i>Suggested walk</span><span><i style="width:18px;height:10px;background:#E6DFC8"></i>Entrance lane</span><span>North is up</span></div>
+      <div class="legend"><span><i style="width:18px;height:10px;background:#E6DFC8"></i>Entrance lane</span><span>North is up</span></div>
     </div>
     <div class="chips" id="chips"></div>
   </aside>
@@ -196,23 +222,37 @@ footer a{color:#DDE3D8}
   </div>
 </section>
 
-<section class="wrap band">
-  <div class="eyebrow">Our mission</div>
-  <p class="mission">To restore and preserve the pioneer farmstead; to operate it as an educational tool that carries on Finnish immigrant culture and history; to offer hands-on learning outdoors as an open-air museum; and to make use of existing historical resources.</p>
+<section class="mission-band" aria-labelledby="mission-h">
+  <div class="wrap">
+    <div class="mframe">
+      <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+      <svg class="mmark" width="52" height="52" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg>
+      <h2 class="eyebrow" id="mission-h">Our mission</h2>
+      <p class="mline">To restore and preserve the pioneer farmstead;</p>
+      <p class="mline">to operate and maintain this farmstead as an educational tool to promote and carry on Finnish immigrant culture and history;</p>
+      <p class="mline">to provide hands-on educational experience in an outdoor setting as an open-air museum;</p>
+      <p class="mline">and to make use of existing historical resources.</p>
+      <p class="msig">Friends of the Wirtanen Pioneer Farm · since 2001</p>
+    </div>
+  </div>
 </section>
 
 <section class="wrap band" id="visit" style="border-top:1px solid var(--line)">
-  <div class="signrow" style="grid-template-columns:1fr">
-    <div style="display:grid;gap:12px">
+  <div class="visit">
+    <div class="vtext">
       <div class="eyebrow">Plan your visit</div>
-      <h2>Getting here</h2>
-      <p style="color:#3D3C36;max-width:56ch">The entrance is a grass lane off Markham Rd, marked by the carved Eli Wirtanen Pioneer Farm sign at the road’s edge. Park in the gravel lot beside the lane and walk in.</p>
+      <h2>Getting there</h2>
+      <p>The entrance is a grass lane off Markham Rd, marked by the carved Eli Wirtanen Pioneer Farm sign at the road’s edge. Park in the gravel lot beside the lane and walk in.</p>
+      <div class="vcols">
+        <div><b>Where</b><span>5312 Markham Rd, Makinen, MN 55763</span><span>16 miles south of Biwabik, or 40 miles north of Duluth on the Vermilion Trail (Hwy 4)</span></div>
+        <div><b>Questions</b><span>218-638-2859</span><span><a href="/contact-us/">Contact the Friends</a></span></div>
+      </div>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wirtanen%20Pioneer%20Farm%2C%205312%20Markham%20Rd%2C%20Makinen%2C%20MN%2055763" target="_blank" rel="noopener">Plan your drive in Google Maps</a>
     </div>
-  </div>
-  <div class="cols">
-    <div><b>Where</b><span>5312 Markham Rd, Makinen, MN 55763</span><span>16 miles south of Biwabik, or 40 miles north of Duluth on the Vermilion Trail (Hwy 4)</span></div>
-    <div><b>When</b><span>Call ahead to plan a visit</span><span>Fall Festival every September</span></div>
-    <div><b>Questions</b><span>218-638-2859</span><span><a href="/contact-us/">Contact the Friends</a></span></div>
+    <div class="gmap">
+      <iframe title="Google Map of the Wirtanen Pioneer Farm" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2705.0869476550606!2d-92.2464553230215!3d47.31263990822993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52af8c2a7f30cf99%3A0xdc064934dcc48dab!2sWirtanen%20Pioneer%20Farm!5e0!3m2!1sen!2sus!4v1761014710630!5m2!1sen!2sus" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <a class="gmap-go" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wirtanen%20Pioneer%20Farm%2C%205312%20Markham%20Rd%2C%20Makinen%2C%20MN%2055763" target="_blank" rel="noopener" aria-label="Plan your drive to the Wirtanen Pioneer Farm in Google Maps"><span>Click to plan your drive</span></a>
+    </div>
   </div>
   <div class="strip">
     <figure><img src="/wp-content/uploads/2017/09/cropped-Header4.jpg" alt="White-tailed deer grazing in a golden hayfield edged with birch" loading="lazy"><figcaption>Deer in the hayfield</figcaption></figure>
@@ -251,8 +291,6 @@ footer a{color:#DDE3D8}
 
   // Stops in walking order. x,y = ground point on the map (drawn from the Friends' own placements).
   var S=[
-    {k:'outhouse',name:'Outhouse',x:84,y:284,t:'tiny',img:null,
-      p:'The first building past the entrance, just south of the lane. A small log outhouse with two plank doors.'},
     {k:'woodshed',name:'Wood Shed',x:150,y:310,t:'woodshed',img:null,
       p:'Log walls on three sides and an open front under a deep gable, built to keep firewood dry.'},
     {k:'bath',name:'Bath House / Sauna',x:182,y:398,t:'bath',img:'/wp-content/uploads/2017/09/cropped-Header9.jpg',
@@ -318,10 +356,6 @@ footer a{color:#DDE3D8}
   trees.forEach(function(tr){var x=tr[0],y=tr[1],s=tr[2],c=tr[3]>.5?'#2C5240':'#1E3A2F';
     el('polygon',{points:x+','+(y-s*2)+' '+(x-s)+','+(y-s*.2)+' '+(x+s)+','+(y-s*.2),fill:c},tg);
     el('polygon',{points:x+','+(y-s*1.3)+' '+(x-s*1.15)+','+y+' '+(x+s*1.15)+','+y,fill:c},tg);});
-  // suggested walk
-  var route=[[138,250]].concat(S.map(function(s){return [s.x,s.y+6]})).concat([[180,214]]);
-  var d='M'+route[0].join(' ');for(var i=1;i<route.length;i++){d+=' L'+route[i].join(' ');}
-  el('path',{d:d,fill:'none',stroke:'#1E3A2F','stroke-width':2,'stroke-dasharray':'2 7','stroke-linecap':'round','stroke-linejoin':'round',opacity:.55},svg);
   // labels
   var hf=el('text',{x:600,y:560,'text-anchor':'middle','font-family':'Gloock,serif','font-size':20,'font-style':'italic',fill:'#5E6B4A'},svg);hf.textContent='Hayfield';
   var na=el('g',{transform:'translate(584 124)'},svg);el('circle',{r:17,fill:'#F1F2EE',opacity:.94},na);el('polygon',{points:'0,-11 6,6 0,2 -6,6',fill:'#1E3A2F'},na);var nt=el('text',{y:-21,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,fill:'#1E3A2F'},na);nt.textContent='N';
@@ -394,7 +428,7 @@ footer a{color:#DDE3D8}
     list.querySelectorAll('.stop').forEach(function(e){var r=e.getBoundingClientRect();if(r.top<=line&&r.bottom>line-30)best=e.dataset.k;});
     if(best)set(best);}
   addEventListener('scroll',spy,{passive:true});
-  set('outhouse');
+  set(S[0].k);
 })();
 </script>
 </body>
