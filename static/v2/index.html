@@ -84,8 +84,6 @@ img{max-width:100%;display:block}
 .phwrap figcaption{font-size:11.5px;line-height:1.35;color:var(--muted)}
 .phwrap figcaption a{color:var(--muted)}
 .stop .ph.none{display:grid;place-items:center;color:var(--muted);font-size:13px}
-.also{margin-top:8px;background:#E6EADB;border-radius:12px;padding:18px 20px;font-size:16px}
-.also b{color:var(--pine)}
 
 /* Eli */
 .eli{background:var(--pine);color:#E2E7DE}
@@ -600,8 +598,10 @@ footer a{color:#DDE3D8}
       p:'A small white building on the west edge of the grass. The signs beside its window read Bath House and Sauna.'},
     {k:'woodshed',name:'Wood Shed',x:150,y:310,t:'woodshed',img:null,
       p:'Log walls on three sides and an open front under a deep gable, built to keep firewood dry.'},
-    {k:'cellar',name:'Root Cellar',x:226,y:150,t:'cellar',img:null,
-      p:'Dug into the bank under the pines north of the parking lot, with a plank entry.'}
+    {k:'sauna',name:'Savusauna',x:284,y:206,t:'sauna',img:'img/sauna-door.jpg',pos:'40% 50%',
+      p:'Eli’s smoke sauna, in the pines north of the Guest House and the Residence. Volunteers replaced its rotted lower timbers in 2008 and 2009, put his soot-blackened benches back inside, and set Harold Johnson’s welded stove under the stones. <a href="#savusauna">Read the restoration story</a>.'},
+    {k:'cellar',name:'Root Cellar',x:432,y:214,t:'cellar',img:null,
+      p:'Dug into a bank under the pines northeast of the Residence, with a plank entry.'}
   ];
 
   // ---------- illustrated map ----------
@@ -669,6 +669,7 @@ footer a{color:#DDE3D8}
       case 'tiny':R('-9,-12 0,-19 9,-12',SH);B(-7,-12,14,12,LOG);B(-5,-9,4,9,DARK);B(1,-9,4,9,DARK);return 21;
       case 'pen':el('rect',{x:-16,y:-12,width:32,height:12,fill:'none',stroke:LOG,'stroke-width':3},g);R('6,-12 12,-18 18,-12',SH);return 20;
       case 'open':R('-22,-18 22,-18 20,-24 -20,-24','#8E9A92');[-18,-6,6,18].forEach(function(x){B(x-1,-18,2,18,'#7A6A55')});el('circle',{cx:-8,cy:-5,r:5,fill:'none',stroke:'#8A4A2A','stroke-width':1.5},g);el('circle',{cx:9,cy:-5,r:5,fill:'none',stroke:'#8A4A2A','stroke-width':1.5},g);return 26;
+      case 'sauna':R('-17,-16 0,-26 17,-16',SH);B(-15,-16,30,16,'#4A3E31');B(-10,-11,7,11,DARK);B(4,-10,6,4,'#8C8878');el('circle',{cx:-8,cy:-30,r:3,fill:'#B9BDB0',opacity:.7},g);el('circle',{cx:-11,cy:-36,r:4,fill:'#B9BDB0',opacity:.5},g);return 28;
       case 'cellar':el('path',{d:'M-20 0 Q 0 -26 20 0 Z',fill:'#8B8062'},g);R('-7,-10 0,-17 7,-10',SH);B(-5,-10,10,10,'#7A6A55');B(-2,-7,4,7,DARK);return 20;
       case 'pump':B(-1.5,-16,3,16,'#2F4A3E');el('path',{d:'M1 -13 q 7 -2 9 3',fill:'none',stroke:'#2F4A3E','stroke-width':2},g);B(-4,-2,8,2,'#2F4A3E');return 18;
       case 'carving':el('circle',{cx:0,cy:-15,r:3,fill:'#8A5A32'},g);B(-3,-12,6,12,'#8A5A32');B(-5,0,10,2,'#6B4A2A');return 18;
@@ -700,7 +701,7 @@ footer a{color:#DDE3D8}
   list.innerHTML=S.map(function(s,i){
     var ph='<figure class="phwrap">'+(s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy"'+(s.pos?' style="object-position:'+s.pos+'"':'')+'>':'<div class="ph none">Photo coming</div>')+'</figure>';
     return '<article class="stop" id="stop-'+s.k+'" data-k="'+s.k+'"><span class="n">'+(i+1)+'</span><div><h3>'+s.name+'</h3><p>'+s.p+'</p></div>'+ph+'</article>';
-  }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="#savusauna">Read the restoration story</a>. It will join the map soon.</p>';
+  }).join('');
   chips.innerHTML=S.map(function(s,i){return '<button type="button" id="chip-'+s.k+'" data-k="'+s.k+'">'+(i+1)+' · '+s.name+'</button>';}).join('');
   chips.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.k)})});
 
