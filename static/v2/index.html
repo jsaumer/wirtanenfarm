@@ -183,17 +183,16 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
   .evcards{grid-template-columns:1fr}
 }
 @media (max-width:520px){.evcard{grid-template-columns:1fr}}
-/* mission */
-.mission-band{background:#E6EADB;padding-block:72px}
-.mframe{position:relative;max-width:860px;margin-inline:auto;background:var(--birch);border:2px solid var(--pine);padding:64px clamp(22px,6vw,72px) 44px;text-align:center;display:grid;gap:14px;justify-items:center}
-.mframe::before{content:"";position:absolute;inset:9px;border:1px solid var(--roof);pointer-events:none}
-.mframe .c{position:absolute;width:14px;height:14px;background:var(--pine);transform:rotate(45deg)}
+/* mission (compact, above the events band) */
+.mission-band{background:var(--birch);padding-block:36px}
+.mframe{position:relative;max-width:980px;margin-inline:auto;background:var(--birch);border:2px solid var(--pine);padding:38px clamp(20px,5vw,56px) 24px;text-align:center;display:grid;gap:6px;justify-items:center}
+.mframe::before{content:"";position:absolute;inset:7px;border:1px solid var(--roof);pointer-events:none}
+.mframe .c{position:absolute;width:12px;height:12px;background:var(--pine);transform:rotate(45deg)}
 .mframe .tl{top:2px;left:2px}.mframe .tr{top:2px;right:2px}.mframe .bl{bottom:2px;left:2px}.mframe .br{bottom:2px;right:2px}
-.mmark{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--birch);padding:0 10px;box-sizing:content-box}
-.mframe h2.eyebrow{font-family:var(--sans);font-size:13px;margin-bottom:6px}
-.mline{font:400 clamp(21px,2.5vw,29px)/1.32 var(--serif);color:var(--pine);width:min(100%,640px);text-wrap:balance}
-.mline+.mline{padding-top:12px;border-top:1px solid var(--line)}
-.msig{margin-top:14px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.mmark{position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:var(--birch);padding:0 8px;box-sizing:content-box;width:40px;height:40px}
+.mframe h2.eyebrow{font-family:var(--sans);font-size:12px;margin-bottom:4px}
+.mline{font:400 clamp(17px,1.8vw,21px)/1.35 var(--serif);color:var(--pine);width:min(100%,820px);text-wrap:balance}
+.msig{margin-top:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 /* visit */
 .visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:36px;align-items:start}
 .vtext{display:grid;gap:16px;align-content:start}
@@ -270,6 +269,20 @@ footer a{color:#DDE3D8}
 
 <main>
 <section id="featured" class="featured" hidden></section>
+<section class="mission-band" aria-labelledby="mission-h">
+  <div class="wrap">
+    <div class="mframe">
+      <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+      <svg class="mmark" width="40" height="40" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg>
+      <h2 class="eyebrow" id="mission-h">Our mission</h2>
+      <p class="mline">To restore and preserve the pioneer farmstead;</p>
+      <p class="mline">to operate and maintain this farmstead as an educational tool to promote and carry on Finnish immigrant culture and history;</p>
+      <p class="mline">to provide hands-on educational experience in an outdoor setting as an open-air museum;</p>
+      <p class="mline">and to make use of existing historical resources.</p>
+      <p class="msig">Friends of the Wirtanen Pioneer Farm · since 2001</p>
+    </div>
+  </div>
+</section>
 <section class="wrap guide-head" id="farmyard">
   <div class="eyebrow">Pihapiiri · the farmyard</div>
   <h2>Step into Eli’s farmyard</h2>
@@ -356,20 +369,7 @@ footer a{color:#DDE3D8}
   </div>
 </section>
 
-<section class="mission-band" aria-labelledby="mission-h">
-  <div class="wrap">
-    <div class="mframe">
-      <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
-      <svg class="mmark" width="52" height="52" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg>
-      <h2 class="eyebrow" id="mission-h">Our mission</h2>
-      <p class="mline">To restore and preserve the pioneer farmstead;</p>
-      <p class="mline">to operate and maintain this farmstead as an educational tool to promote and carry on Finnish immigrant culture and history;</p>
-      <p class="mline">to provide hands-on educational experience in an outdoor setting as an open-air museum;</p>
-      <p class="mline">and to make use of existing historical resources.</p>
-      <p class="msig">Friends of the Wirtanen Pioneer Farm · since 2001</p>
-    </div>
-  </div>
-</section>
+
 
 <section class="wrap band" id="visit" style="border-top:1px solid var(--line)">
   <div class="visit">
@@ -570,6 +570,7 @@ footer a{color:#DDE3D8}
    - date: 'YYYY-MM-DD' (leave '' until the date is set)
    - start/end: 24-hour local times, e.g. '10:00' and '16:00'
    - promoFrom: the day the event starts being featured under the headline
+     (leave '' to start 30 days before the event)
    ============================================================ */
 var EVENTS=[
   { id:'festival', name:'Wirtanen Farm Fall Festival', season:'Every September',
@@ -610,7 +611,7 @@ var EVENTS=[
     now=now||today();var t=ymd(now);
     // featured: the next event inside its promotion window
     var feat=null;
-    EVENTS.forEach(function(e){var d=parse(e.date),p=parse(e.promoFrom);if(!d||!p)return;if(t>=ymd(p)&&t<=ymd(d)){if(!feat||ymd(d)<ymd(parse(feat.date)))feat=e;}});
+    EVENTS.forEach(function(e){var d=parse(e.date),p=parse(e.promoFrom)||(d&&new Date(d.getFullYear(),d.getMonth(),d.getDate()-30));if(!d||!p)return;if(t>=ymd(p)&&t<=ymd(d)){if(!feat||ymd(d)<ymd(parse(feat.date)))feat=e;}});
     var box=document.getElementById('featured');
     if(feat){
       var d=parse(feat.date),days=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
