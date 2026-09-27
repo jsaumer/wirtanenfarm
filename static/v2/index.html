@@ -71,6 +71,9 @@ img{max-width:100%;display:block}
 .stop h3{font-size:27px;margin:0 0 8px}
 .stop p{font-size:16px;color:#3D3C36;max-width:56ch}
 .stop .ph{aspect-ratio:4/3;width:100%;border-radius:8px;object-fit:cover;background:var(--meadow)}
+.phwrap{margin:0;display:grid;gap:4px;align-content:start}
+.phwrap figcaption{font-size:11.5px;line-height:1.35;color:var(--muted)}
+.phwrap figcaption a{color:var(--muted)}
 .stop .ph.none{display:grid;place-items:center;color:var(--muted);font-size:13px}
 .also{margin-top:8px;background:#E6EADB;border-radius:12px;padding:18px 20px;font-size:16px}
 .also b{color:var(--pine)}
@@ -203,6 +206,54 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 @media (max-width:520px){.tips{grid-template-columns:1fr}}
 #events{scroll-margin-top:16px}
 #events-low #events{border-top:1px solid var(--line)}
+/* news + kiitos */
+.newsgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:44px;align-items:start}
+.newslist{display:grid}
+.news{padding:20px 0;border-top:1px solid var(--line);display:grid;gap:6px}
+.news:first-child{border-top:0;padding-top:0}
+.nmeta{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted)}
+.kind{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#E6EADB;color:var(--pine)}
+.k-kiitos{background:var(--pine);color:var(--birch)}
+.k-press{background:#DCE3C8;color:var(--pine)}
+.news h3{font-size:24px}
+.news p{color:#3D3C36;max-width:62ch}
+.nlink a{font-weight:700}
+.kiitos{background:var(--pine);color:#DDE3D8;border-radius:16px;padding:24px 24px 18px;display:grid;gap:10px}
+.kt{font:italic 400 38px/1 var(--serif);color:var(--lichen)}
+.ksub{font-size:15px;color:#C7CFC2}
+.kiitos ul{list-style:none;margin:6px 0 0;padding:0;display:grid}
+.kiitos li{display:grid;gap:1px;padding:10px 0;border-top:1px solid rgba(201,211,176,.22)}
+.kiitos b{font:400 18px/1.25 var(--serif);color:#F4F5F1;font-weight:400}
+.kiitos li span{font-size:14px;color:#C7CFC2}
+.older{justify-self:start;margin-top:12px;font:700 14px var(--sans);color:var(--pine);background:transparent;border:1.5px solid var(--pine);border-radius:999px;padding:8px 16px;cursor:pointer}
+.news[hidden]{display:none}
+.more{margin-top:4px}
+.more a{font-weight:700}
+@media (max-width:900px){.newsgrid{grid-template-columns:1fr}}
+/* news sidebar: three random square photos */
+.side-pics{display:grid;gap:14px}
+.side-pics img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;background:var(--meadow)}
+@media (max-width:900px){.side-pics{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}}
+/* news side card options */
+.side-card{border-radius:16px;padding:24px;display:grid;gap:10px;background:var(--card);border:1px solid var(--line);margin:0}
+.side-card.pine{background:var(--pine);border-color:var(--pine);color:#DDE3D8}
+.side-card.pine h3{color:#F4F5F1}
+.side-card.pine a:not(.btn){color:var(--lichen)}
+.side-card.lichen{background:#DCE3C8;border-color:#DCE3C8}
+.side-card h3{font-size:26px;line-height:1.15}
+.sc-eb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--roof)}
+.side-card.pine .sc-eb{color:var(--lichen)}
+.side-card .btn{justify-self:start}
+.side-card ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.sc-q{margin-top:6px;font-weight:700;color:#F4F5F1}
+.sc-c{font-size:15px}
+.sc-poster img{width:100%;border-radius:4px;box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
+.side-card.photo{padding:0;overflow:hidden}
+.side-card.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.side-card.photo figcaption{padding:12px 16px 14px;display:grid;gap:2px}
+.side-card.photo figcaption b{font:400 18px var(--serif);color:var(--pine);font-weight:400}
+.side-card.photo figcaption span{font-size:12px;color:var(--muted)}
+.side-card.photo figcaption a{color:var(--muted)}
 /* visit */
 .visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:36px;align-items:start}
 .vtext{display:grid;gap:16px;align-content:start}
@@ -239,7 +290,7 @@ footer a{color:#DDE3D8}
   .legend{display:none}
   .chips{display:flex}
   .stop{grid-template-columns:40px minmax(0,1fr);gap:14px}
-  .stop .ph{grid-column:2;max-width:420px}
+  .stop .phwrap{grid-column:2;max-width:420px}
   .eli .wrap{grid-template-columns:1fr}
   .eli img{max-width:220px}
   .line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
@@ -339,7 +390,7 @@ footer a{color:#DDE3D8}
         <div><b>1904</b>Homesteads 40 acres in Markham</div>
         <div><b>1957</b>Dies; buried in Markham Cemetery</div>
         <div><b>2001</b>The Friends take the deed</div>
-        <div><b>2026</b>25 years of the Friends</div>
+        <div><b>2026</b>The 25th Fall Festival</div>
       </div>
     </div>
   </div>
@@ -422,6 +473,16 @@ footer a{color:#DDE3D8}
 
 
 
+<section class="wrap band" id="news" style="border-top:1px solid var(--line)">
+  <div class="eyebrow">News</div>
+  <h2>From the farm</h2>
+  <div class="newsgrid">
+    <div class="newslist" id="newslist"></div>
+<aside class="newsaside" id="newsaside" aria-label="Photos from the farm"></aside>
+  </div>
+  <p class="more"><a href="https://www.facebook.com/WirtanenFarm" target="_blank" rel="noopener">More news on our Facebook page</a></p>
+</section>
+
 <section class="wrap band" id="support" style="border-top:1px solid var(--line)">
   <div class="eyebrow">Support</div>
   <h2>Keep the farm standing</h2>
@@ -433,7 +494,7 @@ footer a{color:#DDE3D8}
 </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit</span><span><a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit · Some photos: <a href="https://commons.wikimedia.org/wiki/Category:Eli_Wirtanen_Pioneer_Farm">Minnesota Historical Society</a>, CC BY 4.0</span><span><a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
 
 <script>
 (function(){
@@ -452,19 +513,19 @@ footer a{color:#DDE3D8}
       p:'A hand-hewn log barn with dovetailed corners and a gambrel roof. The Friends put a new roof on the barn, paid for by memberships, donations and fundraisers.'},
     {k:'pen',name:'Baby Animal Pen',x:305,y:428,t:'pen',img:'/wp-content/uploads/2017/09/cropped-Header6.jpg',
       p:'A low log enclosure out on the lawn, between the Barn and the Tool Shop.'},
-    {k:'equip',name:'Farm Equipment Shed',x:349,y:586,t:'open',img:null,
+    {k:'equip',name:'Farm Equipment Shed',x:349,y:586,t:'open',img:'img/mnhs-farm-equipment.jpg',credit:'https://commons.wikimedia.org/wiki/File:Eli_Wirtanen_Pioneer_Farm,_farm_equipment.jpg',
       p:'An open-sided shed on the south edge of the clearing, full of horse-era implements: iron wheels, a seed drill and more.'},
     {k:'well',name:'Well House',x:395,y:394,t:'well',img:null,
       p:'A small board building over the farm’s well, standing on its own in the open lawn.'},
     {k:'horse',name:'Horse Barn',x:472,y:322,t:'horse',img:null,
       p:'Board siding over log lower walls, at the northeast edge of the clearing among the pines.'},
-    {k:'pump',name:'Hand Pump',x:331,y:382,t:'pump',img:null,
+    {k:'pump',name:'Hand Pump',x:331,y:382,t:'pump',img:'img/mnhs-toolshop-pump.jpg',pos:'28% 60%',credit:'https://commons.wikimedia.org/wiki/File:Eli_Wirtanen_Pioneer_Farm.jpg',
       p:'The farm’s hand pump, out on the lawn south of the Tool Shop.'},
-    {k:'tool',name:'Tool Shop / Wood Storage',x:275,y:350,t:'shed',img:null,
+    {k:'tool',name:'Tool Shop / Wood Storage',x:275,y:350,t:'shed',img:'img/mnhs-toolshop-pump.jpg',pos:'78% 55%',credit:'https://commons.wikimedia.org/wiki/File:Eli_Wirtanen_Pioneer_Farm.jpg',
       p:'One building with two doors: the Tool Shop on the east side and Wood Storage on the south. Volunteers found spikes and bolts when they excavated the tool shed, and a few are still unidentified.'},
-    {k:'carving',name:'Wood Carving',x:311,y:293,t:'carving',img:null,
+    {k:'carving',name:'Wood Carving',x:311,y:293,t:'carving',img:'img/mnhs-residence.jpg',pos:'86% 60%',credit:'https://commons.wikimedia.org/wiki/File:House_at_the_Eli_Wirtanen_Pioneer_Farm.jpg',
       p:'A carved figure leaning on a long-handled logging tool, by John Gage. Donated by Joan Hakala in memory of Mike Hakala (1947–2014).'},
-    {k:'res',name:'Residence',x:335,y:276,t:'house',img:'/wp-content/uploads/2017/09/cropped-Header3.jpg',
+    {k:'res',name:'Residence',x:335,y:276,t:'house',img:'img/mnhs-residence.jpg',pos:'35% 55%',credit:'https://commons.wikimedia.org/wiki/File:House_at_the_Eli_Wirtanen_Pioneer_Farm.jpg',
       p:'Eli’s house is a fine example of Finnish log construction: hand-hewn pine logs chinked with strips of pine, the joints dovetailed. It stays cool on the hottest summer days. The doorways are as small as Eli was short, and none of his buildings were ever painted, inside or out.'},
     {k:'guest',name:'Guest House',x:242,y:270,t:'cabin',img:'/wp-content/uploads/2017/09/cropped-Header10.jpg',
       p:'A small log cabin with dovetailed corners, just west of the Residence, its door facing the house.'},
@@ -559,7 +620,8 @@ footer a{color:#DDE3D8}
   // ---------- list + chips ----------
   var list=document.getElementById('stops'),chips=document.getElementById('chips');
   list.innerHTML=S.map(function(s,i){
-    var ph=s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy">':'<div class="ph none">Photo coming</div>';
+    var ph='<figure class="phwrap">'+(s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy"'+(s.pos?' style="object-position:'+s.pos+'"':'')+'>':'<div class="ph none">Photo coming</div>')+
+      (s.credit?'<figcaption>Photo: <a href="'+s.credit+'" target="_blank" rel="noopener">MNHS Heritage Preservation Dept.</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></figcaption>':'')+'</figure>';
     return '<article class="stop" id="stop-'+s.k+'" data-k="'+s.k+'"><span class="n">'+(i+1)+'</span><div><h3>'+s.name+'</h3><p>'+s.p+'</p></div>'+ph+'</article>';
   }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="#savusauna">Read the restoration story</a>. It will join the map soon.</p>';
   chips.innerHTML=S.map(function(s,i){return '<button type="button" id="chip-'+s.k+'" data-k="'+s.k+'">'+(i+1)+' · '+s.name+'</button>';}).join('');
@@ -666,6 +728,63 @@ var EVENTS=[
     }).join('');
   };
   renderEvents();
+})();
+</script>
+
+<script>
+/* ============================================================
+   NEWS: newest first. The homepage shows the latest four; older ones sit behind a button.
+   kind: 'Kiitos' (thank-you), 'Press', or 'Event'
+   ============================================================ */
+var NEWS=[
+  { date:'2026-09-12', kind:'Event', title:'The 25th Fall Festival',
+    text:'Thank you to everyone who came out to celebrate 25 years of the Fall Festival, and to the artisans, musicians, volunteers and the Colvin Fire Department who made the day.' },
+  { date:'2026-08-13', kind:'Kiitos', title:'Natural Harvest Food Co-op customers raise $1,961.61',
+    text:'Through the co-op’s Change Within Reach program, customers raised $1,961.61 for the Friends in July. The funds go to restoring and preserving the pioneer farmstead.',
+    link:'https://www.facebook.com/WirtanenFarm', linkText:'See the post on Facebook' },
+  { date:'2026-08-29', kind:'Press', title:'Celebrating 25 years of the Wirtanen Farm Fall Festival',
+    text:'The Friends announced the 25th annual Fall Festival, set for Saturday, September 12, with artisans, wagon rides, live music and a book signing.',
+    draft:'Press release: confirm the date and fill in the quote before posting' },
+  { date:'2026-02-04', kind:'Kiitos', title:'The farm joins Wikipedia’s list of Minnesota museums',
+    text:'The Minnesota Historical Society shared photos of the farm on Wikimedia Commons and added the Eli Wirtanen Pioneer Farm to Wikipedia’s list of museums in Minnesota.',
+    link:'https://en.wikipedia.org/wiki/List_of_museums_in_Minnesota', linkText:'See the list on Wikipedia' },
+  { date:'2025-09-05', kind:'Kiitos', title:'Paljon kiitoksia, Natural Harvest Food Co-op',
+    text:'Co-op customers raised $2,352.67 for the Friends in August 2025 through the co-op’s Change Within Reach program.',
+    link:'https://naturalharvest.coop/community/round-up-for-charity/', linkText:'About Change Within Reach' },
+  { date:'2023-09-27', kind:'Kiitos', title:'A grant from Lake Country Power’s Operation Round Up',
+    text:'The Friends were one of 31 local projects and programs funded in Operation Round Up’s fall 2023 round. The grants come from Lake Country Power members who round up their electric bills to the nearest dollar.',
+    link:'https://www.lakecountrypower.coop', linkText:'Lake Country Power' }
+];
+(function(){
+  var M=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+  function fmt(d){var p=d.split('-');return M[+p[1]-1]+' '+(+p[2])+', '+p[0];}
+  var el=document.getElementById('newslist');if(!el)return;
+  el.innerHTML=NEWS.map(function(n,i){
+    return '<article class="news"'+(i>=4?' hidden':'')+'><div class="nmeta"><span class="kind k-'+n.kind.toLowerCase()+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
+      '<h3>'+n.title+'</h3><p>'+n.text+'</p>'+
+      (n.link?'<p class="nlink"><a href="'+n.link+'" target="_blank" rel="noopener">'+n.linkText+'</a></p>':'')+
+      (n.draft?'<p class="sample">'+n.draft+'</p>':'')+'</article>';
+  }).join('')+(NEWS.length>4?'<button type="button" class="older" id="older-news">Show older news ('+(NEWS.length-4)+')</button>':'');
+  var b=document.getElementById('older-news');
+  if(b)b.addEventListener('click',function(){el.querySelectorAll('.news[hidden]').forEach(function(a){a.hidden=false});b.remove();});
+})();
+</script>
+
+<script>
+/* News sidebar: three different farm photos, picked at random on each visit */
+(function(){
+  var H='/wp-content/uploads/2017/09/cropped-Header';
+  var pool=[
+    [H+'1.jpg','The log barn with its green roof'],[H+'2.jpg','The farmyard lawn among the pines'],[H+'3.jpg','Eli’s house with the pump and carving'],
+    [H+'4.jpg','Deer in the hayfield'],[H+'5.jpg','An old iron seat in the tall grass'],[H+'6.jpg','Log buildings around the lawn'],
+    [H+'7.jpg','A log building at the edge of the meadow'],[H+'9.jpg','The barn and the white Bath House'],[H+'10.jpg','The Guest House and the Residence'],
+    ['img/mnhs-toolshop-pump.jpg','The hand pump and the Tool Shop'],['img/mnhs-residence.jpg','The Residence and the wood carving'],['img/mnhs-farm-equipment.jpg','The Farm Equipment shed']
+  ];
+  var hero=(document.getElementById('site-header')||{style:{}}).style.backgroundImage||'';
+  pool=pool.filter(function(p){return hero.indexOf(p[0])<0;});
+  for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=pool[i];pool[i]=pool[j];pool[j]=t;}
+  var box=document.getElementById('newsaside');if(!box)return;
+  box.innerHTML='<div class="side-pics">'+pool.slice(0,3).map(function(p){return '<img src="'+p[0]+'" alt="'+p[1]+'" loading="lazy">';}).join('')+'</div>';
 })();
 </script>
 </body>
