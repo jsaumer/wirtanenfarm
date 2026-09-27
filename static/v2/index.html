@@ -38,6 +38,12 @@ img{max-width:100%;display:block}
 .links a{color:var(--bark);text-decoration:none}
 .links a:hover{color:var(--roof)}
 .links .btn{color:var(--birch)}
+.menu-btn{display:none;align-items:center;gap:8px;font:700 15px var(--sans);color:var(--pine);background:transparent;border:1.5px solid var(--pine);border-radius:999px;padding:8px 14px;cursor:pointer}
+.menu-btn .bars,.menu-btn .bars::before,.menu-btn .bars::after{display:block;width:16px;height:2px;background:var(--pine);border-radius:1px;position:relative;content:""}
+.menu-btn .bars::before{position:absolute;top:-5px}.menu-btn .bars::after{position:absolute;top:5px}
+.menu-btn[aria-expanded="true"] .bars{background:transparent}
+.menu-btn[aria-expanded="true"] .bars::before{top:0;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{top:0;transform:rotate(-45deg)}
 
 /* hero */
 .hero{position:relative;display:grid;align-items:end;min-height:440px;background:url(/wp-content/uploads/2017/09/cropped-Header2.jpg) center 45%/cover}
@@ -50,7 +56,7 @@ img{max-width:100%;display:block}
 .facts{display:flex;gap:8px;flex-wrap:wrap}
 .facts span{font-size:14px;font-weight:700;background:rgba(241,242,238,.14);border:1px solid rgba(241,242,238,.3);padding:6px 12px;border-radius:999px}
 
-/* farmyard guide */
+/* farmstead guide */
 .guide-head{padding-block:64px 8px;display:grid;gap:10px}
 .guide-head h2{font-size:clamp(32px,4vw,46px)}
 .guide-head p{color:var(--muted);max-width:62ch}
@@ -80,13 +86,23 @@ img{max-width:100%;display:block}
 
 /* Eli */
 .eli{background:var(--pine);color:#E2E7DE}
-.eli .wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:44px;align-items:center;padding-block:64px}
+.eli .wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:48px;align-items:start;padding-block:72px 0}
+.eli-photo{margin:0;position:sticky;top:24px;display:grid;gap:8px}
 .eli img{border-radius:4px;filter:sepia(.2) contrast(1.05)}
+.eli-photo figcaption{font-size:13px;color:#AEB8AA;font-style:italic}
 .eli h2{color:#F4F5F1;font-size:clamp(32px,4vw,46px)}
 .eli .eyebrow{color:var(--lichen)}
-.eli blockquote{margin:0;font:400 26px/1.3 var(--serif);color:var(--lichen)}
 .eli p{max-width:64ch}
+.eli .lead{font:400 clamp(21px,2.2vw,25px)/1.4 var(--serif);color:#F4F5F1}
 .eli .copy{display:grid;gap:16px}
+.forest{margin:10px 0;padding:22px 24px;border-radius:14px;background:rgba(201,211,176,.1);display:grid;gap:12px}
+.forest h3{font-size:24px;color:#F4F5F1}
+.forest blockquote{margin:4px 0 0;font:400 clamp(24px,2.6vw,30px)/1.25 var(--serif);color:var(--lichen)}
+.forest cite{display:block;margin-top:6px;font:italic 400 14px var(--sans);color:#AEB8AA}
+.eli-close{grid-template-columns:1fr!important;justify-items:center;text-align:center;padding-block:48px 72px!important;gap:10px!important}
+.monument{font:400 clamp(24px,3vw,36px)/1.25 var(--serif);color:#F4F5F1;max-width:28ch;text-wrap:balance}
+.tranquil{font-size:16px;color:#C7CFC2}
+.tranquil em{color:var(--lichen)}
 .line{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:10px;border-top:2px solid rgba(201,211,176,.35)}
 .line div{padding:14px 12px 0 0;font-size:13.5px;line-height:1.4;color:#C7CFC2;position:relative}
 .line div::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--lichen)}
@@ -293,12 +309,17 @@ footer a{color:#DDE3D8}
   .stop .phwrap{grid-column:2;max-width:420px}
   .eli .wrap{grid-template-columns:1fr}
   .eli img{max-width:220px}
+  .eli-photo{position:static}
   .line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
   .cols{grid-template-columns:1fr}
   .signrow{grid-template-columns:1fr}
   .visit{grid-template-columns:1fr}
   .strip{grid-template-columns:1fr 1fr}
-  .links a:not(.btn){display:none}
+  .menu-btn{display:inline-flex}
+  .links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:0;padding-top:6px;border-top:1px solid var(--line)}
+  .links.open{display:flex}
+  .links a{padding:12px 2px;border-bottom:1px solid var(--line);font-size:17px}
+  .links .btn{margin-top:12px;text-align:center;border-bottom:0}
 }
 @media (max-width:520px){
   .wrap{padding-inline:18px}
@@ -316,7 +337,8 @@ footer a{color:#DDE3D8}
 
 <div class="wrap nav">
   <a class="brand" href="/v2/"><svg width="44" height="44" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg><span>Wirtanen Pioneer Farm<small>Est. 1904 · Markham, Minnesota</small></span></a>
-  <nav class="links" aria-label="Main"><a href="#farmyard">The Farmyard</a><a href="#eli">Eli’s Story</a><a href="#savusauna">Savusauna</a><a href="#events">Events</a><a href="#support">Support</a><a class="btn" href="#visit">Plan a visit</a></nav>
+  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mainnav"><span class="bars" aria-hidden="true"></span>Menu</button>
+  <nav class="links" id="mainnav" aria-label="Main"><a href="#farmstead">The Farmstead</a><a href="#eli">Eli’s Story</a><a href="#savusauna">Savusauna</a><a href="#events">Events</a><a href="#news">News</a><a href="#support">Support</a><a class="btn" href="#visit">Plan a visit</a></nav>
 </div>
 
 <header class="hero" id="site-header">
@@ -332,7 +354,7 @@ footer a{color:#DDE3D8}
     <div class="eyebrow">Wirtanen Pioneer Farm · Est. 1904</div>
     <h1>Experience <em>Old World</em> Serenity.</h1>
     <p>A 1904 Finnish immigrant homestead on the Old Vermilion Trail, kept by the Friends of the Wirtanen Pioneer Farm since 2001.</p>
-    <div class="acts"><a class="btn light" href="#farmyard">Walk the farmyard</a><a class="btn ghost-light" href="#visit">Plan a visit</a></div>
+    <div class="acts"><a class="btn light" href="#farmstead">Walk the farmstead</a><a class="btn ghost-light" href="#visit">Plan a visit</a></div>
   </div></div>
 </header>
 
@@ -357,16 +379,16 @@ footer a{color:#DDE3D8}
   <h2>Every year at the farm</h2>
   <div class="evcards" id="evcards"></div>
 </section></div>
-<section class="wrap guide-head" id="farmyard">
-  <div class="eyebrow">Pihapiiri · the farmyard</div>
-  <h2>Step into Eli’s farmyard</h2>
+<section class="wrap guide-head" id="farmstead">
+  <div class="eyebrow">Pihapiiri · the farmstead</div>
+  <h2>Step into Eli’s farmstead</h2>
   <p>Choose a building on the map to jump to it, or scroll the list and the map will follow along.</p>
 </section>
 
 <div class="wrap guide">
   <aside class="side">
     <div class="mapcard">
-      <svg id="map" viewBox="40 96 570 530" role="group" aria-label="Illustrated map of the Wirtanen farmyard"></svg>
+      <svg id="map" viewBox="40 96 570 530" role="group" aria-label="Illustrated map of the Wirtanen farmstead"></svg>
       <div class="legend"><span><i style="width:18px;height:10px;background:#E6DFC8"></i>Entrance lane</span><span>North is up</span></div>
     </div>
     <div class="chips" id="chips"></div>
@@ -377,13 +399,26 @@ footer a{color:#DDE3D8}
 <div id="events-low"></div>
 <section class="eli" id="eli">
   <div class="wrap">
-    <img src="/wp-content/uploads/2010/12/eli.jpg" alt="Eli Wirtanen in a cap, white shirt and suspenders, standing in front of a board-sided building" width="300" height="423">
+    <figure class="eli-photo">
+      <img src="/wp-content/uploads/2010/12/eli.jpg" alt="Eli Wirtanen in a cap, white shirt and suspenders, standing in front of a board-sided building" width="300" height="423">
+      <figcaption>Eli Wirtanen</figcaption>
+    </figure>
     <div class="copy">
       <div class="eyebrow">Eli Wirtanen · 1872–1957</div>
       <h2>Who was Eli?</h2>
-      <blockquote>“The forest gives what the forest has.”</blockquote>
-      <p>Eli was born Elias Vertanen in Karstula, Finland, in 1872. As the third son, he had no hope of owning the family farm. As a teenager he emigrated to Thunder Bay, Ontario, to live with his brother David. When David died, Eli came to the United States to apply for citizenship, and in 1904 he homesteaded 40 acres along the Old Vermilion Trail in Markham, Minnesota.</p>
-      <p>He worked in logging camps, helped local farmers at harvest, and built and maintained roads with horse power. He never married and never owned a car. Nearly everything he needed, from food to the logs for his buildings, came from his own land. Eli died in 1957 and is buried in the Markham Cemetery in Colvin Township.</p>
+      <p class="lead">Eli was born Elias Vertanen in Karstula, Finland, in 1872. As the third son, he had no hope of owning the family farm.</p>
+      <p>As a teenager he emigrated to Thunder Bay, Ontario, to live with his brother David. When David died, Eli came to the United States to apply for citizenship, and in 1904 he homesteaded 40 acres along the Old Vermilion Trail in Markham, Minnesota.</p>
+      <p>He worked in logging camps and helped local farmers at harvest. There were no roads then, only trails, so Eli helped build and maintain the roads with horse-drawn power.</p>
+
+      <div class="forest">
+        <h3>People from the forest</h3>
+        <p>Finnish people are known as “people from the forest,” and Eli understood the forest and how to use it. He never married and never owned a car. Nearly everything he needed in life, from his food to the logs for his buildings, came from his own land.</p>
+        <blockquote>“The forest gives what the forest has.”<cite>Finnish proverb</cite></blockquote>
+      </div>
+
+      <p>He set his buildings apart from one another, the way farms were laid out in the Savo region of Finland, just east of his birthplace. With space between them, a single fire could never take the whole farm. None of his buildings were ever painted, inside or out.</p>
+      <p>Eli died in 1957 and is buried in the Markham Cemetery in Colvin Township.</p>
+
       <div class="line">
         <div><b>1872</b>Born in Karstula, Finland</div>
         <div><b>1880s</b>Emigrates to Thunder Bay as a teen</div>
@@ -393,6 +428,10 @@ footer a{color:#DDE3D8}
         <div><b>2026</b>The 25th Fall Festival</div>
       </div>
     </div>
+  </div>
+  <div class="wrap eli-close">
+    <p class="monument">“This is a monument to a time when man and nature were in unity.”</p>
+    <p class="tranquil">Visitors’ favorite way to describe it: <em>“a most peaceful and tranquil place.”</em></p>
   </div>
 </section>
 
@@ -494,7 +533,7 @@ footer a{color:#DDE3D8}
 </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit · Some photos: <a href="https://commons.wikimedia.org/wiki/Category:Eli_Wirtanen_Pioneer_Farm">Minnesota Historical Society</a>, CC BY 4.0</span><span><a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit · Some photos: <a href="https://commons.wikimedia.org/wiki/Category:Eli_Wirtanen_Pioneer_Farm">Minnesota Historical Society</a>, CC BY 4.0</span><span><a href="/contact-us/">Contact</a> · <a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
 
 <script>
 (function(){
@@ -620,8 +659,7 @@ footer a{color:#DDE3D8}
   // ---------- list + chips ----------
   var list=document.getElementById('stops'),chips=document.getElementById('chips');
   list.innerHTML=S.map(function(s,i){
-    var ph='<figure class="phwrap">'+(s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy"'+(s.pos?' style="object-position:'+s.pos+'"':'')+'>':'<div class="ph none">Photo coming</div>')+
-      (s.credit?'<figcaption>Photo: <a href="'+s.credit+'" target="_blank" rel="noopener">MNHS Heritage Preservation Dept.</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></figcaption>':'')+'</figure>';
+    var ph='<figure class="phwrap">'+(s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy"'+(s.pos?' style="object-position:'+s.pos+'"':'')+'>':'<div class="ph none">Photo coming</div>')++'</figure>';
     return '<article class="stop" id="stop-'+s.k+'" data-k="'+s.k+'"><span class="n">'+(i+1)+'</span><div><h3>'+s.name+'</h3><p>'+s.p+'</p></div>'+ph+'</article>';
   }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="#savusauna">Read the restoration story</a>. It will join the map soon.</p>';
   chips.innerHTML=S.map(function(s,i){return '<button type="button" id="chip-'+s.k+'" data-k="'+s.k+'">'+(i+1)+' · '+s.name+'</button>';}).join('');
@@ -775,7 +813,7 @@ var NEWS=[
 (function(){
   var H='/wp-content/uploads/2017/09/cropped-Header';
   var pool=[
-    [H+'1.jpg','The log barn with its green roof'],[H+'2.jpg','The farmyard lawn among the pines'],[H+'3.jpg','Eli’s house with the pump and carving'],
+    [H+'1.jpg','The log barn with its green roof'],[H+'2.jpg','The farmstead lawn among the pines'],[H+'3.jpg','Eli’s house with the pump and carving'],
     [H+'4.jpg','Deer in the hayfield'],[H+'5.jpg','An old iron seat in the tall grass'],[H+'6.jpg','Log buildings around the lawn'],
     [H+'7.jpg','A log building at the edge of the meadow'],[H+'9.jpg','The barn and the white Bath House'],[H+'10.jpg','The Guest House and the Residence'],
     ['img/mnhs-toolshop-pump.jpg','The hand pump and the Tool Shop'],['img/mnhs-residence.jpg','The Residence and the wood carving'],['img/mnhs-farm-equipment.jpg','The Farm Equipment shed']
@@ -785,6 +823,17 @@ var NEWS=[
   for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=pool[i];pool[i]=pool[j];pool[j]=t;}
   var box=document.getElementById('newsaside');if(!box)return;
   box.innerHTML='<div class="side-pics">'+pool.slice(0,3).map(function(p){return '<img src="'+p[0]+'" alt="'+p[1]+'" loading="lazy">';}).join('')+'</div>';
+})();
+</script>
+
+<script>
+/* Phone menu: open and close the top menu */
+(function(){
+  var btn=document.getElementById('menu-btn'),nav=document.getElementById('mainnav');if(!btn||!nav)return;
+  function set(open){nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);}
+  btn.addEventListener('click',function(){set(btn.getAttribute('aria-expanded')!=='true');});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
 })();
 </script>
 </body>
