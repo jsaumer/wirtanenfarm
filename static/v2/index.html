@@ -637,7 +637,7 @@ footer a{color:#DDE3D8}
       case 'carving':el('circle',{cx:0,cy:-15,r:3,fill:'#8A5A32'},g);B(-3,-12,6,12,'#8A5A32');B(-5,0,10,2,'#6B4A2A');return 18;
     }
   }
-  var marks={},pinLayer=el('g',{},svg),iconLayer=el('g',{},svg);
+  var marks={},iconLayer=el('g',{},svg),pinLayer=el('g',{},svg); // pins and their labels sit above the buildings
   S.slice().sort(function(a,b){return a.y-b.y}).forEach(function(s){
     var g=el('g',{transform:'translate('+s.x+' '+s.y+')'},iconLayer);s.h=draw(g,s.t);
   });
