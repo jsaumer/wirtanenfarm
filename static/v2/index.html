@@ -234,6 +234,7 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .kind{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#E6EADB;color:var(--pine)}
 .k-kiitos{background:var(--pine);color:var(--birch)}
 .k-press{background:#DCE3C8;color:var(--pine)}
+.k-on-screen{background:var(--bark);color:var(--birch)}
 .news h3{font-size:24px}
 .news p{color:#3D3C36;max-width:62ch}
 .nlink a{font-weight:700}
@@ -427,7 +428,7 @@ footer a{color:#DDE3D8}
         <div><b>1880s</b>Emigrates to Thunder Bay as a teen</div>
         <div><b>1904</b>Homesteads 40 acres in Markham</div>
         <div><b>1957</b>Dies; buried in Markham Cemetery</div>
-        <div><b>2001</b>The Friends take the deed</div>
+        <div><b>2001</b>The Friends take the deed, with help from State Rep. Tom Rukavina</div>
         <div><b>2026</b>The 25th Fall Festival</div>
       </div>
     </div>
@@ -805,14 +806,17 @@ var NEWS=[
     link:'https://naturalharvest.coop/community/round-up-for-charity/', linkText:'About Change Within Reach' },
   { date:'2023-09-27', kind:'Kiitos', title:'A grant from Lake Country Power’s Operation Round Up',
     text:'The Friends were one of 31 local projects and programs funded in Operation Round Up’s fall 2023 round. The grants come from Lake Country Power members who round up their electric bills to the nearest dollar.',
-    link:'https://www.lakecountrypower.coop', linkText:'Lake Country Power' }
+    link:'https://www.lakecountrypower.coop', linkText:'Lake Country Power' },
+  { date:'2014-02-12', kind:'On screen', title:'The farm in Atmosphere’s “Bob Seger” video',
+    text:'Parts of the Minneapolis hip-hop group Atmosphere’s “Bob Seger” music video were filmed at the farm. Victor Rukavina wrote, produced and edited the video for 1Light Films, with director Andrew Melby. Victor is the son of the late Tom Rukavina, who helped the Friends secure the farm in 2001.',
+    link:'https://www.youtube.com/watch?v=kTdFt3C5WXI', linkText:'Watch on YouTube (explicit lyrics)' }
 ];
 (function(){
   var M=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
   function fmt(d){var p=d.split('-');return M[+p[1]-1]+' '+(+p[2])+', '+p[0];}
   var el=document.getElementById('newslist');if(!el)return;
   el.innerHTML=NEWS.map(function(n,i){
-    return '<article class="news"'+(i>=4?' hidden':'')+'><div class="nmeta"><span class="kind k-'+n.kind.toLowerCase()+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
+    return '<article class="news"'+(i>=4?' hidden':'')+'><div class="nmeta"><span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
       '<h3>'+n.title+'</h3><p>'+n.text+'</p>'+
       (n.link?'<p class="nlink"><a href="'+n.link+'" target="_blank" rel="noopener">'+n.linkText+'</a></p>':'')+
       (n.draft?'<p class="sample">'+n.draft+'</p>':'')+'</article>';
