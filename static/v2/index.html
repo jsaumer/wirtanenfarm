@@ -277,7 +277,15 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 /* news sidebar: three random square photos */
 .side-pics{display:grid;gap:14px}
 .side-pics img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;background:var(--meadow)}
-@media (max-width:900px){.side-pics{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}}
+@media (max-width:900px){.side-pics{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+.newsaside{display:grid;gap:14px;align-content:start}
+.side-vid{margin:0;display:grid;gap:8px}
+.side-vid .vid{margin-top:0}
+.side-vid figcaption{display:grid;gap:2px}
+.side-vid figcaption b{font:400 19px/1.2 var(--serif);color:var(--pine)}
+.side-vid figcaption b a{color:var(--pine);text-decoration:underline;text-decoration-color:var(--lichen);text-underline-offset:3px}
+.side-vid figcaption b a:hover{color:var(--roof);text-decoration-color:var(--roof)}
+.side-vid figcaption span{font-size:14px;line-height:1.45;color:var(--muted)}
 /* news side card options */
 .side-card{border-radius:16px;padding:24px;display:grid;gap:10px;background:var(--card);border:1px solid var(--line);margin:0}
 .side-card.pine{background:var(--pine);border-color:var(--pine);color:#DDE3D8}
@@ -545,7 +553,7 @@ footer a{color:#DDE3D8}
   <h2>From the farm</h2>
   <div class="newsgrid">
     <div class="newslist" id="newslist"></div>
-<aside class="newsaside" id="newsaside" aria-label="Photos from the farm"></aside>
+<aside class="newsaside" id="newsaside" aria-label="Video and photos from the farm"><div id="sidevideo"></div><div id="sidepics"></div></aside>
   </div>
   <p class="more"><a href="https://www.facebook.com/WirtanenFarm" target="_blank" rel="noopener">More news on our Facebook page</a></p>
 </section>
@@ -840,10 +848,11 @@ var EVENTS=[
    poster: optional festival poster shown small beside the post
    video: {id, thumb, length} plays a YouTube video right in the page
    pin: true keeps a post at the top of the list (shown as Featured)
+   side: true shows a video post in the sidebar, above the photos, instead of in the list
    draft: a private reminder; it is never shown on the page
    ============================================================ */
 var NEWS=[
-  { date:'2011-09-10', kind:'Video', pin:true, poster:'img/poster-2011.jpg', title:'John Berquist at the 2011 Fall Festival',
+  { date:'2011-09-10', kind:'Video', side:true, title:'John Berquist at the 2011 Fall Festival',
     text:'Musician and storyteller John Berquist performs a northern Minnesota folk tune at the Wirtanen Farm Fall Festival on September 10, 2011.',
     video:{id:'sDUuYv9flDk', thumb:'img/yt-sDUuYv9flDk.jpg', length:'2:53'} },
   { date:'2026-09-12', kind:'Event', title:'The 25th Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
@@ -879,7 +888,13 @@ var NEWS=[
   var M=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
   function fmt(d){var p=d.split('-');return M[+p[1]-1]+' '+(+p[2])+', '+p[0];}
   var el=document.getElementById('newslist');if(!el)return;
-  var LIST=NEWS.filter(function(n){return n.pin;}).concat(NEWS.filter(function(n){return !n.pin;}));
+  var SIDE=NEWS.filter(function(n){return n.side&&n.video;});
+  var sv=document.getElementById('sidevideo');
+  if(sv)sv.innerHTML=SIDE.map(function(n){var q=n.title.replace(/"/g,'&quot;');
+    return '<figure class="side-vid"><div class="vid" data-id="'+n.video.id+'" data-title="'+q+'"><button type="button" class="vplay" aria-label="Play video: '+q+'"><img src="'+n.video.thumb+'" alt="" loading="lazy"><span class="vbtn" aria-hidden="true"></span><span class="vlen">'+n.video.length+'</span></button></div>'+
+      '<figcaption><b><a href="https://www.youtube.com/watch?v='+n.video.id+'" target="_blank" rel="noopener">'+n.title+'</a></b><span>'+n.text+'</span></figcaption></figure>';}).join('');
+  var LIST=NEWS.filter(function(n){return !n.side;});
+  LIST=LIST.filter(function(n){return n.pin;}).concat(LIST.filter(function(n){return !n.pin;}));
   el.innerHTML=LIST.map(function(n,i){
     return '<article class="news'+(n.poster?' has-poster':'')+(n.pin?' pinned':'')+'"'+(i>=4?' hidden':'')+'><div class="nbody"><div class="nmeta">'+(n.pin?'<span class="kind k-featured">Featured</span>':'')+'<span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
       '<h3>'+n.title+'</h3><p>'+n.text+'</p>'+
@@ -887,7 +902,7 @@ var NEWS=[
       (n.link?'<p class="nlink"><a href="'+n.link+'" target="_blank" rel="noopener">'+n.linkText+'</a></p>':'')+'</div>'+
       (n.poster?'<a class="nposter" href="'+n.poster+'" target="_blank" rel="noopener" aria-label="See the full Fall Festival poster"><img src="'+n.poster+'" alt="Fall Festival poster" loading="lazy"></a>':'')+'</article>';
   }).join('')+(LIST.length>4?'<button type="button" class="older" id="older-news">Show older news ('+(LIST.length-4)+')</button>':'');
-  el.addEventListener('click',function(ev){var btn=ev.target.closest('.vplay');if(!btn)return;var v=btn.parentNode;
+  document.addEventListener('click',function(ev){var btn=ev.target.closest('.vplay');if(!btn)return;var v=btn.parentNode;
     var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+v.dataset.id+'?autoplay=1&rel=0';f.title=v.dataset.title;
     f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');v.innerHTML='';v.appendChild(f);});
   var b=document.getElementById('older-news');
@@ -896,7 +911,7 @@ var NEWS=[
 </script>
 
 <script>
-/* News sidebar: three different farm photos, picked at random on each visit */
+/* News sidebar: two different farm photos, picked at random on each visit */
 (function(){
   var H='/wp-content/uploads/2017/09/cropped-Header';
   var pool=[
@@ -908,8 +923,8 @@ var NEWS=[
   var hero=(document.getElementById('site-header')||{style:{}}).style.backgroundImage||'';
   pool=pool.filter(function(p){return hero.indexOf(p[0])<0;});
   for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=pool[i];pool[i]=pool[j];pool[j]=t;}
-  var box=document.getElementById('newsaside');if(!box)return;
-  box.innerHTML='<div class="side-pics">'+pool.slice(0,3).map(function(p){return '<img src="'+p[0]+'" alt="'+p[1]+'" loading="lazy">';}).join('')+'</div>';
+  var box=document.getElementById('sidepics')||document.getElementById('newsaside');if(!box)return;
+  box.innerHTML='<div class="side-pics">'+pool.slice(0,2).map(function(p){return '<img src="'+p[0]+'" alt="'+p[1]+'" loading="lazy">';}).join('')+'</div>';
 })();
 </script>
 
