@@ -178,6 +178,7 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .fmeta{font-size:17px;font-weight:700;color:var(--fsub)}
 .fplace{font-size:15px;color:var(--fsub);margin-top:-6px}
 .evplace{font-size:14px}
+.evthanks{font-size:15px;color:var(--muted)}
 .evplace a{color:var(--muted)}
 .facts2{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .featured .btn{background:var(--fbtn);color:var(--fbtn-ink)}
@@ -232,7 +233,19 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .newsgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:44px;align-items:start}
 .newslist{display:grid}
 .news{padding:20px 0;border-top:1px solid var(--line);display:grid;gap:6px}
-.nbody{display:grid;gap:6px}
+.nbody{display:grid;gap:6px} 
+.vid{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:10px;overflow:hidden;background:#111;margin-top:6px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vplay{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer}
+.vplay img{width:100%;height:100%;object-fit:cover;display:block}
+.vbtn{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:rgba(30,58,47,.88);box-shadow:0 6px 18px -6px rgba(0,0,0,.6);transition:transform .15s}
+.vbtn::after{content:"";position:absolute;left:27px;top:21px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent #F1F2EE}
+.vplay:hover .vbtn,.vplay:focus-visible .vbtn{transform:scale(1.08)}
+.vlen{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.7);color:#fff;font:700 12px var(--sans);padding:2px 6px;border-radius:4px}
+.news.pinned{background:#E6EADB;border-radius:14px;padding:20px 22px;border-top:0;margin-bottom:8px}
+.news.pinned+.news{border-top:0}
+.k-featured{background:var(--pine);color:var(--birch)}
+.k-video{background:#DCE3C8;color:var(--pine)}
 .news.has-poster{grid-template-columns:minmax(0,1fr) 104px;column-gap:24px;align-items:start}
 .nposter{display:block;padding-top:4px}
 .nposter img{width:100%;border-radius:3px;box-shadow:0 10px 22px -12px rgba(0,0,0,.55);transform:rotate(2deg);transition:transform .2s}
@@ -245,6 +258,7 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .k-press{background:#DCE3C8;color:var(--pine)}
 .k-on-screen{background:var(--bark);color:var(--birch)}
 .k-exhibit{background:#E3D9C4;color:var(--bark)}
+.k-in-memory{background:transparent;color:var(--pine);box-shadow:inset 0 0 0 1px var(--pine)}
 .news h3{font-size:24px}
 .news p{color:#3D3C36;max-width:62ch}
 .nlink a{font-weight:700}
@@ -431,7 +445,7 @@ footer a{color:#DDE3D8}
       </div>
 
       <p>He set his buildings apart from one another, the way farms were laid out in the Savo region of Finland, just east of his birthplace. With space between them, a single fire could never take the whole farm. None of his buildings were ever painted, inside or out.</p>
-      <p>Eli died in 1957 and is buried in the Markham Cemetery in Colvin Township.</p>
+      <p>In his final years, when Eli could no longer keep up with the farm work, his neighbors Gladys and Alvin Pekkarinen looked after him and his farm. Eli died in 1957 and is buried in the Markham Cemetery in Colvin Township.</p>
 
       <div class="line">
         <div><b>1872</b>Born in Karstula, Finland</div>
@@ -714,11 +728,14 @@ footer a{color:#DDE3D8}
    - date: 'YYYY-MM-DD' (leave '' until the date is set); endDate for events of more than one day
    - place/address: for events away from the farm (directions and calendar use the address)
    - start/end: 24-hour local times, e.g. '10:00' and '16:00'
+   - rule: 'second-saturday-september' works out next year's date on its own once this one has passed
    - promoFrom: the day the event starts being featured under the headline
      (leave '' to start 30 days before the event)
    ============================================================ */
 var EVENTS=[
-  { id:'festival', name:'Wirtanen Farm Fall Festival', season:'Every September',
+  { id:'festival', name:'Wirtanen Farm Fall Festival', season:'Second Saturday of September',
+    rule:'second-saturday-september',
+    nextBlurb:'Past festivals have brought artisans and crafters, horse-drawn wagon rides, live music and fresh baking. This year’s lineup and poster will be posted here.',
     date:'2026-09-12', start:'10:00', end:'16:00', promoFrom:'2026-08-01',
     admission:'Free admission · donations accepted',
     poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
@@ -761,12 +778,23 @@ var EVENTS=[
   function gcal(e){var d=e.date.replace(/-/g,'');function z(t){return d+'T'+t.replace(':','')+'00';}
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.name)+'&dates='+z(e.start)+'/'+z(e.end)+(nDays(e)>1?'&recur='+encodeURIComponent('RRULE:FREQ=DAILY;COUNT='+nDays(e)):'')+'&ctz=America/Chicago&location='+encodeURIComponent(e.address||FARM)+'&details='+encodeURIComponent('wirtanenfarm.org');}
 
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function secondSat(y){var d=new Date(y,8,1);d.setDate(1+((6-d.getDay()+7)%7)+7);return d;}
+  // an event with a yearly rule rolls forward to next year's date once this year's has passed
+  function effective(e,now){
+    if(e.rule!=='second-saturday-september')return e;
+    var t=ymd(now),conf=first(e);
+    if(conf&&t<=ymd(last(e)))return e;
+    var d=secondSat(now.getFullYear());if(ymd(d)<t)d=secondSat(now.getFullYear()+1);
+    return Object.assign({},e,{date:iso(d),endDate:'',promoFrom:iso(new Date(d.getFullYear(),7,1)),poster:'',lineup:[],blurb:e.nextBlurb,derived:true,thanks:conf?conf.getFullYear():null});
+  }
   function today(){var q=(location.search.match(/[?&]today=(\d{4}-\d{2}-\d{2})/)||[])[1];return q?parse(q):new Date();}
   window.renderEvents=function(now){
     now=now||today();var t=ymd(now);
+    var L=EVENTS.map(function(e){return effective(e,now);});
     // featured: the next event inside its promotion window (through its last day)
     var feat=null;
-    EVENTS.forEach(function(e){var d=first(e);if(!d)return;var p=parse(e.promoFrom)||new Date(d.getFullYear(),d.getMonth(),d.getDate()-30);if(t>=ymd(p)&&t<=ymd(last(e))){if(!feat||ymd(d)<ymd(first(feat)))feat=e;}});
+    L.forEach(function(e){var d=first(e);if(!d)return;var p=parse(e.promoFrom)||new Date(d.getFullYear(),d.getMonth(),d.getDate()-30);if(t>=ymd(p)&&t<=ymd(last(e))){if(!feat||ymd(d)<ymd(first(feat)))feat=e;}});
     var box=document.getElementById('featured');
     if(feat){
       var d=first(feat),days=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
@@ -787,7 +815,7 @@ var EVENTS=[
 
     // the yearly cards
     var cards=document.getElementById('evcards');
-    cards.innerHTML=EVENTS.map(function(e){
+    cards.innerHTML=L.map(function(e){
       var d=first(e),state='tba';
       if(d){state=t>ymd(last(e))?'past':'upcoming';}
       var dateHtml=d?'<div class="date"><div class="m">'+MON[d.getMonth()]+'</div><div class="d">'+dayNums(e)+'</div><div class="y">'+d.getFullYear()+'</div></div>':'<div class="date"><div class="m">DATE</div><div class="d">?</div><div class="y">to come</div></div>';
@@ -795,8 +823,10 @@ var EVENTS=[
       if(state==='past'&&lastYear)e=Object.assign({},e,{after:'Thanks to everyone who came in '+d.getFullYear()+'. The '+now.getFullYear()+' date will be posted here.'});
       var when=d?(nDays(e)>1?dayNames(e)+', '+MONL[d.getMonth()]+' '+dayNums(e):DAY[d.getDay()])+', '+hours(e):'';
       var body=state==='upcoming'?'<p><b>'+when+'.</b> '+e.admission+'.</p>'+(e.address?'<p class="evplace"><a href="'+dir(e)+'" target="_blank" rel="noopener">'+e.address+'</a></p>':''):state==='past'?'<p>'+e.after+'</p>':'<p>Date to be announced.</p>';
-      var tag=state==='upcoming'?'<span class="tag up">Coming up</span>':state==='past'?'<span class="tag">'+(lastYear?'Date to come':'This year’s is done')+'</span>':'<span class="tag">To be announced</span>';
-      return '<article class="evcard '+state+'">'+dateHtml+'<div><div class="evtop">'+tag+'<span class="season">'+e.season+'</span></div><h3>'+e.name+'</h3>'+body+(e.poster&&state==='past'?'<p><a href="'+e.poster+'" target="_blank" rel="noopener">See the '+d.getFullYear()+' poster</a></p>':'')+'</div></article>';
+      var far=d&&(d-now)/864e5>60;
+      if(e.derived&&e.thanks)body+='<p class="evthanks">Thank you to everyone who came in '+e.thanks+'.</p>';
+      var tag=state==='upcoming'?(far?'<span class="tag">Save the date</span>':'<span class="tag up">Coming up</span>'):state==='past'?'<span class="tag">'+(lastYear?'Date to come':'This year’s is done')+'</span>':'<span class="tag">To be announced</span>';
+      return '<article class="evcard '+(state==='upcoming'&&far?'later':state)+'">'+dateHtml+'<div><div class="evtop">'+tag+'<span class="season">'+e.season+'</span></div><h3>'+e.name+'</h3>'+body+(e.poster&&state==='past'?'<p><a href="'+e.poster+'" target="_blank" rel="noopener">See the '+d.getFullYear()+' poster</a></p>':'')+'</div></article>';
     }).join('');
   };
   renderEvents();
@@ -808,9 +838,14 @@ var EVENTS=[
    NEWS: newest first. The homepage shows the latest four; older ones sit behind a button.
    kind: 'Kiitos' (thank-you), 'Press', or 'Event'
    poster: optional festival poster shown small beside the post
+   video: {id, thumb, length} plays a YouTube video right in the page
+   pin: true keeps a post at the top of the list (shown as Featured)
    draft: a private reminder; it is never shown on the page
    ============================================================ */
 var NEWS=[
+  { date:'2011-09-10', kind:'Video', pin:true, poster:'img/poster-2011.jpg', title:'John Berquist at the 2011 Fall Festival',
+    text:'Musician and storyteller John Berquist performs a northern Minnesota folk tune at the Wirtanen Farm Fall Festival on September 10, 2011.',
+    video:{id:'sDUuYv9flDk', thumb:'img/yt-sDUuYv9flDk.jpg', length:'2:53'} },
   { date:'2026-09-12', kind:'Event', title:'The 25th Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
     text:'Thank you to everyone who came out to celebrate 25 years of the Fall Festival, and to the artisans, musicians, volunteers and the Colvin Fire Department who made the day.' },
   { date:'2026-08-13', kind:'Kiitos', title:'Natural Harvest Food Co-op customers raise $1,961.61',
@@ -831,6 +866,8 @@ var NEWS=[
   { date:'2023-09-27', kind:'Kiitos', title:'A grant from Lake Country Power’s Operation Round Up',
     text:'The Friends were one of 31 local projects and programs funded in Operation Round Up’s fall 2023 round. The grants come from Lake Country Power members who round up their electric bills to the nearest dollar.',
     link:'https://www.lakecountrypower.coop', linkText:'Lake Country Power' },
+  { date:'2019-10-20', kind:'In memory', title:'Remembering Gladys Pekkarinen, 1918–2019',
+    text:'Gladys Pekkarinen, a Markham neighbor for many decades, passed away in October 2019 at 101. She knew Eli: she and her husband, Alvin, cared for Eli and his farm when he could no longer do the farm work himself. Gladys was instrumental in helping the Friends become who they are today. In the Mesabi Daily News, Linda Tyssen recalled her as “a natural caretaker who loved her family and friends dearly.”' },
   { date:'2015-05-31', kind:'Exhibit', title:'Eli’s farm comes to the Depot in Duluth',
     text:'The St. Louis County Historical Society opened “Explore Eli’s Farm,” a permanent children’s exhibit at the Depot in Duluth that recreates a scene from the farmstead. Around a child-sized, dovetailed log cabin with a garden, chicken coop and sauna, kids “help Eli” by picking vegetables, gathering eggs and picking apples. A Depot Foundation grant funded the exhibit, and it was created with the support of the Friends and the Nordic Center in Duluth. It is still open today.',
     link:'https://www.thehistorypeople.org/permanent-exhibits', linkText:'See the Depot’s permanent exhibits' },
@@ -842,12 +879,17 @@ var NEWS=[
   var M=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
   function fmt(d){var p=d.split('-');return M[+p[1]-1]+' '+(+p[2])+', '+p[0];}
   var el=document.getElementById('newslist');if(!el)return;
-  el.innerHTML=NEWS.map(function(n,i){
-    return '<article class="news'+(n.poster?' has-poster':'')+'"'+(i>=4?' hidden':'')+'><div class="nbody"><div class="nmeta"><span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
+  var LIST=NEWS.filter(function(n){return n.pin;}).concat(NEWS.filter(function(n){return !n.pin;}));
+  el.innerHTML=LIST.map(function(n,i){
+    return '<article class="news'+(n.poster?' has-poster':'')+(n.pin?' pinned':'')+'"'+(i>=4?' hidden':'')+'><div class="nbody"><div class="nmeta">'+(n.pin?'<span class="kind k-featured">Featured</span>':'')+'<span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
       '<h3>'+n.title+'</h3><p>'+n.text+'</p>'+
+      (n.video?'<div class="vid" data-id="'+n.video.id+'" data-title="'+n.title.replace(/"/g,'&quot;')+'"><button type="button" class="vplay" aria-label="Play video: '+n.title.replace(/"/g,'&quot;')+'"><img src="'+n.video.thumb+'" alt="" loading="lazy"><span class="vbtn" aria-hidden="true"></span><span class="vlen">'+n.video.length+'</span></button></div><p class="nlink"><a href="https://www.youtube.com/watch?v='+n.video.id+'" target="_blank" rel="noopener">Watch on YouTube</a></p>':'')+
       (n.link?'<p class="nlink"><a href="'+n.link+'" target="_blank" rel="noopener">'+n.linkText+'</a></p>':'')+'</div>'+
       (n.poster?'<a class="nposter" href="'+n.poster+'" target="_blank" rel="noopener" aria-label="See the full Fall Festival poster"><img src="'+n.poster+'" alt="Fall Festival poster" loading="lazy"></a>':'')+'</article>';
-  }).join('')+(NEWS.length>4?'<button type="button" class="older" id="older-news">Show older news ('+(NEWS.length-4)+')</button>':'');
+  }).join('')+(LIST.length>4?'<button type="button" class="older" id="older-news">Show older news ('+(LIST.length-4)+')</button>':'');
+  el.addEventListener('click',function(ev){var btn=ev.target.closest('.vplay');if(!btn)return;var v=btn.parentNode;
+    var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+v.dataset.id+'?autoplay=1&rel=0';f.title=v.dataset.title;
+    f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');v.innerHTML='';v.appendChild(f);});
   var b=document.getElementById('older-news');
   if(b)b.addEventListener('click',function(){el.querySelectorAll('.news[hidden]').forEach(function(a){a.hidden=false});b.remove();});
 })();
