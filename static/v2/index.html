@@ -11,15 +11,15 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <style>
 /* Pihapiiri: Norway pine, barn-roof green, lichen, birch */
 :root{--pine:#1E3A2F;--roof:#3F7D5C;--lichen:#C9D3B0;--birch:#F1F2EE;--bark:#24231F;--log:#6B5A45;--muted:#5B5A52;--line:#DCDFD5;--card:#FFFFFF;--meadow:#DDE4CC;
-  --serif:"Gloock",Georgia,"Times New Roman",serif;--sans:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif}
+  --serif:"Alegreya",Georgia,"Times New Roman",serif;--sans:"Alegreya Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--birch);color:var(--bark);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:var(--serif);font-weight:400;color:var(--pine);margin:0;line-height:1.08;text-wrap:balance}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;color:var(--pine);margin:0;line-height:1.08;text-wrap:balance}
 p{margin:0}
 a{color:var(--roof)}
 img{max-width:100%;display:block}
@@ -506,7 +506,7 @@ footer a{color:#DDE3D8}
     </div>
   </div>
   <div class="tips">
-    <div><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="10" width="24" height="14" rx="3" fill="none" stroke="#3F7D5C" stroke-width="2"/><text x="16" y="21" text-anchor="middle" font-family="Karla,sans-serif" font-size="11" font-weight="700" fill="#1E3A2F">P</text></svg><b>Park at the entrance</b><span>The gravel lot sits right beside the lane off Markham Rd.</span></div>
+    <div><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="10" width="24" height="14" rx="3" fill="none" stroke="#3F7D5C" stroke-width="2"/><text x="16" y="21" text-anchor="middle" font-family="Alegreya Sans,sans-serif" font-size="11" font-weight="700" fill="#1E3A2F">P</text></svg><b>Park at the entrance</b><span>The gravel lot sits right beside the lane off Markham Rd.</span></div>
     <div><svg viewBox="0 0 32 32" aria-hidden="true"><polygon points="6,14 16,6 26,14" fill="#8E897C"/><rect x="8" y="14" width="16" height="12" fill="#6B5A45"/><rect x="11" y="17" width="4" height="9" fill="#1E3A2F"/><rect x="17" y="17" width="4" height="9" fill="#1E3A2F"/></svg><b>Outhouse by the lane</b><span>Just inside the entrance, on your right as you walk in.</span></div>
     <div><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 24 C 10 18, 14 26, 20 20 S 28 18, 28 18" fill="none" stroke="#3F7D5C" stroke-width="2.4" stroke-linecap="round"/><path d="M8 26 v-5 M13 26 v-4 M22 25 v-5" stroke="#1E3A2F" stroke-width="1.6"/></svg><b>Wear walking shoes</b><span>Grass paths and uneven ground connect the buildings.</span></div>
     <div><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="12" width="20" height="3" fill="#6B5A45"/><rect x="4" y="19" width="24" height="2.5" fill="#6B5A45"/><path d="M9 15 L7 26 M23 15 L25 26" stroke="#6B5A45" stroke-width="2"/></svg><b>Bring a picnic</b><span>There are picnic tables out on the lawn under the pines.</span></div>
@@ -585,11 +585,11 @@ footer a{color:#DDE3D8}
   el('ellipse',{cx:382,cy:470,rx:20,ry:50,fill:'#D2CBA2',transform:'rotate(-8 382 470)'},svg);
   // road, lake hint
   el('rect',{x:48,y:0,width:22,height:700,fill:'#DCD3BD'},svg);
-  var rl=el('text',{transform:'translate(64 440) rotate(-90)','text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':2,fill:'#6E6450'},svg);rl.textContent='MARKHAM RD';
-  var lk=el('text',{transform:'translate(44 250) rotate(-90)','text-anchor':'middle','font-family':'Gloock,serif','font-size':12,'font-style':'italic',fill:'#4E6272'},svg);lk.textContent='← Little Markham Lake';
+  var rl=el('text',{transform:'translate(64 440) rotate(-90)','text-anchor':'middle','font-family':'Alegreya Sans,sans-serif','font-size':11,'font-weight':700,'letter-spacing':2,fill:'#6E6450'},svg);rl.textContent='MARKHAM RD';
+  var lk=el('text',{transform:'translate(44 250) rotate(-90)','text-anchor':'middle','font-family':'Alegreya,serif','font-size':12,'font-style':'italic',fill:'#4E6272'},svg);lk.textContent='← Little Markham Lake';
   // parking + lane with rope-fence posts + carved sign
   el('rect',{x:68,y:178,width:88,height:72,rx:10,fill:'#D2CAB6'},svg);
-  var pt=el('text',{x:112,y:219,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':1.5,fill:'#7A7058'},svg);pt.textContent='PARKING';
+  var pt=el('text',{x:112,y:219,'text-anchor':'middle','font-family':'Alegreya Sans,sans-serif','font-size':11,'font-weight':700,'letter-spacing':1.5,fill:'#7A7058'},svg);pt.textContent='PARKING';
   var lane='M70 256 C 110 258, 170 266, 228 278 S 262 292, 272 312';
   el('path',{d:lane,fill:'none',stroke:'#E6DFC8','stroke-width':14,'stroke-linecap':'round'},svg);
   [[92,247],[112,249],[132,252],[92,266],[112,268],[132,271]].forEach(function(p){el('circle',{cx:p[0],cy:p[1],r:2.2,fill:'#6B5A45'},svg);});
@@ -613,8 +613,8 @@ footer a{color:#DDE3D8}
     el('polygon',{points:x+','+(y-s*2)+' '+(x-s)+','+(y-s*.2)+' '+(x+s)+','+(y-s*.2),fill:c},tg);
     el('polygon',{points:x+','+(y-s*1.3)+' '+(x-s*1.15)+','+y+' '+(x+s*1.15)+','+y,fill:c},tg);});
   // labels
-  var hf=el('text',{x:600,y:560,'text-anchor':'middle','font-family':'Gloock,serif','font-size':20,'font-style':'italic',fill:'#5E6B4A'},svg);hf.textContent='Hayfield';
-  var na=el('g',{transform:'translate(584 124)'},svg);el('circle',{r:17,fill:'#F1F2EE',opacity:.94},na);el('polygon',{points:'0,-11 6,6 0,2 -6,6',fill:'#1E3A2F'},na);var nt=el('text',{y:-21,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,fill:'#1E3A2F'},na);nt.textContent='N';
+  var hf=el('text',{x:600,y:560,'text-anchor':'middle','font-family':'Alegreya,serif','font-size':20,'font-style':'italic',fill:'#5E6B4A'},svg);hf.textContent='Hayfield';
+  var na=el('g',{transform:'translate(584 124)'},svg);el('circle',{r:17,fill:'#F1F2EE',opacity:.94},na);el('polygon',{points:'0,-11 6,6 0,2 -6,6',fill:'#1E3A2F'},na);var nt=el('text',{y:-21,'text-anchor':'middle','font-family':'Alegreya Sans,sans-serif','font-size':11,'font-weight':700,fill:'#1E3A2F'},na);nt.textContent='N';
 
   // building icons, anchored at the ground point (bottom centre)
   var LOG='#6B5A45',DARK='#3D3227',SH='#8E897C',GREEN='#3F7D5C',WIN='#E6E2D2';
@@ -646,10 +646,10 @@ footer a{color:#DDE3D8}
     var px=s.x+12,py=s.y-s.h-6;
     el('line',{x1:s.x+4,y1:s.y-s.h+4,x2:px,y2:py,stroke:'#1E3A2F','stroke-width':1.2,opacity:.6},g);
     var c=el('circle',{cx:px,cy:py,r:11,fill:'#1E3A2F',stroke:'#F1F2EE','stroke-width':2},g);
-    var tx=el('text',{x:px,y:py+4.5,'text-anchor':'middle','font-family':'Gloock,serif','font-size':12,fill:'#F1F2EE'},g);tx.textContent=i+1;
+    var tx=el('text',{x:px,y:py+4.5,'text-anchor':'middle','font-family':'Alegreya,serif','font-size':12,fill:'#F1F2EE'},g);tx.textContent=i+1;
     var tag=el('g',{opacity:0},g);
     var tr=el('rect',{x:px+14,y:py-10,width:60,height:20,rx:10,fill:'#1E3A2F'},tag);
-    var tt=el('text',{x:px+44,y:py+4,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':12,'font-weight':700,fill:'#F1F2EE'},tag);tt.textContent=s.name;
+    var tt=el('text',{x:px+44,y:py+4,'text-anchor':'middle','font-family':'Alegreya Sans,sans-serif','font-size':12,'font-weight':700,fill:'#F1F2EE'},tag);tt.textContent=s.name;
     var ti=el('title',{},g);ti.textContent=(i+1)+'. '+s.name;
     // hit area covers the building too
     el('rect',{x:s.x-24,y:s.y-s.h-18,width:52,height:s.h+22,fill:'transparent'},g);
