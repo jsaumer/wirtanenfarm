@@ -377,11 +377,7 @@ footer a{color:#DDE3D8}
     </div>
   </div>
 </section>
-<div id="events-high"><section class="wrap band" id="events">
-  <div class="eyebrow">Events</div>
-  <h2>Every year at the farm</h2>
-  <div class="evcards" id="evcards"></div>
-</section></div>
+
 <section class="wrap guide-head" id="farmstead">
   <div class="eyebrow">Pihapiiri · the farmstead</div>
   <h2>Step into Eli’s farmstead</h2>
@@ -399,7 +395,11 @@ footer a{color:#DDE3D8}
   <div class="stops" id="stops"></div>
 </div>
 
-<div id="events-low"></div>
+<div id="events-low"><section class="wrap band" id="events">
+  <div class="eyebrow">Events</div>
+  <h2>Every year at the farm</h2>
+  <div class="evcards" id="evcards"></div>
+</section></div>
 <section class="eli" id="eli">
   <div class="wrap">
     <figure class="eli-photo">
@@ -753,8 +753,7 @@ var EVENTS=[
         '</div>';
       box.hidden=false;
     } else {box.hidden=true;box.innerHTML='';}
-    // keep the yearly events away from the banner: high on the page normally, lower while a banner shows
-    var evs=document.getElementById('events');document.getElementById(feat?'events-low':'events-high').appendChild(evs);
+
     // the yearly cards
     var cards=document.getElementById('evcards');
     cards.innerHTML=EVENTS.map(function(e){
