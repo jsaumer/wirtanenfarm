@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wirtanen Pioneer Farm</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A 1904 Finnish immigrant homestead and open-air museum in Markham, Minnesota, kept by the Friends of the Wirtanen Pioneer Farm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Pihapiiri: Norway pine, barn-roof green, lichen, birch */
+:root{--pine:#1E3A2F;--roof:#3F7D5C;--lichen:#C9D3B0;--birch:#F1F2EE;--bark:#24231F;--log:#6B5A45;--muted:#5B5A52;--line:#DCDFD5;--card:#FFFFFF;--meadow:#DDE4CC;
+  --serif:"Gloock",Georgia,"Times New Roman",serif;--sans:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--birch);color:var(--bark);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;color:var(--pine);margin:0;line-height:1.08;text-wrap:balance}
+p{margin:0}
+a{color:var(--roof)}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--roof);outline-offset:3px}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:28px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--roof);font-weight:700}
+.btn{display:inline-block;background:var(--pine);color:var(--birch);padding:10px 20px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--pine);box-shadow:inset 0 0 0 1.5px var(--pine)}
+
+/* preview banner */
+.preview{background:var(--pine);color:#DDE3D8;font-size:14px;text-align:center;padding:8px 16px;padding-top:calc(8px + env(safe-area-inset-top,0px))}
+.preview a{color:var(--lichen);font-weight:700}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:14px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--pine);text-decoration:none;font-weight:700;font-size:16px;line-height:1.2}
+.brand small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.links{display:flex;gap:22px;flex-wrap:wrap;align-items:center;font-size:15px;font-weight:500}
+.links a{color:var(--bark);text-decoration:none}
+.links a:hover{color:var(--roof)}
+.links .btn{color:var(--birch)}
+
+/* hero */
+.hero{position:relative;display:grid;align-items:end;min-height:440px;background:url(/wp-content/uploads/2017/09/cropped-Header2.jpg) center 45%/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,32,26,.88) 0%,rgba(20,32,26,.55) 48%,rgba(20,32,26,0) 85%)}
+.hero .wrap{position:relative;width:100%;padding-block:48px}
+.hero .in{display:grid;gap:16px;max-width:620px;color:#F1F2EE}
+.hero .eyebrow{color:var(--lichen)}
+.hero h1{font-size:clamp(42px,6.4vw,78px);line-height:.98;color:#F4F5F1}
+.hero p{font-size:19px;color:#DDE3D8}
+.facts{display:flex;gap:8px;flex-wrap:wrap}
+.facts span{font-size:14px;font-weight:700;background:rgba(241,242,238,.14);border:1px solid rgba(241,242,238,.3);padding:6px 12px;border-radius:999px}
+
+/* farmyard guide */
+.guide-head{padding-block:64px 8px;display:grid;gap:10px}
+.guide-head h2{font-size:clamp(32px,4vw,46px)}
+.guide-head p{color:var(--muted);max-width:62ch}
+.guide{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:44px;padding-block:28px 64px;align-items:start}
+.side{position:sticky;top:12px;display:grid;gap:10px;z-index:3}
+.mapcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;display:grid;gap:8px}
+.mapcard svg{width:100%;height:auto;display:block;border-radius:10px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--muted);padding:0 6px 2px}
+.legend i{display:inline-block;vertical-align:middle;margin-right:6px}
+.chips{display:none;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chips button{font:600 13px var(--sans);padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--bark);white-space:nowrap;cursor:pointer}
+.chips button.on{background:var(--pine);border-color:var(--pine);color:var(--birch)}
+.stops{display:grid}
+.stop{display:grid;grid-template-columns:44px minmax(0,1fr) 200px;gap:18px;padding:24px 0;border-top:1px solid var(--line);scroll-margin-top:24px}
+.stop:first-child{border-top:0;padding-top:0}
+.stop .n{width:38px;height:38px;border-radius:50%;background:var(--pine);color:var(--birch);display:grid;place-items:center;font:400 18px var(--serif)}
+.stop.on .n{background:var(--roof)}
+.stop h3{font-size:27px;margin:0 0 8px}
+.stop p{font-size:16px;color:#3D3C36;max-width:56ch}
+.stop .ph{aspect-ratio:4/3;width:100%;border-radius:8px;object-fit:cover;background:var(--meadow)}
+.stop .ph.none{display:grid;place-items:center;color:var(--muted);font-size:13px}
+.also{margin-top:8px;background:#E6EADB;border-radius:12px;padding:18px 20px;font-size:16px}
+.also b{color:var(--pine)}
+
+/* Eli */
+.eli{background:var(--pine);color:#E2E7DE}
+.eli .wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:44px;align-items:center;padding-block:64px}
+.eli img{border-radius:4px;filter:sepia(.2) contrast(1.05)}
+.eli h2{color:#F4F5F1;font-size:clamp(32px,4vw,46px)}
+.eli .eyebrow{color:var(--lichen)}
+.eli blockquote{margin:0;font:400 26px/1.3 var(--serif);color:var(--lichen)}
+.eli p{max-width:64ch}
+.eli .copy{display:grid;gap:16px}
+.line{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:10px;border-top:2px solid rgba(201,211,176,.35)}
+.line div{padding:14px 12px 0 0;font-size:13.5px;line-height:1.4;color:#C7CFC2;position:relative}
+.line div::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--lichen)}
+.line b{display:block;font:400 22px var(--serif);color:#F4F5F1}
+
+/* mission, visit, events, support */
+.band{padding-block:64px;display:grid;gap:24px}
+.band h2{font-size:clamp(30px,3.6vw,42px)}
+.mission{max-width:760px;font:400 clamp(22px,2.4vw,28px)/1.35 var(--serif);color:var(--pine)}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cols>div{display:grid;gap:6px;align-content:start;padding-top:14px;border-top:3px solid var(--roof)}
+.cols b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roof)}
+.cols .big{font:400 40px/1 var(--serif);color:var(--pine)}
+.signrow{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:center}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.strip figure{margin:0;display:grid;gap:6px}
+.strip img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
+.strip figcaption{font-size:14px;color:var(--muted)}
+.event{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.date{width:120px;border-radius:10px;overflow:hidden;text-align:center;border:1px solid var(--line)}
+.date .m{background:var(--roof);color:#FFF;font-weight:700;letter-spacing:.12em;font-size:13px;padding:5px}
+.date .d{font:400 52px/1 var(--serif);color:var(--pine);padding:10px 0 2px}
+.date .y{font-size:13px;color:var(--muted);padding-bottom:8px}
+.event h3{font-size:28px;margin-bottom:6px}
+.event p{color:#3D3C36}
+footer{background:var(--bark);color:#B9BDB2;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:26px calc(26px + env(safe-area-inset-bottom,0px))}
+footer a{color:#DDE3D8}
+
+@media (max-width:900px){
+  .guide{grid-template-columns:1fr;gap:16px;padding-top:12px}
+  .side{top:0;background:var(--birch);margin-inline:-28px;padding:10px 16px;border-bottom:1px solid var(--line);box-shadow:0 8px 16px -14px rgba(0,0,0,.5)}
+  .mapcard{padding:6px}
+  .mapcard svg{height:190px}
+  .legend{display:none}
+  .chips{display:flex}
+  .stop{grid-template-columns:40px minmax(0,1fr);gap:14px}
+  .stop .ph{grid-column:2;max-width:420px}
+  .eli .wrap{grid-template-columns:1fr}
+  .eli img{max-width:220px}
+  .line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
+  .cols{grid-template-columns:1fr}
+  .signrow{grid-template-columns:1fr}
+  .strip{grid-template-columns:1fr 1fr}
+  .links a:not(.btn){display:none}
+}
+@media (max-width:520px){
+  .wrap{padding-inline:18px}
+  .side{margin-inline:-18px}
+  .event{grid-template-columns:1fr}
+  .hero{min-height:380px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="preview">You’re looking at a preview of the new website. <a href="/">Go to the current site</a></div>
+
+<div class="wrap nav">
+  <a class="brand" href="/v2/"><svg width="44" height="44" viewBox="0 0 56 56" aria-hidden="true"><polygon points="16,4 4,26 10,26 2,40 30,40 22,26 28,26" fill="#1E3A2F"/><rect x="14" y="40" width="4" height="10" fill="#1E3A2F"/><polygon points="26,34 40,22 54,34" fill="#3F7D5C"/><rect x="29" y="34" width="22" height="16" fill="#6B5A45"/><rect x="37" y="40" width="6" height="10" fill="#1E3A2F"/></svg><span>Wirtanen Pioneer Farm<small>Est. 1904 · Markham, Minnesota</small></span></a>
+  <nav class="links" aria-label="Main"><a href="#farmyard">The Farmyard</a><a href="#eli">Eli’s Story</a><a href="/savusauna/">Savusauna</a><a href="#events">Events</a><a href="#support">Support</a><a class="btn" href="#visit">Plan a visit</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap"><div class="in">
+    <div class="eyebrow">Open-air museum · Finnish homestead</div>
+    <h1>Step into Eli’s farmyard.</h1>
+    <p>A 1904 Finnish immigrant homestead on the Old Vermilion Trail, kept by the Friends of the Wirtanen Pioneer Farm since 2001. Experience Old World serenity.</p>
+    <div class="facts"><span>40 acres</span><span>Homesteaded 1904</span><span>5312 Markham Rd, Makinen</span></div>
+  </div></div>
+</header>
+
+<main>
+<section class="wrap guide-head" id="farmyard">
+  <div class="eyebrow">Pihapiiri · the farmyard</div>
+  <h2>Walk the farmyard</h2>
+  <p>From the parking lot, follow the numbers around the clearing. Choose a building on the map to jump to it, or scroll the list and the map will follow along.</p>
+</section>
+
+<div class="wrap guide">
+  <aside class="side">
+    <div class="mapcard">
+      <svg id="map" viewBox="40 96 570 530" role="group" aria-label="Illustrated map of the Wirtanen farmyard"></svg>
+      <div class="legend"><span><i style="width:18px;border-top:2.5px dashed #1E3A2F"></i>Suggested walk</span><span><i style="width:18px;height:10px;background:#E6DFC8"></i>Entrance lane</span><span>North is up</span></div>
+    </div>
+    <div class="chips" id="chips"></div>
+  </aside>
+  <div class="stops" id="stops"></div>
+</div>
+
+<section class="eli" id="eli">
+  <div class="wrap">
+    <img src="/wp-content/uploads/2010/12/eli.jpg" alt="Eli Wirtanen in a cap, white shirt and suspenders, standing in front of a board-sided building" width="300" height="423">
+    <div class="copy">
+      <div class="eyebrow">Eli Wirtanen · 1872–1957</div>
+      <h2>Who was Eli?</h2>
+      <blockquote>“The forest gives what the forest has.”</blockquote>
+      <p>Eli was born Elias Vertanen in Karstula, Finland, in 1872. As the third son, he had no hope of owning the family farm. As a teenager he emigrated to Thunder Bay, Ontario, to live with his brother David. When David died, Eli came to the United States to apply for citizenship, and in 1904 he homesteaded 40 acres along the Old Vermilion Trail in Markham, Minnesota.</p>
+      <p>He worked in logging camps, helped local farmers at harvest, and built and maintained roads with horse power. He never married and never owned a car. Nearly everything he needed, from food to the logs for his buildings, came from his own land. Eli died in 1957 and is buried in the Markham Cemetery in Colvin Township.</p>
+      <div class="line">
+        <div><b>1872</b>Born in Karstula, Finland</div>
+        <div><b>1880s</b>Emigrates to Thunder Bay as a teen</div>
+        <div><b>1904</b>Homesteads 40 acres in Markham</div>
+        <div><b>1957</b>Dies; buried in Markham Cemetery</div>
+        <div><b>2001</b>The Friends take the deed</div>
+        <div><b>2026</b>25 years of the Friends</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap band">
+  <div class="eyebrow">Our mission</div>
+  <p class="mission">To restore and preserve the pioneer farmstead; to operate it as an educational tool that carries on Finnish immigrant culture and history; to offer hands-on learning outdoors as an open-air museum; and to make use of existing historical resources.</p>
+</section>
+
+<section class="wrap band" id="visit" style="border-top:1px solid var(--line)">
+  <div class="signrow" style="grid-template-columns:1fr">
+    <div style="display:grid;gap:12px">
+      <div class="eyebrow">Plan your visit</div>
+      <h2>Getting here</h2>
+      <p style="color:#3D3C36;max-width:56ch">The entrance is a grass lane off Markham Rd, marked by the carved Eli Wirtanen Pioneer Farm sign at the road’s edge. Park in the gravel lot beside the lane and walk in.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div><b>Where</b><span>5312 Markham Rd, Makinen, MN 55763</span><span>16 miles south of Biwabik, or 40 miles north of Duluth on the Vermilion Trail (Hwy 4)</span></div>
+    <div><b>When</b><span>Call ahead to plan a visit</span><span>Fall Festival every September</span></div>
+    <div><b>Questions</b><span>218-638-2859</span><span><a href="/contact-us/">Contact the Friends</a></span></div>
+  </div>
+  <div class="strip">
+    <figure><img src="/wp-content/uploads/2017/09/cropped-Header4.jpg" alt="White-tailed deer grazing in a golden hayfield edged with birch" loading="lazy"><figcaption>Deer in the hayfield</figcaption></figure>
+    <figure><img src="/wp-content/uploads/2017/09/cropped-Header8.jpg" alt="A bald eagle perched among pine branches" loading="lazy"><figcaption>A bald eagle in the pines</figcaption></figure>
+    <figure><img src="/wp-content/uploads/2017/09/cropped-Header5.jpg" alt="A rusted tractor seat and iron wheel in tall grass" loading="lazy"><figcaption>Old iron in the tall grass</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap band" id="events" style="border-top:1px solid var(--line)">
+  <div class="eyebrow">Events</div>
+  <div class="event">
+    <div class="date"><div class="m">SEPT</div><div class="d">12</div><div class="y">2026</div></div>
+    <div><h3>Thank you for coming to the Fall Festival</h3><p>This year’s festival celebrated 25 years, with artisans and crafters, horse-drawn wagon rides, baby animals, fresh baking, live music and the Colvin Fire Department. Next year’s date will be posted here. <a href="/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg">See the 2026 poster</a>.</p></div>
+  </div>
+</section>
+
+<section class="wrap band" id="support" style="border-top:1px solid var(--line)">
+  <div class="eyebrow">Support</div>
+  <h2>Keep the farm standing</h2>
+  <div class="cols">
+    <div><span class="big">85+</span><b>Become a member</b><span>Memberships, donations and fundraisers paid for the new barn roof and the main house floor.</span><a href="/contact-us/">Ask about membership</a></div>
+    <div><span class="big">211</span><b>Volunteer</b><span>Volunteer hours logged in the summer of 2009 on the savusauna alone. Most of the work on the farm is done by volunteers.</span><a href="/savusauna/">Read the restoration story</a></div>
+    <div><span class="big">2001</span><b>Donate</b><span>The Friends have owned and cared for the farm since the St. Louis County Historical Society signed over the deed in 2001.</span><a href="/contact-us/">Contact us to give</a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit</span><span><a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function rng(s){return function(){s=(s*9301+49297)%233280;return s/233280;};}
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Stops in walking order. x,y = ground point on the map (drawn from the Friends' own placements).
+  var S=[
+    {k:'outhouse',name:'Outhouse',x:84,y:284,t:'tiny',img:null,
+      p:'The first building past the entrance, just south of the lane. A small log outhouse with two plank doors.'},
+    {k:'woodshed',name:'Wood Shed',x:150,y:310,t:'woodshed',img:null,
+      p:'Log walls on three sides and an open front under a deep gable, built to keep firewood dry.'},
+    {k:'bath',name:'Bath House / Sauna',x:182,y:398,t:'bath',img:'/wp-content/uploads/2017/09/cropped-Header9.jpg',
+      p:'A small white building on the west edge of the grass. The signs beside its window read Bath House and Sauna.'},
+    {k:'barn',name:'Barn',x:215,y:492,t:'barn',img:'/wp-content/uploads/2017/09/cropped-Header1.jpg',
+      p:'A hand-hewn log barn with dovetailed corners and a gambrel roof. The Friends put a new roof on the barn, paid for by memberships, donations and fundraisers.'},
+    {k:'pen',name:'Baby Animal Pen',x:305,y:428,t:'pen',img:'/wp-content/uploads/2017/09/cropped-Header6.jpg',
+      p:'A low log enclosure out on the lawn, between the Barn and the Tool Shop.'},
+    {k:'equip',name:'Farm Equipment Shed',x:349,y:586,t:'open',img:null,
+      p:'An open-sided shed on the south edge of the clearing, full of horse-era implements: iron wheels, a seed drill and more.'},
+    {k:'well',name:'Well House',x:395,y:394,t:'well',img:null,
+      p:'A small board building over the farm’s well, standing on its own in the open lawn.'},
+    {k:'horse',name:'Horse Barn',x:472,y:322,t:'horse',img:null,
+      p:'Board siding over log lower walls, at the northeast edge of the clearing among the pines.'},
+    {k:'pump',name:'Hand Pump',x:331,y:382,t:'pump',img:null,
+      p:'The farm’s hand pump, out on the lawn south of the Tool Shop.'},
+    {k:'tool',name:'Tool Shop / Wood Storage',x:275,y:350,t:'shed',img:null,
+      p:'One building with two doors: the Tool Shop on the east side and Wood Storage on the south. Volunteers found spikes and bolts when they excavated the tool shed, and a few are still unidentified.'},
+    {k:'carving',name:'Wood Carving',x:311,y:293,t:'carving',img:null,
+      p:'A carved figure leaning on a long-handled logging tool, by John Gage. Donated by Joan Hakala in memory of Mike Hakala (1947–2014).'},
+    {k:'res',name:'Residence',x:335,y:276,t:'house',img:'/wp-content/uploads/2017/09/cropped-Header3.jpg',
+      p:'Eli’s house is a fine example of Finnish log construction: hand-hewn pine logs chinked with strips of pine, the joints dovetailed. It stays cool on the hottest summer days. The doorways are as small as Eli was short, and none of his buildings were ever painted, inside or out.'},
+    {k:'guest',name:'Guest House',x:242,y:270,t:'cabin',img:'/wp-content/uploads/2017/09/cropped-Header10.jpg',
+      p:'A small log cabin with dovetailed corners, just west of the Residence, its door facing the house.'},
+    {k:'cellar',name:'Root Cellar',x:226,y:150,t:'cellar',img:null,
+      p:'Dug into the bank under the pines north of the parking lot, with a plank entry.'}
+  ];
+
+  // ---------- illustrated map ----------
+  var svg=document.getElementById('map');
+  var clearing=[[130,262],[220,248],[310,290],[380,330],[460,310],[520,350],[600,440],[720,480],[770,560],[680,650],[500,650],[400,592],[280,610],[180,548],[160,430],[120,340]];
+  el('rect',{x:0,y:0,width:820,height:700,fill:'#A7B690'},svg);
+  el('polygon',{points:clearing.map(function(p){return p.join(',')}).join(' '),fill:'#DDE4CC'},svg);
+  // mown lawn vs hayfield: a slightly richer green near the buildings
+  el('ellipse',{cx:300,cy:400,rx:170,ry:130,fill:'#D6E0C2',opacity:.8},svg);
+  el('ellipse',{cx:382,cy:470,rx:20,ry:50,fill:'#D2CBA2',transform:'rotate(-8 382 470)'},svg);
+  // road, lake hint
+  el('rect',{x:48,y:0,width:22,height:700,fill:'#DCD3BD'},svg);
+  var rl=el('text',{transform:'translate(64 440) rotate(-90)','text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':2,fill:'#6E6450'},svg);rl.textContent='MARKHAM RD';
+  var lk=el('text',{transform:'translate(44 250) rotate(-90)','text-anchor':'middle','font-family':'Gloock,serif','font-size':12,'font-style':'italic',fill:'#4E6272'},svg);lk.textContent='← Little Markham Lake';
+  // parking + lane with rope-fence posts + carved sign
+  el('rect',{x:96,y:178,width:84,height:72,rx:12,fill:'#D2CAB6'},svg);
+  var pt=el('text',{x:138,y:219,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,'letter-spacing':1.5,fill:'#7A7058'},svg);pt.textContent='PARKING';
+  var lane='M70 256 C 110 258, 170 266, 228 278 S 262 292, 272 312';
+  el('path',{d:lane,fill:'none',stroke:'#E6DFC8','stroke-width':14,'stroke-linecap':'round'},svg);
+  [[92,247],[112,249],[132,252],[92,266],[112,268],[132,271]].forEach(function(p){el('circle',{cx:p[0],cy:p[1],r:2.2,fill:'#6B5A45'},svg);});
+  el('rect',{x:73,y:236,width:20,height:11,rx:1,fill:'#9A6A3A',stroke:'#5B3E22','stroke-width':1},svg);
+  el('rect',{x:75,y:247,width:2,height:6,fill:'#5B3E22'},svg);el('rect',{x:89,y:247,width:2,height:6,fill:'#5B3E22'},svg);
+  // pines outside the clearing
+  function inside(x,y){var c=false;for(var i=0,j=clearing.length-1;i<clearing.length;j=i++){var a=clearing[i],b=clearing[j];if(((a[1]>y)!=(b[1]>y))&&(x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0]))c=!c;}return c;}
+  var r=rng(23),trees=[],n=0,t=0;
+  function clearOf(x,y){for(var i=0;i<S.length;i++){if(Math.hypot(x-S[i].x,y-S[i].y+10)<32)return false;}return true;}
+  while(n<330&&t<12000){t++;var x=72+r()*560,y=90+r()*540,s=7+r()*8;
+    if(inside(x,y)||inside(x+s,y)||inside(x-s,y))continue;
+    if(x>90&&x<186&&y>168&&y<258)continue;
+    if(x>64&&x<200&&y>228&&y<300)continue;
+    if(!clearOf(x,y))continue;
+    n++;trees.push([x,y,s,r()]);}
+  // a few big pines in the lawn
+  [[360,244],[296,250],[405,494],[455,406]].forEach(function(p){trees.push([p[0],p[1],15,0.3]);});
+  trees.sort(function(a,b){return a[1]-b[1]});
+  var tg=el('g',{},svg);
+  trees.forEach(function(tr){var x=tr[0],y=tr[1],s=tr[2],c=tr[3]>.5?'#2C5240':'#1E3A2F';
+    el('polygon',{points:x+','+(y-s*2)+' '+(x-s)+','+(y-s*.2)+' '+(x+s)+','+(y-s*.2),fill:c},tg);
+    el('polygon',{points:x+','+(y-s*1.3)+' '+(x-s*1.15)+','+y+' '+(x+s*1.15)+','+y,fill:c},tg);});
+  // suggested walk
+  var route=[[138,250]].concat(S.map(function(s){return [s.x,s.y+6]})).concat([[180,214]]);
+  var d='M'+route[0].join(' ');for(var i=1;i<route.length;i++){d+=' L'+route[i].join(' ');}
+  el('path',{d:d,fill:'none',stroke:'#1E3A2F','stroke-width':2,'stroke-dasharray':'2 7','stroke-linecap':'round','stroke-linejoin':'round',opacity:.55},svg);
+  // labels
+  var hf=el('text',{x:600,y:560,'text-anchor':'middle','font-family':'Gloock,serif','font-size':20,'font-style':'italic',fill:'#5E6B4A'},svg);hf.textContent='Hayfield';
+  var na=el('g',{transform:'translate(584 124)'},svg);el('circle',{r:17,fill:'#F1F2EE',opacity:.94},na);el('polygon',{points:'0,-11 6,6 0,2 -6,6',fill:'#1E3A2F'},na);var nt=el('text',{y:-21,'text-anchor':'middle','font-family':'Karla,sans-serif','font-size':11,'font-weight':700,fill:'#1E3A2F'},na);nt.textContent='N';
+
+  // building icons, anchored at the ground point (bottom centre)
+  var LOG='#6B5A45',DARK='#3D3227',SH='#8E897C',GREEN='#3F7D5C',WIN='#E6E2D2';
+  function draw(g,t){
+    var R=function(pts,f){el('polygon',{points:pts,fill:f},g)},B=function(x,y,w,h,f){el('rect',{x:x,y:y,width:w,height:h,fill:f},g)};
+    switch(t){
+      case 'house':R('-34,-30 0,-50 34,-30',SH);B(-30,-30,60,30,LOG);B(-22,-22,9,9,WIN);B(12,-22,9,9,WIN);B(-4,-16,9,16,DARK);B(12,-46,5,10,'#8A4A3A');return 52;
+      case 'cabin':R('-18,-20 0,-32 18,-20',SH);B(-15,-20,30,20,LOG);B(-4,-13,8,13,DARK);return 34;
+      case 'barn':R('-30,-26 -22,-44 0,-54 22,-44 30,-26',GREEN);B(-26,-26,52,26,'#5E4E3C');B(-5,-44,10,10,DARK);B(-7,-16,14,16,DARK);return 56;
+      case 'horse':R('-24,-22 -2,-38 4,-34 24,-22',SH);B(-21,-22,42,22,'#7A6A55');B(-21,-8,42,8,'#5E4E3C');B(-6,-15,11,15,DARK);return 40;
+      case 'shed':R('-18,-18 0,-30 18,-18',SH);B(-15,-18,30,18,LOG);B(-11,-12,7,12,DARK);B(5,-11,6,6,WIN);return 32;
+      case 'bath':R('-13,-18 0,-28 13,-18','#7D7A70');B(-11,-18,22,18,'#EEF0EC');el('rect',{x:-11,y:-18,width:22,height:18,fill:'none',stroke:'#9FA69A','stroke-width':1},g);B(-3,-12,6,6,'#5E6A62');return 30;
+      case 'woodshed':R('-14,-16 0,-27 14,-16',SH);B(-12,-16,24,16,LOG);B(-7,-12,14,12,'#2A241D');return 29;
+      case 'well':R('-9,-12 0,-20 9,-12',SH);B(-7,-12,14,12,'#7A6A55');B(-2,-8,4,8,DARK);return 22;
+      case 'tiny':R('-9,-12 0,-19 9,-12',SH);B(-7,-12,14,12,LOG);B(-5,-9,4,9,DARK);B(1,-9,4,9,DARK);return 21;
+      case 'pen':el('rect',{x:-16,y:-12,width:32,height:12,fill:'none',stroke:LOG,'stroke-width':3},g);R('6,-12 12,-18 18,-12',SH);return 20;
+      case 'open':R('-22,-18 22,-18 20,-24 -20,-24','#8E9A92');[-18,-6,6,18].forEach(function(x){B(x-1,-18,2,18,'#7A6A55')});el('circle',{cx:-8,cy:-5,r:5,fill:'none',stroke:'#8A4A2A','stroke-width':1.5},g);el('circle',{cx:9,cy:-5,r:5,fill:'none',stroke:'#8A4A2A','stroke-width':1.5},g);return 26;
+      case 'cellar':el('path',{d:'M-20 0 Q 0 -26 20 0 Z',fill:'#8B8062'},g);R('-7,-10 0,-17 7,-10',SH);B(-5,-10,10,10,'#7A6A55');B(-2,-7,4,7,DARK);return 20;
+      case 'pump':B(-1.5,-16,3,16,'#2F4A3E');el('path',{d:'M1 -13 q 7 -2 9 3',fill:'none',stroke:'#2F4A3E','stroke-width':2},g);B(-4,-2,8,2,'#2F4A3E');return 18;
+      case 'carving':el('circle',{cx:0,cy:-15,r:3,fill:'#8A5A32'},g);B(-3,-12,6,12,'#8A5A32');B(-5,0,10,2,'#6B4A2A');return 18;
+    }
+  }
+  var marks={},pinLayer=el('g',{},svg),iconLayer=el('g',{},svg);
+  S.slice().sort(function(a,b){return a.y-b.y}).forEach(function(s){
+    var g=el('g',{transform:'translate('+s.x+' '+s.y+')'},iconLayer);s.h=draw(g,s.t);
+  });
+  S.forEach(function(s,i){
+    var g=el('g',{class:'pin',tabindex:0,role:'button','aria-label':(i+1)+'. '+s.name,style:'cursor:pointer;outline:none'},pinLayer);
+    var px=s.x+12,py=s.y-s.h-6;
+    el('line',{x1:s.x+4,y1:s.y-s.h+4,x2:px,y2:py,stroke:'#1E3A2F','stroke-width':1.2,opacity:.6},g);
+    var c=el('circle',{cx:px,cy:py,r:11,fill:'#1E3A2F',stroke:'#F1F2EE','stroke-width':2},g);
+    var tx=el('text',{x:px,y:py+4.5,'text-anchor':'middle','font-family':'Gloock,serif','font-size':12,fill:'#F1F2EE'},g);tx.textContent=i+1;
+    var lw=s.name.length*6.4+18,lx=Math.min(px+14,600-lw);
+    var tag=el('g',{opacity:0},g);
+    el('rect',{x:lx,y:py-10,width:lw,height:20,rx:10,fill:'#1E3A2F'},tag);
+    var tt=el('text',{x:lx+9,y:py+4,'font-family':'Karla,sans-serif','font-size':12,'font-weight':700,fill:'#F1F2EE'},tag);tt.textContent=s.name;
+    var ti=el('title',{},g);ti.textContent=(i+1)+'. '+s.name;
+    // hit area covers the building too
+    el('rect',{x:s.x-24,y:s.y-s.h-18,width:52,height:s.h+22,fill:'transparent'},g);
+    marks[s.k]={c:c,tag:tag,g:g};
+    g.addEventListener('click',function(){go(s.k)});
+    g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(s.k)}});
+  });
+
+  // ---------- list + chips ----------
+  var list=document.getElementById('stops'),chips=document.getElementById('chips');
+  list.innerHTML=S.map(function(s,i){
+    var ph=s.img?'<img class="ph" src="'+s.img+'" alt="'+s.name+'" loading="lazy">':'<div class="ph none">Photo coming</div>';
+    return '<article class="stop" id="stop-'+s.k+'" data-k="'+s.k+'"><span class="n">'+(i+1)+'</span><div><h3>'+s.name+'</h3><p>'+s.p+'</p></div>'+ph+'</article>';
+  }).join('')+'<p class="also"><b>Also on the farm:</b> Eli’s savusauna, the smoke sauna volunteers rebuilt in 2008 and 2009 with his original soot-blackened benches. <a href="/savusauna/">Read the restoration story</a>. It will join the map soon.</p>';
+  chips.innerHTML=S.map(function(s,i){return '<button type="button" id="chip-'+s.k+'" data-k="'+s.k+'">'+(i+1)+' · '+s.name+'</button>';}).join('');
+  chips.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.k)})});
+
+  var cur=null,lock=0;
+  function set(k){if(k===cur)return;cur=k;
+    Object.keys(marks).forEach(function(j){var on=j===k;marks[j].c.setAttribute('fill',on?'#3F7D5C':'#1E3A2F');marks[j].c.setAttribute('r',on?13:11);marks[j].tag.setAttribute('opacity',on?1:0);marks[j].g.setAttribute('aria-pressed',on);});
+    if(marks[k])pinLayer.appendChild(marks[k].g);
+    list.querySelectorAll('.stop').forEach(function(e){e.classList.toggle('on',e.dataset.k===k)});
+    chips.querySelectorAll('button').forEach(function(b){var on=b.dataset.k===k;b.classList.toggle('on',on);if(on&&chips.offsetParent){var l=b.offsetLeft-chips.clientWidth/2+b.offsetWidth/2;chips.scrollTo({left:l,behavior:reduce?'auto':'smooth'});}});
+  }
+  function go(k){set(k);lock=Date.now();
+    var e=document.getElementById('stop-'+k),side=document.querySelector('.side');
+    var narrow=innerWidth<=900,off=narrow?side.offsetHeight+10:28;
+    window.scrollTo({top:window.scrollY+e.getBoundingClientRect().top-off,behavior:reduce?'auto':'smooth'});}
+  function spy(){if(Date.now()-lock<800)return;
+    var side=document.querySelector('.side'),narrow=innerWidth<=900,line=narrow?side.getBoundingClientRect().bottom+innerHeight*.18:innerHeight*.4,best=null;
+    list.querySelectorAll('.stop').forEach(function(e){var r=e.getBoundingClientRect();if(r.top<=line&&r.bottom>line-30)best=e.dataset.k;});
+    if(best)set(best);}
+  addEventListener('scroll',spy,{passive:true});
+  set('outhouse');
+})();
+</script>
+</body>
+</html>
