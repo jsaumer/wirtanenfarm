@@ -268,7 +268,15 @@ footer a{color:#DDE3D8}
   <nav class="links" aria-label="Main"><a href="#farmyard">The Farmyard</a><a href="#eli">Eli’s Story</a><a href="#savusauna">Savusauna</a><a href="#events">Events</a><a href="#support">Support</a><a class="btn" href="#visit">Plan a visit</a></nav>
 </div>
 
-<header class="hero">
+<header class="hero" id="site-header">
+<script>
+/* Rotating header: same 10 farm photos, picked at random on each page load, like the current site */
+(function(){
+  var imgs=[1,2,3,4,5,6,7,8,9,10];
+  var n=imgs[Math.floor(Math.random()*imgs.length)];
+  document.getElementById('site-header').style.backgroundImage="url(/wp-content/uploads/2017/09/cropped-Header"+n+".jpg)";
+})();
+</script>
   <div class="wrap"><div class="in">
     <div class="eyebrow">Wirtanen Pioneer Farm · Est. 1904</div>
     <h1>Experience <em>Old World</em> Serenity.</h1>
