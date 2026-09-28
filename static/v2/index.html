@@ -278,12 +278,15 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .more a{font-weight:700}
 @media (max-width:900px){.newsgrid{grid-template-columns:1fr}}
 /* news sidebar: three random square photos */
-.side-pics{display:grid;gap:14px}
-.side-pics img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;background:var(--meadow)}
-@media (max-width:900px){.side-pics{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+/* three random farm photos in a row at the foot of the page */
+.farmpics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding-block:8px 56px}
+.farmpics img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block;background:var(--meadow)}
+@media (max-width:600px){.farmpics{gap:8px;padding-block:4px 36px}.farmpics img{border-radius:8px}}
 .newsaside{display:grid;gap:14px;align-content:start}
+#sidevideo{display:grid;gap:26px}
 .side-vid{margin:0;display:grid;gap:8px}
 .side-vid .vid{margin-top:0}
+.vid.tall{aspect-ratio:9/16;max-width:340px}
 .side-vid figcaption{display:grid;gap:2px}
 .side-vid figcaption b{font:400 19px/1.2 var(--serif);color:var(--pine)}
 .side-vid figcaption b a{color:var(--pine);text-decoration:underline;text-decoration-color:var(--lichen);text-underline-offset:3px}
@@ -480,7 +483,7 @@ footer a{color:#DDE3D8}
   <h2>From the farm</h2>
   <div class="newsgrid">
     <div class="newslist" id="newslist"></div>
-<aside class="newsaside" id="newsaside" aria-label="Video and photos from the farm"><div id="sidevideo"></div><div id="sidepics"></div></aside>
+<aside class="newsaside" id="newsaside" aria-label="Videos from the farm"><div id="sidevideo"></div></aside>
   </div>
   <p class="more"><a href="https://www.facebook.com/WirtanenFarm" target="_blank" rel="noopener">More news on our Facebook page</a></p>
 </section>
@@ -564,6 +567,8 @@ footer a{color:#DDE3D8}
   </div>
 </section>
 </main>
+
+<div class="wrap farmpics" id="farmpics" aria-label="Photos from the farm"></div>
 
 <footer><div class="wrap"><span>© 2026 Friends of the Wirtanen Pioneer Farm · a nonprofit · Some photos: <a href="https://commons.wikimedia.org/wiki/Category:Eli_Wirtanen_Pioneer_Farm">Minnesota Historical Society</a>, CC BY 4.0</span><span><a href="/contact-us/">Contact</a> · <a href="https://www.facebook.com/WirtanenFarm">Facebook</a> · <a href="/">Current website</a></span></div></footer>
 
@@ -845,7 +850,7 @@ var EVENTS=[
    NEWS: newest first. The homepage shows the latest four; older ones sit behind a button.
    kind: 'Kiitos' (thank-you), 'Press', or 'Event'
    poster: optional festival poster shown small beside the post
-   video: {id, thumb, length} plays a YouTube video right in the page
+   video: {id, thumb, length} plays a YouTube video right in the page; tall:true for a vertical Short
    pin: true keeps a post at the top of the list (shown as Featured)
    side: true shows a video post in the sidebar, above the photos, instead of in the list
    draft: a private reminder; it is never shown on the page
@@ -856,7 +861,7 @@ var NEWS=[
     video:{id:'sDUuYv9flDk', thumb:'img/yt-sDUuYv9flDk.jpg', length:'2:53'} },
   { date:'2016-09-10', kind:'Video', side:true, title:'Sara Pajunen and Karen Kiviluoma sing “Oi Emma Emma”',
     text:'Sara Pajunen and Karen Kiviluoma sing the old Finnish tune “Oi Emma Emma” at the 2016 Fall Festival. We were so honored to hear it. Karen was a mainstay of the local Finnish community, and we remember her with gratitude.',
-    video:{id:'m9xidoipCyA', thumb:'img/yt-m9xidoipCyA.jpg', length:'0:57'} },
+    video:{id:'m9xidoipCyA', thumb:'img/yt-m9xidoipCyA.jpg', length:'0:57', tall:true} },
   { date:'2026-09-12', kind:'Event', title:'Kiitos for the 25th Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
     text:'Kiitos! Thank you to everyone who came out on September 12 to celebrate the 25th Wirtanen Farm Fall Festival. A special thank-you to the artisans and crafters, the “Strawberry Fields” wagon rides, Scott’s Baby Animals, Jon Niemi and Sheila Coughlin for the music, Karen Lobb Cleghorn for her book signing, the Colvin Fire Department, and every volunteer who helped make the day. Twenty-five years of festivals would not be possible without you. Paljon kiitoksia, and see you next year on Saturday, September 11.' },
   { date:'2026-08-13', kind:'Kiitos', title:'Natural Harvest Food Co-op customers raise $1,961.61',
@@ -896,7 +901,7 @@ var NEWS=[
   var SIDE=NEWS.filter(function(n){return n.side&&n.video;});
   var sv=document.getElementById('sidevideo');
   if(sv)sv.innerHTML=SIDE.map(function(n){var q=n.title.replace(/"/g,'&quot;');
-    return '<figure class="side-vid"><div class="vid" data-id="'+n.video.id+'" data-title="'+q+'"><button type="button" class="vplay" aria-label="Play video: '+q+'"><img src="'+n.video.thumb+'" alt="" loading="lazy"><span class="vbtn" aria-hidden="true"></span><span class="vlen">'+n.video.length+'</span></button></div>'+
+    return '<figure class="side-vid"><div class="vid'+(n.video.tall?' tall':'')+'" data-id="'+n.video.id+'" data-title="'+q+'"><button type="button" class="vplay" aria-label="Play video: '+q+'"><img src="'+n.video.thumb+'" alt="" loading="lazy"><span class="vbtn" aria-hidden="true"></span><span class="vlen">'+n.video.length+'</span></button></div>'+
       '<figcaption><b><a href="https://www.youtube.com/watch?v='+n.video.id+'" target="_blank" rel="noopener">'+n.title+'</a></b><span>'+n.text+'</span></figcaption></figure>';}).join('');
   var LIST=NEWS.filter(function(n){return !n.side;});
   LIST=LIST.filter(function(n){return n.pin;}).concat(LIST.filter(function(n){return !n.pin;}));
@@ -916,7 +921,7 @@ var NEWS=[
 </script>
 
 <script>
-/* News sidebar: two different farm photos, picked at random on each visit */
+/* Foot of the page: three different farm photos, picked at random on each visit */
 (function(){
   var H='/wp-content/uploads/2017/09/cropped-Header';
   var pool=[
@@ -928,8 +933,8 @@ var NEWS=[
   var hero=(document.getElementById('site-header')||{style:{}}).style.backgroundImage||'';
   pool=pool.filter(function(p){return hero.indexOf(p[0])<0;});
   for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=pool[i];pool[i]=pool[j];pool[j]=t;}
-  var box=document.getElementById('sidepics')||document.getElementById('newsaside');if(!box)return;
-  box.innerHTML='<div class="side-pics">'+pool.slice(0,2).map(function(p){return '<img src="'+p[0]+'" alt="'+p[1]+'" loading="lazy">';}).join('')+'</div>';
+  var box=document.getElementById('farmpics');if(!box)return;
+  box.innerHTML=pool.slice(0,3).map(function(p){return '<img src="'+p[0]+'" alt="'+p[1]+'" loading="lazy">';}).join('');
 })();
 </script>
 
