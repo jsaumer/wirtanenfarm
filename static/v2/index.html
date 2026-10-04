@@ -847,7 +847,8 @@ var EVENTS=[
 
 <script>
 /* ============================================================
-   NEWS: newest first. The homepage shows the latest four; older ones sit behind a button.
+   NEWS: shown newest first by date, whatever order they are written in here.
+   The homepage shows the latest four; older ones sit behind a button.
    kind: 'Kiitos' (thank-you), 'Press', or 'Event'
    poster: optional festival poster shown small beside the post
    video: {id, thumb, length} plays a YouTube video right in the page; tall:true for a vertical Short
@@ -864,15 +865,18 @@ var NEWS=[
     video:{id:'Y2_ss_jdwmg', thumb:'img/yt-Y2_ss_jdwmg.jpg', length:'2:53'} },
   { date:'2026-09-12', kind:'Event', title:'Kiitos for the 25th Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
     text:'Kiitos! Thank you to everyone who came out on September 12 to celebrate the 25th Wirtanen Farm Fall Festival. A special thank-you to the artisans and crafters, the “Strawberry Fields” wagon rides, Scott’s Baby Animals, Jon Niemi and Sheila Coughlin for the music, Karen Lobb Cleghorn for her book signing, the Colvin Fire Department, and every volunteer who helped make the day. Twenty-five years of festivals would not be possible without you. Paljon kiitoksia, and see you next year on Saturday, September 11.' },
-  { date:'2026-08-13', kind:'Kiitos', title:'Natural Harvest Food Co-op customers raise $1,961.61',
-    text:'Through the co-op’s Change Within Reach program, customers raised $1,961.61 for the Friends in July. The funds go to restoring and preserving the pioneer farmstead.',
-    link:'https://www.facebook.com/WirtanenFarm', linkText:'See the post on Facebook' },
   { date:'2026-08-29', kind:'Press', title:'Celebrating 25 years of the Wirtanen Farm Fall Festival', poster:'/wp-content/uploads/2026/08/Wirtanen-Festival-Poster-2026.jpg',
     text:'The Friends announced the 25th annual Fall Festival, set for Saturday, September 12, with artisans, wagon rides, live music and a book signing.',
     draft:'Press release: confirm the date and fill in the quote before posting' },
+  { date:'2026-08-13', kind:'Kiitos', title:'Natural Harvest Food Co-op customers raise $1,961.61',
+    text:'Through the co-op’s Change Within Reach program, customers raised $1,961.61 for the Friends in July. The funds go to restoring and preserving the pioneer farmstead.',
+    link:'https://www.facebook.com/WirtanenFarm', linkText:'See the post on Facebook' },
   { date:'2026-06-08', kind:'Press', title:'Discover the Range features the farm',
     text:'The Iron Range’s Discover the Range shared a video visit to the farmstead, calling it “a historic Minnesota treasure that anyone can visit for free” and crediting the Friends for maintaining and restoring it.',
     link:'https://www.facebook.com/reel/1696593431656212', linkText:'Watch the video on Facebook' },
+  { date:'2026-04-27', kind:'Press', title:'Holding On To History: the farm relies on volunteers to preserve the past',
+    text:'Northern News Now’s Dave Anderson came back to the farmstead for his “Holding On To History” series, 25 years after it was nearly sold. Volunteer Thomas Raihala recalls the agreement between Eli and a neighboring family to keep his place up and running, and says anyone who wants to be a member is welcome, from the area or not. Darlene Saumer, the Friends’ longtime volunteer coordinator, explains that the horse barn is too far gone to repair and has to come down. The story also notes how the Friends raise money for upkeep the old-fashioned way, through things like bake sales.',
+    link:'https://www.northernnewsnow.com/2026/04/28/holding-history-wirtanen-pioneer-farm-relies-volunteers-preserve-past/', linkText:'Read and watch the story on Northern News Now' },
   { date:'2025-09-24', kind:'Press', title:'WDIO’s The Lift: a look into Finnish immigrant life',
     text:'WDIO’s William Lien visited the farmstead for The Lift. He talked with families who have come for years and now bring their own children, Friends volunteer Ron Pekkarinen, whose family cared for Eli and his farm, Finn sheep raiser and potter Jayme Meyer, and woodworker Dale Torma. The story also recalls how Tom Rukavina helped keep the farm from being sold.',
     link:'https://www.wdio.com/lift-online/eli-wirtanen-pioneer-farm-offers-a-look-into-finnish-immigrants/', linkText:'Read the story on WDIO' },
@@ -904,6 +908,7 @@ var NEWS=[
     return '<figure class="side-vid"><div class="vid'+(n.video.tall?' tall':'')+'" data-id="'+n.video.id+'" data-title="'+q+'"><button type="button" class="vplay" aria-label="Play video: '+q+'"><img src="'+n.video.thumb+'" alt="" loading="lazy"><span class="vbtn" aria-hidden="true"></span><span class="vlen">'+n.video.length+'</span></button></div>'+
       '<figcaption><b><a href="https://www.youtube.com/watch?v='+n.video.id+'" target="_blank" rel="noopener">'+n.title+'</a></b><span>'+n.text+'</span></figcaption></figure>';}).join('');
   var LIST=NEWS.filter(function(n){return !n.side;});
+  LIST.sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:0;});
   LIST=LIST.filter(function(n){return n.pin;}).concat(LIST.filter(function(n){return !n.pin;}));
   el.innerHTML=LIST.map(function(n,i){
     return '<article class="news'+(n.poster?' has-poster':'')+(n.pin?' pinned':'')+'"'+(i>=4?' hidden':'')+'><div class="nbody"><div class="nmeta">'+(n.pin?'<span class="kind k-featured">Featured</span>':'')+'<span class="kind k-'+n.kind.toLowerCase().replace(/\s+/g,'-')+'">'+n.kind+'</span><time datetime="'+n.date+'">'+fmt(n.date)+'</time></div>'+
