@@ -1,26 +1,31 @@
-# wirtanenfarm.org — Hugo site
+# wirtanenfarm.org
 
-Static Hugo port of the WordPress site, matching the Hemingway theme 1:1
-(same CSS, fonts, and images at their original /wp-content/ paths).
+The website of the Friends of the Wirtanen Pioneer Farm. The pages are plain
+HTML files in `static/`; Hugo only copies them into `public/`.
+
+## Pages
+- `static/index.html`: the homepage (farmstead map, events, Eli's story, news,
+  savusauna, getting there).
+- `static/savusauna/index.html`: Norm and Harold's restoration notes.
+- `static/contact-us/index.html`: contact details.
+- `static/404.html`: the "page not found" page.
+- `static/sitemap.xml`: add a line when a page is added.
 
 ## Editing
-- Page content: `content/*.html` (raw HTML bodies extracted from WordPress).
-- Menu, title, tagline: `hugo.toml`.
-- Layout/header/footer: `layouts/_default/baseof.html` (includes the
-  rotating-header script and the Rybbit analytics tag).
-- Images: `static/wp-content/uploads/` — e.g. drop next year's poster in
-  `static/wp-content/uploads/<year>/<month>/` and update the link in
-  `content/_index.html`.
+- Events: the `EVENTS` block near the end of `static/index.html`. Set the dates
+  each year; the festival works out its own next date.
+- News: the `NEWS` block below it. Items show newest first by date.
+- Farmstead stops: the `S` list in the map script.
+- Photos: `static/img/`. Give a replaced photo a new file name, because the
+  CDN keeps serving the old file under the old name.
+- Festival posters: `static/wp-content/uploads/<year>/<month>/`.
 
 ## Build & deploy
     ./deploy.sh
-Builds with Hugo and rsyncs `public/` to `/var/www/wirtanenfarm-static`
-(currently served as a preview on port 8081 by
-`/etc/nginx/sites-available/wirtanenfarm-hugo-preview`).
+Builds with Hugo, copies `public/` to `/var/www/wirtanenfarm-static`, and
+pushes committed changes to GitHub.
 
-## Going live
-Point the main nginx site's root at `/var/www/wirtanenfarm-static` (or move
-this server block to port 80) — Pangolin/Cloudflare need no changes.
-WordPress stays untouched at /var/www/html/wordpress for instant rollback.
-
-Theme CSS © Anders Norén (Hemingway, GPL). Drop Shadow Boxes CSS GPL.
+## Old addresses
+nginx redirects the old site's pages (`/eli-wirtanen/`, `/location/`,
+`/about-us/`) and the `/v2/` preview addresses to their new homes. The rules
+are in `/etc/nginx/sites-available/wirtanenfarm-static`.

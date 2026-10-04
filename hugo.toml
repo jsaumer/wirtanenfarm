@@ -1,40 +1,7 @@
 baseURL = 'https://wirtanenfarm.org/'
 locale = 'en-US'
-title = 'Friends of the Wirtanen Farm'
-disableKinds = ['taxonomy', 'term', 'section', 'rss']
-
-[params]
-  description = 'Experience Old World Serenity'
-  rybbitSiteId = '3eff1c5d1561'
-
-[[menus.main]]
-name = 'Home'
-url = '/'
-weight = 10
-[[menus.main]]
-name = 'Eli Wirtanen'
-url = '/eli-wirtanen/'
-weight = 20
-[[menus.main]]
-name = 'Savusauna Restoration'
-url = '/savusauna/'
-weight = 30
-[[menus.main]]
-name = 'Location'
-url = '/location/'
-weight = 40
-[[menus.main]]
-name = 'Facebook'
-url = 'https://www.facebook.com/WirtanenFarm'
-weight = 50
-[[menus.main]]
-name = 'Contact'
-url = '/contact-us/'
-weight = 60
-[[menus.main]]
-name = 'About'
-url = '/about-us/'
-weight = 70
-
-[security]
-  allowContent = ['^text/html$']
+title = 'Wirtanen Pioneer Farm'
+# The pages are plain files in static/. Hugo only copies them into public/.
+# 'home' stays enabled because Hugo crashes with it disabled; with no template
+# it prints a "found no layout file" warning on each build, which is harmless.
+disableKinds = ['page', 'section', 'taxonomy', 'term', 'rss', 'sitemap', '404']
