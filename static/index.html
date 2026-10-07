@@ -186,7 +186,7 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .fwhen{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;background:var(--fpill);color:var(--fpill-ink);padding:4px 10px;border-radius:4px}
 .fdate{display:flex;align-items:baseline;gap:10px;color:var(--fink)}
 .fdate .fm{font-weight:700;letter-spacing:.14em;font-size:15px}
-.fdate .fd{font:400 72px/0.9 var(--serif)}
+.fdate .fd{font:700 60px/0.9 var(--sans);font-variant-numeric:lining-nums}
 .fdate .fy{font-size:16px;font-weight:700}
 .featured h2{font-size:clamp(30px,3.6vw,44px);color:var(--fink)}
 .fmeta{font-size:17px;font-weight:700;color:var(--fsub)}
@@ -202,6 +202,11 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .lineup b{font:400 20px/1.2 var(--serif);color:var(--fink)}
 .lineup span{font-size:15px;color:var(--fsub)}
 .fblurb{font:400 24px/1.35 var(--serif);color:var(--fink);max-width:30ch}
+.fshow{display:grid;gap:10px}
+.fhead{font:400 clamp(30px,3.4vw,44px)/1.08 var(--serif);color:var(--fink);text-wrap:balance}
+.fhead em{font-style:italic;color:var(--faccent)}
+.fsub{font-size:16px;color:var(--fsub)}
+.fart{display:block;width:100%;max-width:560px;height:auto;margin-top:6px}
 .fposter{display:grid;gap:8px;text-decoration:none;color:var(--fink);font-weight:700;font-size:14px}
 .fposter img{width:100%;border-radius:4px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55);transform:rotate(1.5deg);transition:transform .2s}
 .fposter:hover img{transform:rotate(0)}
@@ -344,7 +349,7 @@ body[data-tone="maple"]{--fbg:#EFDCCB;--fsub:#5A3420;--fpill:#A5482A;--fpill-ink
 .event{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
 .date{width:120px;border-radius:10px;overflow:hidden;text-align:center;border:1px solid var(--line)}
 .date .m{background:var(--roof);color:#FFF;font-weight:700;letter-spacing:.12em;font-size:13px;padding:5px}
-.date .d{font:400 52px/1 var(--serif);color:var(--pine);padding:10px 0 2px}
+.date .d{font:700 44px/1 var(--sans);font-variant-numeric:lining-nums;color:var(--pine);padding:12px 0 4px}
 .date .y{font-size:13px;color:var(--muted);padding-bottom:8px}
 .event h3{font-size:28px;margin-bottom:6px}
 .event p{color:#3D3C36}
@@ -751,6 +756,8 @@ footer a{color:#DDE3D8}
    - place/address: for events away from the farm (directions and calendar use the address)
    - start/end: 24-hour local times, e.g. '10:00' and '16:00'
    - rule: 'second-saturday-september' works out next year's date on its own once this one has passed
+   - headline/sub/art: for an event with no lineup, the large line, the short line under it
+     and a drawing (art:'hall' is the Colvin Town Hall) shown beside the date
    - promoFrom: the day the event starts being featured under the headline
      (leave '' to start 30 days before the event)
    ============================================================ */
@@ -776,6 +783,7 @@ var EVENTS=[
     place:'Colvin Town Hall', address:'Colvin Town Hall, 2579 Vermilion Trail, Makinen, MN 55763',
     admission:'At the Colvin Town Hall',
     poster:'', lineup:[],
+    headline:'Tasty sweets <em>&amp; baked goods</em>', sub:'Two days at the Colvin Town Hall.', art:'hall',
     blurb:'The Friends’ annual fall bake sale: two days of tasty sweets and baked goods at the Colvin Town Hall, 2579 Vermilion Trail.',
     after:'Thank you for supporting this year’s bake sale. Next year’s date will be posted here.' }
 ];
@@ -787,6 +795,7 @@ var EVENTS=[
   var DAY=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var FARM='Wirtanen Pioneer Farm, 5312 Markham Rd, Makinen, MN 55763';
+  var ART={hall:'<svg class="fart" viewBox="0 0 400 130" role="img" aria-label="Drawing of the Colvin Town Hall: a long white building with a brown roof and three cupolas, with pines behind it"><defs><g id="th-pine"><polygon points="0,-60 -12,-25 12,-25"/><polygon points="0,-42 -16,-8 16,-8"/><polygon points="0,-24 -20,10 20,10"/></g><g id="th-cup"><rect x="-8" y="-12" width="16" height="12" fill="#F1F2EE"/><path d="M-6 -9h12M-6 -6h12M-6 -3h12" stroke="#B9BDB0" stroke-width="1"/><polygon points="-12,-12 -4,-20 -2,-27 2,-27 4,-20 12,-12" fill="#9A6248"/></g></defs><g fill="#1E3A2F"><use href="#th-pine" x="14" y="96"/><use href="#th-pine" x="84" y="92"/><use href="#th-pine" x="170" y="88"/><use href="#th-pine" x="252" y="92"/><use href="#th-pine" x="338" y="90"/><use href="#th-pine" x="392" y="98"/></g><g fill="#2C5240"><use href="#th-pine" x="46" y="100"/><use href="#th-pine" x="126" y="94"/><use href="#th-pine" x="212" y="90"/><use href="#th-pine" x="296" y="96"/><use href="#th-pine" x="368" y="102"/></g><rect x="0" y="120" width="400" height="10" fill="#B9B6A6"/><rect x="180" y="12" width="15" height="24" fill="#A5482A"/><polygon points="52,82 86,46 338,46 372,82" fill="#6E4636"/><polygon points="130,50 156,32 288,32 314,50" fill="#7B5040"/><use href="#th-cup" x="102" y="46"/><use href="#th-cup" transform="translate(222 32) scale(1.25)"/><use href="#th-cup" x="326" y="46"/><rect x="60" y="82" width="304" height="38" fill="#F4F5F1"/><path d="M60 92h304M60 101h304M60 110h304" stroke="#DADDD5" stroke-width="1"/><rect x="52" y="80" width="320" height="4" fill="#FFFFFF"/><g fill="#5E6A62" stroke="#FFFFFF" stroke-width="2"><rect x="80" y="96" width="14" height="14"/><rect x="114" y="96" width="14" height="14"/><rect x="148" y="96" width="14" height="14"/><rect x="196" y="96" width="14" height="14"/><rect x="232" y="96" width="14" height="14"/><rect x="268" y="96" width="14" height="14"/></g><polygon points="56,84 76,73 96,84" fill="#6E4636"/><polygon points="65,82 76,76 87,82" fill="#F1F2EE"/><polygon points="300,84 326,70 352,84" fill="#6E4636"/><polygon points="311,82 326,74 341,82" fill="#F1F2EE"/><rect x="306" y="86" width="40" height="6" fill="#F1F2EE" stroke="#6B5A45" stroke-width=".7"/><rect x="319" y="97" width="13" height="23" fill="#5B3E32"/><rect x="322" y="100" width="7" height="9" fill="#B9BDB0"/><path d="M304 92V120M348 92V120M338 108H362M342 108V120M350 108V120M358 108V120" stroke="#24231F" stroke-width="1.2" fill="none"/></svg>'};
   function parse(d){if(!d)return null;var p=d.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
   function fmtTime(t){if(!t)return '';var h=+t.split(':')[0],m=t.split(':')[1];var ap=h>=12?'PM':'AM';h=h%12||12;return h+(m!=='00'?':'+m:'')+' '+ap;}
   function ymd(d){return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
@@ -821,7 +830,7 @@ var EVENTS=[
     if(feat){
       var d=first(feat),days=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
       var when=days<=0?'Today!':days===1?'Tomorrow':days<=14?'In '+days+' days':'Coming up';
-      var lineup=feat.lineup.length?'<ul class="lineup">'+feat.lineup.map(function(l){return '<li><b>'+l[0]+'</b><span>'+l[1]+'</span></li>';}).join('')+'</ul>':'<p class="fblurb">'+(feat.blurb||'')+'</p>';
+      var lineup=feat.lineup.length?'<ul class="lineup">'+feat.lineup.map(function(l){return '<li><b>'+l[0]+'</b><span>'+l[1]+'</span></li>';}).join('')+'</ul>':feat.headline?'<div class="fshow"><p class="fhead">'+feat.headline+'</p>'+(feat.sub?'<p class="fsub">'+feat.sub+'</p>':'')+(ART[feat.art]||'')+'</div>':'<p class="fblurb">'+(feat.blurb||'')+'</p>';
       box.innerHTML='<div class="wrap fgrid'+(feat.poster?'':' noposter')+'">'+
         '<div class="fmain"><div class="fwhen">'+when+'</div>'+
         '<div class="fdate"><span class="fm">'+MON[d.getMonth()]+'</span><span class="fd">'+dayNums(feat)+'</span><span class="fy">'+dayNames(feat)+'</span></div>'+
